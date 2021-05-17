@@ -36,14 +36,14 @@ public class HomeController {
     @GetMapping ("/manageCustomers")
     public String manageCustomers(Model model) {
         //Code ...
-        return "home/manageMotorhomes";
+        return "home/manageCustomers";
     }
 
 
     @GetMapping ("/manageContracts")
     public String manageContracts(Model model) {
         //Code ...
-        return "home/manageMotorhomes";
+        return "home/manageContracts";
     }
     //</editor-fold>
 
