@@ -21,7 +21,7 @@ public class HomeController {
     @PostMapping("/enterDateAndLocation")
     public String enterDateAndLocation(Model model) {
         //code
-        return "home/enterDateAndLocation";
+        return "home/reservations";
     }
 
 
