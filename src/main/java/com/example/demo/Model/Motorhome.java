@@ -8,9 +8,9 @@ public class Motorhome {
     private String brandAndModel;
     private int capacity;
     private int odometer;
-    private boolean service;
-    private String plateNumber;
+    private String numberPlate;
     private int rentalPrice;
+    private boolean service;
 
     //Constructor
     public Motorhome(){ }
@@ -56,12 +56,12 @@ public class Motorhome {
         this.service = service;
     }
 
-    public String getPlateNumber() {
-        return plateNumber;
+    public String getNumberPlate() {
+        return numberPlate;
     }
 
-    public void setPlateNumber(String plateNumber) {
-        this.plateNumber = plateNumber;
+    public void setNumberPlate(String numberPlate) {
+        this.numberPlate = numberPlate;
     }
 
     public int getRentalPrice() {
