@@ -2,10 +2,8 @@ package com.example.demo.Model;
 
 public class Motorhome {
 
-    public Motorhome(){
 
-    }
-
+    //Fields/Attributes
     private int motorhomeID;
     private String brandAndModel;
     private int capacity;
@@ -14,6 +12,10 @@ public class Motorhome {
     private String plateNumber;
     private int rentalPrice;
 
+    //Constructor
+    public Motorhome(){ }
+
+    //Getters & Setters
     public int getMotorhomeID() {
         return motorhomeID;
     }

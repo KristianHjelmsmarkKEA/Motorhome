@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class Contract {
 
-    public Contract(){
-
-    }
-
-
+    //Fields/Attributes
     private int contractID;
     private Date startDate;
     private Date endDate;
     private boolean finalizedContract;
     private boolean cancelledContract;
 
+    //Constructor
+    public Contract(){ }
+
+    //Getters & Setters
     public int getContractID() {
         return contractID;
     }

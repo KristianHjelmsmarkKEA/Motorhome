@@ -4,10 +4,7 @@ import java.util.Date;
 
 public class Customer {
 
-    public Customer(){
-
-    }
-
+    //Fields/Attributes
     private int customerID;
     private String firstName;
     private String lastName;
@@ -16,14 +13,17 @@ public class Customer {
     private String diverLicence;
     private Date driverSinceDate;
 
-    private int addressID;
     private String address;
-    private int zipcodeID;
+
     private int zipcode;
     private String city;
-    private int countryID;
+
     private String country;
 
+    //Constructor
+    public Customer() {}
+
+    //Getters & Setters
     public int getCustomerID() {
         return customerID;
     }
@@ -80,28 +80,12 @@ public class Customer {
         this.driverSinceDate = driverSinceDate;
     }
 
-    public int getAddressID() {
-        return addressID;
-    }
-
-    public void setAddressID(int addressID) {
-        this.addressID = addressID;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getZipcodeID() {
-        return zipcodeID;
-    }
-
-    public void setZipcodeID(int zipcodeID) {
-        this.zipcodeID = zipcodeID;
     }
 
     public int getZipcode() {
@@ -118,14 +102,6 @@ public class Customer {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public int getCountryID() {
-        return countryID;
-    }
-
-    public void setCountryID(int countryID) {
-        this.countryID = countryID;
     }
 
     public String getCountry() {
