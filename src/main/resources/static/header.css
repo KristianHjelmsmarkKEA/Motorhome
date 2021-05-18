@@ -1,52 +1,36 @@
-.headertab {
+body {
+    background-color: #fff2e6;
+}
+
+.header-box {
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: #ffd9b3;
     padding: 20px 10px;
 }
 
-/* Style the header links */
-.headertab a {
+.header-box a {
     float: left;
     color: black;
     text-align: center;
     padding: 12px;
     text-decoration: none;
-    font-size: 18px;
-    line-height: 25px;
+    font-size: 26px;
+    line-height: 50px;
     border-radius: 4px;
 }
 
-/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-.headertab a.logo {
-    font-size: 25px;
+.header-box a.logo {
+    font-size: 34px;
     font-weight: bold;
 }
 
-/* Change the background color on mouse-over */
-.headertab a:hover {
-    background-color: #ddd;
+.header-box a:hover {
+    background-color: #ffbd80;
     color: black;
 }
 
-/* Style the active/current link*/
-.headertab a.active {
-    background-color: dodgerblue;
-    color: white;
+.header-menu {
+    padding-left: 50px;
+    float: left;
 }
 
-/* Float the link section to the right */
-.headertab-right {
-    float: right;
-}
-
-/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-@media screen and (max-width: 500px) {
-    .headertab a {
-        float: none;
-        display: block;
-        text-align: left;
-    }
-    .headertab-right {
-        float: none;
-    }
-}

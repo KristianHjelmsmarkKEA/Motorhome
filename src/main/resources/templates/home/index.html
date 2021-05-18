@@ -4,16 +4,33 @@
     <meta charset="UTF-8">
     <title>Nordic Motorhome Rentals</title>
     <link rel="stylesheet" type="text/css" href="header.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-<div id="headertab">
-    <a href="#default" class="logo">NordicMotorhomeRentals</a>
-    <div class="headertab-right">
-        <a class="active" href="#home">Home</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
+<div class="header-box">
+    <a href="/" class="logo">Nordic Motorhome Rentals</a>
+    <div class="header-menu">
+        <a href="manageCustomers">Kunder</a>
+        <a href="manageMotorhomes">Autocampere</a>
+        <a href="manageContracts">Kontrakter</a>
+        <a href="managePrices">Priser</a>
     </div>
 </div>
+
+<div class="center-card">
+    <h1>Skriv den forventede leje dato</h1>
+        <form action="reservations">
+            <div class="date-field">
+                <label for="start-date">Fra den: </label>
+                <input type="date" id="start-date" name="start-date">
+                <label for="end-date">Til den: </label>
+                <input type="date" id="end-date" name="end-date">
+            </div>
+            <input type="submit" value="Søg">
+        </form>
+
+</div>
+
 
 
 </body>

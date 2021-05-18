@@ -4,16 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
     @Autowired
-
-@RequestMapping("home/index")
-    public ModelAndView firstPage() {
-        return new ModelAndView("home/index");
-    }
 
     /** Homepage */
     @GetMapping("/")
@@ -28,7 +22,11 @@ public class HomeController {
         return "home/reservations";
     }
 
-
+    @GetMapping("/managePrices")
+    public String managePrices(Model model) {
+        //code ...
+        return "home/managemotorhomes";
+    }
 
     @GetMapping ("/manageMotorhomes")
     public String manageMotorhomes(Model model) {
