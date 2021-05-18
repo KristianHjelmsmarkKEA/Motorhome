@@ -1,9 +1,13 @@
 package com.example.demo.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
+@Entity
 public class Customer {
 
+    @Id
     //Fields/Attributes
     private int customerID;
     private String firstName;

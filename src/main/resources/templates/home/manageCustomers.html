@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Customers</title>
+    <link rel="stylesheet" type="text/css" href="manageCustomers.css">
 </head>
 <body>
+
+<input type="text" id="userInput" onkeyup="userSearch()" placeholder="Search for customer">
+
+<table id="customerTable">
+    <thead>
+    <tr>
+        <th>Customer ID</th>
+        <th>Name</th>
+        <th>Lastname</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Driver License</th>
+        <th>Driver License Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customers: ${customers}">
+        <td th:text="${customers.customerID}"/>
+        <td th:text="${customers.firstName}"/>
+        <td th:text="${customers.lastName}" />
+        <td th:text="${customers.phoneNumber}" />
+        <td th:text="${customers.email}" />
+        <td th:text="${customers.diverLicense}"/>
+        <td th:text="${customers.driverSinceDate}"/>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    function userSearch() {
+        var input, filter, table, tr, td, td1, td2, td3, i;
+        input = document.getElementById("userInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("customerTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            td1 = tr[i].getElementsByTagName("td")[2];
+            td2 = tr[i].getElementsByTagName("td")[3];
+            td3 = tr[i].getElementsByTagName("td")[4];
+            if (td) {
+                if ( (td.textContent.toUpperCase().indexOf(filter) > -1) ||
+                    (td1.textContent.toUpperCase().indexOf(filter) > -1) ||
+                    (td2.textContent.toUpperCase().indexOf(filter) > -1) ||
+                    (td3.textContent.toUpperCase().indexOf(filter) > -1) )  {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
 
 </body>
 </html>
