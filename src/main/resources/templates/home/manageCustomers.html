@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Customers</title>
+    <link rel="stylesheet" type="text/css" href="header.css">
     <link rel="stylesheet" type="text/css" href="manageCustomers.css">
 </head>
 <body>
-
-<input type="text" id="userInput" onkeyup="userSearch()" placeholder="Search for customer">
-
-<table id="customerTable">
+<div class="header-box">
+    <a href="/" class="logo">Nordic Motorhome Rentals</a>
+    <div class="header-menu">
+        <a href="manageCustomers">Kunder</a>
+        <a href="manageMotorhomes">Autocampere</a>
+        <a href="manageContracts">Kontrakter</a>
+        <a href="managePrices">Priser</a>
+    </div>
+</div>
+<div class="input-box">
+<input type="text" onkeyup="userSearch()" placeholder="Search for customer">
+</div>
+<table>
     <thead>
     <tr>
         <th>Customer ID</th>
