@@ -1,6 +1,5 @@
 package com.example.demo.Repository;
 
-import com.example.demo.Model.Contract;
 import com.example.demo.Model.Motorhome;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,10 +21,16 @@ public class MotorhomeRepo {
         return template.query(sql, rowMapper);
     }
 
-    //SQL STRING SKAL ÆNDRES
-    public Contract addMotorhome(Motorhome motorhome){
+    //SQL Fikset tror jeg
+    public Motorhome addMotorhome(Motorhome motorhome){
         String sql = "INSERT INTO motorhomes (VALUES (?, ?, ?, ?, ?, ?)";
-        template.update(sql, motorhome.getBrandAndModel());
+        template.update(sql, motorhome.getBrandAndModel(), motorhome.getCapacity(), motorhome.getOdometer(), motorhome.getNumberPlate(), motorhome.getRentalPrice(), motorhome.isService());
         return null;
     }
+
+    public Boolean deleteMotorhome(int motorhomeID){
+        String sql = "DELETE FROM motorhomes WHERE motorhomeid = ?";
+        return template.update(sql, motorhomeID) > 0;
+    }
+
 }
