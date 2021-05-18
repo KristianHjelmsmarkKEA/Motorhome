@@ -16,4 +16,12 @@ public class MotorhomeService {
     public List<Motorhome> fetchAll(){
         return motorhomeRepo.fetchAll();
     }
+
+    public Motorhome addMotorhome(Motorhome motorhome){
+        return motorhomeRepo.addMotorhome(motorhome);
+    }
+
+    public Boolean deleteMotorhome(int motorhomeID){
+        return motorhomeRepo.deleteMotorhome(motorhomeID);
+    }
 }
