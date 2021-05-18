@@ -25,21 +25,21 @@ public class CustomerRepo {
     }
     //SQL STRING SKAL ÆNDRES?
     public Customer addZipcode(Customer customer) {
-        String sql = "INSERT INTO zipcodes (zipcode, city) VALUES (?, ?)";
+        String sql = "INSERT INTO zipcodes (zipcode, city, foreign_countryid) VALUES (?, ?, (select countryid from country where countryid = (select max(countryid) from country)))";
         template.update(sql, customer.getZipcode(), customer.getCity());
         return null;
     }
 
     //SQL STRING SKAL ÆNDRES
     public Customer addAddress(Customer customer) {
-        String sql = " INSERT INTO address (address, zipcodeida) VALUES (?, (select zipcodeid from zipcodes where zipcodeid = (select max(zipcodeid) from zipcodes)))";
+        String sql = " INSERT INTO address (address, foreign_zipcodeid) VALUES (?, (select zipcodeid from zipcodes where zipcodeid = (select max(zipcodeid) from zipcodes)))";
         template.update(sql, customer.getAddress());
         return null;
     }
     //SQL STRING SKAL ÆNDRES
     public Customer addCustomer(Customer customer) {
-        String sql = "INSERT INTO customers (firstname, mobile_phone, email, driver_licence, driver_since_date, addressidc) VALUES (?, ?, ?, ?, ?, (select addressid from address where addressid = (select max(addressid) from address)))";
-        template.update(sql, customer.getFirstName());
+        String sql = "INSERT INTO customers (first_name, last_name, phone_number, email, driver_license, driver_since_date, foreign_addressid) VALUES (?, ?, ?, ?, ?, ?, (select addressid from address where addressid = (select max(addressid) from address)))";
+        template.update(sql, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getDiverLicense(), customer.getDriverSinceDate());
         return null;
     }
 
