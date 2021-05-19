@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Customers</title>
     <link rel="stylesheet" type="text/css" href="header.css">
-    <link rel="stylesheet" type="text/css" href="manageCustomers.css">
+    <link rel="stylesheet" type="text/css" href="tableLayout.css">
 </head>
 <body>
 <div class="header-box">
@@ -16,10 +16,8 @@
         <a href="managePrices">Priser</a>
     </div>
 </div>
-<div class="input-box">
-<input type="text" onkeyup="userSearch()" placeholder="Search for customer">
-</div>
-<table>
+<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for customer">
+<table id="filter-table">
     <thead>
     <tr>
         <th>Customer ID</th>
@@ -47,9 +45,9 @@
 <script>
     function userSearch() {
         var input, filter, table, tr, td, td1, td2, td3, i;
-        input = document.getElementById("userInput");
+        input = document.getElementById("user-input");
         filter = input.value.toUpperCase();
-        table = document.getElementById("customerTable");
+        table = document.getElementById("filter-table");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[1];

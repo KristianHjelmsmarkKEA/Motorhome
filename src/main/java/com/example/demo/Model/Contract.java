@@ -10,6 +10,9 @@ public class Contract {
     private Date endDate;
     private boolean finalizedContract;
     private boolean cancelledContract;
+    private int foreignMotorhomeID;
+    private int foreignCustomerID;
+    private int foreignOrderID;
 
     //Constructor
     public Contract(){ }
@@ -53,5 +56,29 @@ public class Contract {
 
     public void setCancelledContract(boolean cancelledContract) {
         this.cancelledContract = cancelledContract;
+    }
+
+    public int getForeignMotorhomeID() {
+        return foreignMotorhomeID;
+    }
+
+    public void setForeignMotorhomeID(int foreignMotorhomeID) {
+        this.foreignMotorhomeID = foreignMotorhomeID;
+    }
+
+    public int getForeignCustomerID() {
+        return foreignCustomerID;
+    }
+
+    public void setForeignCustomerID(int foreignCustomerID) {
+        this.foreignCustomerID = foreignCustomerID;
+    }
+
+    public int getForeignOrderID() {
+        return foreignOrderID;
+    }
+
+    public void setForeignOrderID(int foreignOrderID) {
+        this.foreignOrderID = foreignOrderID;
     }
 }

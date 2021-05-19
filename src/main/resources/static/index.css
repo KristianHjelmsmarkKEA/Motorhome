@@ -17,8 +17,8 @@
     font-size: 26px;
     position:relative;
     margin:auto;
-
 }
+
 input[type=date] {
     width:auto;
     height:40px;
@@ -26,6 +26,7 @@ input[type=date] {
     cursor:pointer;
     background-color: #fff2e6;
 }
+
 input[type=date]:hover {
     font-weight:bold;
 }
@@ -43,5 +44,5 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.24),0 13px 42px 0 rgba(0,0,0,0.19);
 }

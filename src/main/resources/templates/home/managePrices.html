@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Prices</title>
+    <title>Customers</title>
     <link rel="stylesheet" type="text/css" href="header.css">
-    <link rel="stylesheet" type="text/css" href="managePrices.css">
+    <link rel="stylesheet" type="text/css" href="tableLayout.css">
 </head>
 <body>
 <div class="header-box">
@@ -16,6 +16,50 @@
         <a href="managePrices">Priser</a>
     </div>
 </div>
+<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for customer">
+<table id="filter-table">
+    <thead>
+    <tr>
+        <th>Item-Fee ID</th>
+        <th>Name</th>
+        <th>Lastname</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="prices: ${prices}">
+        <td th:text="${prices.feeID}"/>
+        <td th:text="${prices.itemName}"/>
+        <td th:text="${prices.itemPrice}" />
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    function userSearch() {
+        var input, filter, table, tr, td, td1, td2, td3, i;
+        input = document.getElementById("user-input");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("filter-table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            td1 = tr[i].getElementsByTagName("td")[1];
+            td2 = tr[i].getElementsByTagName("td")[2];
+
+            if (td) {
+                if ( (td.textContent.toUpperCase().indexOf(filter) > -1) ||
+                    (td1.textContent.toUpperCase().indexOf(filter) > -1) ||
+                    (td2.textContent.toUpperCase().indexOf(filter) > -1) ) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
 
 </body>
 </html>

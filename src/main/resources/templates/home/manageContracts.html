@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Contracts</title>
+    <title>Customers</title>
     <link rel="stylesheet" type="text/css" href="header.css">
-    <link rel="stylesheet" type="text/css" href="manageContracts.css">
+    <link rel="stylesheet" type="text/css" href="tableLayout.css">
 </head>
 <body>
 <div class="header-box">
@@ -16,18 +16,18 @@
         <a href="managePrices">Priser</a>
     </div>
 </div>
-<div class="input-box">
-    <input type="text" onkeyup="userSearch()" placeholder="Search for customer">
-</div>
-<table>
+<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for customer">
+<table id="filter-table">
     <thead>
     <tr>
         <th>Contract ID</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>Ongoing</th>
-        <th>Finalized or Cancelled</th>
-        <th>Finilize contract</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Finalized</th>
+        <th>Cancelled</th>
+        <th>Motorhome ID</th>
+        <th>Customer ID</th>
+        <th>Order ID</th>
     </tr>
     </thead>
     <tbody>
@@ -37,14 +37,39 @@
         <td th:text="${contracts.endDate}" />
         <td th:text="${contracts.finalizedContract}" />
         <td th:text="${contracts.cancelledContract}" />
-        <td>
-            <a th:href="@{'/delete/'+${contracts.contractID}}">
-
-            </a>
-        </td>
+        <td th:text="${contracts.foreignMotorhomeID}"/>
+        <td th:text="${contracts.foreignCustomerID}"/>
+        <td th:text="${contracts.foreignOrderID}"/>
     </tr>
     </tbody>
 </table>
+
+<script>
+    function userSearch() {
+        var input, filter, table, tr, td, td1, td2, td3, i;
+        input = document.getElementById("user-input");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("filter-table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            td1 = tr[i].getElementsByTagName("td")[1];
+            td2 = tr[i].getElementsByTagName("td")[2];
+            td3 = tr[i].getElementsByTagName("td")[8];
+            if (td) {
+                if ( (td.textContent.toUpperCase().indexOf(filter) > -1) ||
+                    (td1.textContent.toUpperCase().indexOf(filter) > -1) ||
+                    (td2.textContent.toUpperCase().indexOf(filter) > -1) ||
+                    (td3.textContent.toUpperCase().indexOf(filter) > -1) )  {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
 
 </body>
 </html>
