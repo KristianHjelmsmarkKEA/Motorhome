@@ -30,7 +30,7 @@
     <tr th:each="prices: ${prices}">
         <td th:text="${prices.feeID}"/>
         <td th:text="${prices.itemName}"/>
-        <td th:text="${prices.itemPrice}" />
+        <td th:text="${prices.itemPrice} + ' kr.'" ></td>
     </tr>
     </tbody>
 </table>
