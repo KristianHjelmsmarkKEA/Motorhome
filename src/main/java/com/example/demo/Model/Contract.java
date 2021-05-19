@@ -2,7 +2,8 @@ package com.example.demo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Entity
 public class Contract {
@@ -10,8 +11,9 @@ public class Contract {
     //Fields/Attributes
     @Id
     private int contractID;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private double totalPrice;
     private boolean finalizedContract;
     private boolean cancelledContract;
     private int foreign_MotorhomeID;
@@ -30,20 +32,28 @@ public class Contract {
         this.contractID = contractID;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double finalPrice) {
+        this.totalPrice = finalPrice;
     }
 
     public boolean isFinalizedContract() {
@@ -86,17 +96,4 @@ public class Contract {
         this.foreign_OrderID = foreignOrderID;
     }
 
-    @Override
-    public String toString() {
-        return "Contract{" +
-                "contractID=" + contractID +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", finalizedContract=" + finalizedContract +
-                ", cancelledContract=" + cancelledContract +
-                ", foreignMotorhomeID=" + foreign_MotorhomeID +
-                ", foreignCustomerID=" + foreign_CustomerID +
-                ", foreignOrderID=" + foreign_OrderID +
-                '}';
-    }
 }

@@ -16,12 +16,18 @@ public class Customer {
     private String email;
     private String driverLicense;
     private Date driverSinceDate;
+    private int foreign_AddressID;
 
+    private int addressID;
     private String address;
+    private int foreign_ZipcodeID;
 
+    private int zipcodeID;
     private int zipcode;
     private String city;
+    private int foreign_countryID;
 
+    private int countryID;
     private String country;
 
     //Constructor
@@ -84,12 +90,44 @@ public class Customer {
         this.driverSinceDate = driverSinceDate;
     }
 
+    public int getForeign_AddressID() {
+        return foreign_AddressID;
+    }
+
+    public void setForeign_AddressID(int foreign_AddressID) {
+        this.foreign_AddressID = foreign_AddressID;
+    }
+
+    public int getAddressID() {
+        return addressID;
+    }
+
+    public void setAddressID(int addressID) {
+        this.addressID = addressID;
+    }
+
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getForeign_ZipcodeID() {
+        return foreign_ZipcodeID;
+    }
+
+    public void setForeign_ZipcodeID(int foreign_ZipcodeID) {
+        this.foreign_ZipcodeID = foreign_ZipcodeID;
+    }
+
+    public int getZipcodeID() {
+        return zipcodeID;
+    }
+
+    public void setZipcodeID(int zipcodeID) {
+        this.zipcodeID = zipcodeID;
     }
 
     public int getZipcode() {
@@ -106,6 +144,22 @@ public class Customer {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public int getForeign_countryID() {
+        return foreign_countryID;
+    }
+
+    public void setForeign_countryID(int foreign_countryID) {
+        this.foreign_countryID = foreign_countryID;
+    }
+
+    public int getCountryID() {
+        return countryID;
+    }
+
+    public void setCountryID(int countryID) {
+        this.countryID = countryID;
     }
 
     public String getCountry() {
