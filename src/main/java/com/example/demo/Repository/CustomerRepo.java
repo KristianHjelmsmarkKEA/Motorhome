@@ -39,7 +39,7 @@ public class CustomerRepo {
     //SQL STRING SKAL ÆNDRES
     public Customer addCustomer(Customer customer) {
         String sql = "INSERT INTO customers (first_name, last_name, phone_number, email, driver_license, driver_since_date, foreign_addressid) VALUES (?, ?, ?, ?, ?, ?, (select addressid from address where addressid = (select max(addressid) from address)))";
-        template.update(sql, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getDiverLicense(), customer.getDriverSinceDate());
+        template.update(sql, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getDriverLicense(), customer.getDriverSinceDate());
         return null;
     }
 

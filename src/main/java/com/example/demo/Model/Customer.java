@@ -14,7 +14,7 @@ public class Customer {
     private String lastName;
     private int phoneNumber;
     private String email;
-    private String diverLicense;
+    private String driverLicense;
     private Date driverSinceDate;
 
     private String address;
@@ -68,12 +68,12 @@ public class Customer {
         this.email = email;
     }
 
-    public String getDiverLicense() {
-        return diverLicense;
+    public String getDriverLicense() {
+        return driverLicense;
     }
 
-    public void setDiverLicense(String diverLicense) {
-        this.diverLicense = diverLicense;
+    public void setDriverLicense(String driverLicense) {
+        this.driverLicense = driverLicense;
     }
 
     public Date getDriverSinceDate() {
