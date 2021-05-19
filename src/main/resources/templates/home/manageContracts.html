@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Contracts</title>
@@ -16,6 +16,35 @@
         <a href="managePrices">Priser</a>
     </div>
 </div>
+<div class="input-box">
+    <input type="text" onkeyup="userSearch()" placeholder="Search for customer">
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Contract ID</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Ongoing</th>
+        <th>Finalized or Cancelled</th>
+        <th>Finilize contract</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="contracts: ${contracts}">
+        <td th:text="${contracts.contractID}"/>
+        <td th:text="${contracts.startDate}"/>
+        <td th:text="${contracts.endDate}" />
+        <td th:text="${contracts.finalizedContract}" />
+        <td th:text="${contracts.cancelledContract}" />
+        <td>
+            <a th:href="@{'/delete/'+${contracts.contractID}}">
+
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
