@@ -1,18 +1,22 @@
 package com.example.demo.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
+@Entity
 public class Contract {
 
     //Fields/Attributes
+    @Id
     private int contractID;
     private Date startDate;
     private Date endDate;
     private boolean finalizedContract;
     private boolean cancelledContract;
-    private int foreignMotorhomeID;
-    private int foreignCustomerID;
-    private int foreignOrderID;
+    private int foreign_MotorhomeID;
+    private int foreign_CustomerID;
+    private int foreign_OrderID;
 
     //Constructor
     public Contract(){ }
@@ -58,27 +62,41 @@ public class Contract {
         this.cancelledContract = cancelledContract;
     }
 
-    public int getForeignMotorhomeID() {
-        return foreignMotorhomeID;
+    public int getForeign_MotorhomeID() {
+        return foreign_MotorhomeID;
     }
 
-    public void setForeignMotorhomeID(int foreignMotorhomeID) {
-        this.foreignMotorhomeID = foreignMotorhomeID;
+    public void setForeign_MotorhomeID(int foreignMotorhomeID) {
+        this.foreign_MotorhomeID = foreignMotorhomeID;
     }
 
-    public int getForeignCustomerID() {
-        return foreignCustomerID;
+    public int getForeign_CustomerID() {
+        return foreign_CustomerID;
     }
 
-    public void setForeignCustomerID(int foreignCustomerID) {
-        this.foreignCustomerID = foreignCustomerID;
+    public void setForeign_CustomerID(int foreignCustomerID) {
+        this.foreign_CustomerID = foreignCustomerID;
     }
 
-    public int getForeignOrderID() {
-        return foreignOrderID;
+    public int getForeign_OrderID() {
+        return foreign_OrderID;
     }
 
-    public void setForeignOrderID(int foreignOrderID) {
-        this.foreignOrderID = foreignOrderID;
+    public void setForeign_OrderID(int foreignOrderID) {
+        this.foreign_OrderID = foreignOrderID;
+    }
+
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "contractID=" + contractID +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", finalizedContract=" + finalizedContract +
+                ", cancelledContract=" + cancelledContract +
+                ", foreignMotorhomeID=" + foreign_MotorhomeID +
+                ", foreignCustomerID=" + foreign_CustomerID +
+                ", foreignOrderID=" + foreign_OrderID +
+                '}';
     }
 }
