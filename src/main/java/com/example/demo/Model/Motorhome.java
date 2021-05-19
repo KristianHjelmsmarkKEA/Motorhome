@@ -9,7 +9,7 @@ public class Motorhome {
     private int capacity;
     private int odometer;
     private String numberPlate;
-    private int rentalPrice;
+    private double rentalPrice;
     private boolean service;
 
     //Constructor
@@ -64,11 +64,11 @@ public class Motorhome {
         this.numberPlate = numberPlate;
     }
 
-    public int getRentalPrice() {
+    public double getRentalPrice() {
         return rentalPrice;
     }
 
-    public void setRentalPrice(int rentalPrice) {
+    public void setRentalPrice(double rentalPrice) {
         this.rentalPrice = rentalPrice;
     }
 }

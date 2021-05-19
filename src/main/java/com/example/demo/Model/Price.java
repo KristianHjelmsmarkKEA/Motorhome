@@ -5,7 +5,7 @@ public class Price {
     //Fields/Attributes
     private int feeID;
     private String itemName;
-    private int itemPrice;
+    private double itemPrice;
 
     //Constructor
     public Price(){ }
@@ -19,7 +19,7 @@ public class Price {
 
     public void setItemName(String itemName) {this.itemName = itemName;}
 
-    public int getItemPrice() {return itemPrice;}
+    public double getItemPrice() {return itemPrice;}
 
-    public void setItemPrice(int itemPrice) {this.itemPrice = itemPrice;}
+    public void setItemPrice(double itemPrice) {this.itemPrice = itemPrice;}
 }
