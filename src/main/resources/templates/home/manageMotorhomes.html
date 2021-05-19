@@ -42,6 +42,9 @@
     </tbody>
 </table>
 
+<!--search funktion, filtrer tabel ud fra user-input-->
+<!--Input er brugerens input, filter tjekker textContent, og fjerner row hvis i input ikke passer med søgning-->
+<!--td, td1 osv. Er de columns man kan søge på, hvor [i] er column nummerering-->
 <script>
     function userSearch() {
         var input, filter, table, tr, td, td1, td2, td3, td4, i;
@@ -49,7 +52,7 @@
         filter = input.value.toUpperCase();
         table = document.getElementById("filter-table");
         tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
+        for (i = 0; i < tr.length; i++) {   <!--tjekker hver td og om de skal kunne filtreres ud fra -->
             td = tr[i].getElementsByTagName("td")[0];
             td1 = tr[i].getElementsByTagName("td")[1];
             td2 = tr[i].getElementsByTagName("td")[2];
