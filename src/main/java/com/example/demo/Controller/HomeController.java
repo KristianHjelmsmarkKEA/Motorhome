@@ -19,8 +19,11 @@ import java.util.List;
 public class HomeController {
     @Autowired
     CustomerService customerService;
+    @Autowired
     MotorhomeService motorhomeService;
+    @Autowired
     ContractService contractService;
+    @Autowired
     PriceService priceService;
 
     /** Homepage */
