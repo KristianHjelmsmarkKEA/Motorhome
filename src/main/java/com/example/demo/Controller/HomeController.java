@@ -1,7 +1,13 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Contract;
 import com.example.demo.Model.Customer;
+import com.example.demo.Model.Motorhome;
+import com.example.demo.Model.Price;
+import com.example.demo.Service.ContractService;
 import com.example.demo.Service.CustomerService;
+import com.example.demo.Service.MotorhomeService;
+import com.example.demo.Service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +19,9 @@ import java.util.List;
 public class HomeController {
     @Autowired
     CustomerService customerService;
+    MotorhomeService motorhomeService;
+    ContractService contractService;
+    PriceService priceService;
 
     /** Homepage */
     @GetMapping("/")
@@ -29,13 +38,15 @@ public class HomeController {
 
     @GetMapping("/managePrices")
     public String managePrices(Model model) {
-        //code ...
-        return "home/managemotorhomes";
+        List<Price> priceList = priceService.fetchAll();
+        model.addAttribute("prices", priceList);
+        return "home/managePrices";
     }
 
     @GetMapping ("/manageMotorhomes")
     public String manageMotorhomes(Model model) {
-        //code ...
+        List<Motorhome> motorhomeList = motorhomeService.fetchAll();
+        model.addAttribute("motorhomes", motorhomeList);
         return "home/manageMotorhomes";
     }
 
@@ -50,7 +61,8 @@ public class HomeController {
 
     @GetMapping ("/manageContracts")
     public String manageContracts(Model model) {
-        //Code ...
+        List<Contract> contractList = contractService.fetchAll();
+        model.addAttribute("contracts", contractList);
         return "home/manageContracts";
     }
     //</editor-fold>
