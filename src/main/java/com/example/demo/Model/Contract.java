@@ -19,7 +19,7 @@ public class Contract {
     private int foreign_MotorhomeID;
     private int foreign_CustomerID;
     private int foreign_OrderID;
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Secret Error :D;
     //Constructor
     public Contract(){ }
 
