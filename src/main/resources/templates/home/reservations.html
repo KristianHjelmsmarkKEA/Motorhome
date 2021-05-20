@@ -1,10 +1,34 @@
-!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>New Contract</title>
+    <title>Customers</title>
+    <link rel="stylesheet" type="text/css" href="header.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
+<div class="header-box">
+    <a href="/" class="logo">Nordic Motorhome Rentals</a>
+    <div class="header-menu">
+        <a href="manageCustomers">Kunder</a>
+        <a href="manageMotorhomes">Autocampere</a>
+        <a href="manageContracts">Kontrakter</a>
+        <a href="managePrices">Priser</a>
+    </div>
+</div>
+<div class="center-card">
+<h1 style="text-align: center; color:white; font-family:verdana;">Vælg Autocamper:</h1>
+
+    <h3 style="color:white; text-align: center"> Choose a Car: </h3>
+    <ul th:if="${availableMotorhomes.empty}">
+        <li colspan="2"> Error </li>
+    </ul>
+        <div id="car-buttons">
+            <ul th:each="motorhome : ${availableMotorhomes}">
+                   <span th:text="${motorhome.motorhomeID}"/>
+            </ul>
+        </div>
+    </div>
 
 </body>
 </html>

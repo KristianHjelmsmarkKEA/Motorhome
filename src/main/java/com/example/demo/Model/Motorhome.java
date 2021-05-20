@@ -71,4 +71,17 @@ public class Motorhome {
     public void setRentalPrice(double rentalPrice) {
         this.rentalPrice = rentalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Motorhome{" +
+                "motorhomeID=" + motorhomeID +
+                ", brandAndModel='" + brandAndModel + '\'' +
+                ", capacity=" + capacity +
+                ", odometer=" + odometer +
+                ", numberPlate='" + numberPlate + '\'' +
+                ", rentalPrice=" + rentalPrice +
+                ", service=" + service +
+                '}';
+    }
 }

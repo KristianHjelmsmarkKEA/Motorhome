@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -18,6 +20,12 @@ public class MotorhomeRepo {
 
     public List<Motorhome> fetchAll() {
         String sql = "SELECT * FROM motorhomes";
+        RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
+        return template.query(sql, rowMapper);
+    }
+
+    public List<Motorhome> fetchAllInService() {
+        String sql = "SELECT * FROM motorhomes WHERE in_service = 1";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.query(sql, rowMapper);
     }
@@ -47,4 +55,27 @@ public class MotorhomeRepo {
 
         return null;
     }
+
+
+    public Integer unavailableMotorhomes(LocalDate startDate, LocalDate endDate) {
+        String sql = "SELECT foreign_motorhomeid from contracts where" +
+                "(start_date BETWEEN '"+startDate+"' AND '"+endDate+"') OR " +
+                "(end_date BETWEEN '"+startDate+"' AND '"+endDate+"') OR " +
+                "('"+startDate+"' between start_date AND end_date) OR " +
+                "('"+endDate+"' between start_date AND end_date);";
+
+        return template.queryForObject(sql, Integer.class);
+    }
+
+    public List<Motorhome> fetchIntervalMotorhomes(LocalDate startDate, LocalDate endDate) {
+
+        List<Motorhome> allMotorhomesInService = fetchAllInService();
+        ArrayList<Motorhome> availableMotorhomes = new ArrayList<>();
+        for (Motorhome motorhome : allMotorhomesInService) {
+            if (motorhome.getMotorhomeID() != unavailableMotorhomes(startDate, endDate))
+                availableMotorhomes.add(motorhome);
+        }
+        return availableMotorhomes;
+    }
+
 }

@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -33,5 +34,4 @@ public class ContractRepo {
         String sql = "DELETE FROM contracts WHERE contractid = ?";
         return template.update(sql, contractID) > 0;
     }
-
 }

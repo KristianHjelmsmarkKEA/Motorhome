@@ -46,6 +46,14 @@ public class HomeController {
         return "home/managePrices";
     }
 
+    @PostMapping("/reservations")
+    public String reservations(@ModelAttribute Contract contract, Model model) {
+        List<Motorhome> availableMotorhomes = motorhomeService.fetchIntervalMotorhomes(contract.getStartDate(), contract.getEndDate());
+        model.addAttribute("availableMotorhomes", availableMotorhomes);
+        return "home/reservations";
+    }
+
+
     @GetMapping ("/manageContracts")
     public String manageContracts(Model model) {
         List<Contract> contractList = contractService.fetchAll();
@@ -80,6 +88,7 @@ public class HomeController {
         model.addAttribute("customers", customerList);
         return "home/manageCustomers";
     }
+
 
     @GetMapping("/updateCustomer/{customerID}")
     public String update(@PathVariable("customerID") int customerID, Model model){

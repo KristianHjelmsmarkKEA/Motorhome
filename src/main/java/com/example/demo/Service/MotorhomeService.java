@@ -5,6 +5,7 @@ import com.example.demo.Repository.MotorhomeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -25,10 +26,12 @@ public class MotorhomeService {
         return motorhomeRepo.deleteMotorhome(motorhomeID);
     }
 
+    public List<Motorhome> fetchIntervalMotorhomes(LocalDate startDate, LocalDate endDate) {
+        return motorhomeRepo.fetchIntervalMotorhomes(startDate, endDate);
+    }
+
     public Motorhome findMotorhome(int motorhomeID) { return motorhomeRepo.findMotorhomeID(motorhomeID); }
 
     public Motorhome updateMotorhomeInformation(int motorhomeID, Motorhome m) {
         return motorhomeRepo.updateMotorhomeInformation(motorhomeID, m); }
-
-
 }

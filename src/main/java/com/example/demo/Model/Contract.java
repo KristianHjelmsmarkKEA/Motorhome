@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Entity
 public class Contract {
 
-    //Fields/Attributes
+    //Fields & Attributes
     @Id
     private int contractID;
     private LocalDate startDate;
@@ -104,4 +104,18 @@ public class Contract {
         this.foreign_OrderID = foreignOrderID;
     }
 
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "contractID=" + contractID +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", totalPrice=" + totalPrice +
+                ", finalizedContract=" + finalizedContract +
+                ", cancelledContract=" + cancelledContract +
+                ", foreign_MotorhomeID=" + foreign_MotorhomeID +
+                ", foreign_CustomerID=" + foreign_CustomerID +
+                ", foreign_OrderID=" + foreign_OrderID +
+                '}';
+    }
 }
