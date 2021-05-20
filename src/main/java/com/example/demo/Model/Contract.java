@@ -13,6 +13,8 @@ public class Contract {
     private int contractID;
     private LocalDate startDate;
     private LocalDate endDate;
+    private int startOdometer;
+    private int endOdometer;
     private double totalPrice;
     private boolean finalizedContract;
     private boolean cancelledContract;
@@ -48,9 +50,15 @@ public class Contract {
         this.endDate = endDate;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
+    public int getStartOdometer() {return startOdometer;}
+
+    public void setStartOdometer(int startOdometer) {this.startOdometer = startOdometer;}
+
+    public int getEndOdometer() {return endOdometer;}
+
+    public void setEndOdometer(int endOdometer) {this.endOdometer = endOdometer;}
+
+    public double getTotalPrice() { return totalPrice; }
 
     public void setTotalPrice(double finalPrice) {
         this.totalPrice = finalPrice;

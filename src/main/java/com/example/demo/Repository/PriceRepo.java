@@ -22,8 +22,8 @@ public class PriceRepo {
     }
 
     public Price addPrice(Price price){
-        String sql = "INSERT INTO item_fees (VALUES (?, ?)";
-        template.update(sql, price.getItemName(), price.getItemPrice());
+        String sql = "INSERT INTO item_fees (VALUES (?, ?, ?)";
+        template.update(sql, price.getItemName(), price.getItemPrice(), price.getItemCategory());
         return null;
     }
 

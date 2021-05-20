@@ -6,6 +6,7 @@ public class Price {
     private int feeID;
     private String itemName;
     private double itemPrice;
+    private String itemCategory;
 
     //Constructor
     public Price(){ }
@@ -22,4 +23,8 @@ public class Price {
     public double getItemPrice() {return itemPrice;}
 
     public void setItemPrice(double itemPrice) {this.itemPrice = itemPrice;}
+
+    public String getItemCategory() {return itemCategory;}
+
+    public void setItemCategory(String itemCategory) {this.itemCategory = itemCategory;}
 }
