@@ -36,6 +36,7 @@ public class CustomerRepo {
         template.update(sql, customer.getAddress());
         return null;
     }
+
     //SQL STRING SKAL ÆNDRES
     public Customer addCustomer(Customer customer) {
         String sql = "INSERT INTO customers (first_name, last_name, phone_number, email, driver_license, driver_since_date, foreign_addressid) VALUES (?, ?, ?, ?, ?, ?, (select addressid from address where addressid = (select max(addressid) from address)))";
@@ -58,7 +59,6 @@ public class CustomerRepo {
     }
 
     public Customer updateCustomerInformation(int customerID, Customer c){
-        System.out.printf("Customer:" + c);
         String sql = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ? Where customerid = ?";
         String sql1 = "UPDATE address SET address = ? Where addressid = ?";
         String sql2 = "UPDATE zipcodes SET zipcode = ?, city = ? Where zipcodeid = ?";

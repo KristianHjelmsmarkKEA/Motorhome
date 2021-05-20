@@ -46,6 +46,13 @@ public class HomeController {
         return "home/managePrices";
     }
 
+    @GetMapping ("/manageContracts")
+    public String manageContracts(Model model) {
+        List<Contract> contractList = contractService.fetchAll();
+        model.addAttribute("contracts", contractList);
+        return "home/manageContracts";
+    }
+
     @GetMapping ("/manageMotorhomes")
     public String manageMotorhomes(Model model) {
         List<Motorhome> motorhomeList = motorhomeService.fetchAll();
@@ -53,22 +60,26 @@ public class HomeController {
         return "home/manageMotorhomes";
     }
 
+    @GetMapping("/updateMotorhome/{motorhomeID}")
+    public String updateMotorhome(@PathVariable("motorhomeID") int motorhomeID, Model model) {
+        model.addAttribute("motorhomes", motorhomeService.findMotorhome(motorhomeID));
+        return "home/updateMotorhome";
+    }
 
+    @PostMapping("/updateMotorhomeInformation")
+    public String updateMotorhomeInformation(@ModelAttribute Motorhome motorhome, Model model) {
+        model.addAttribute("motorhomes", motorhome);
+        motorhomeService.updateMotorhomeInformation(motorhome.getMotorhomeID(), motorhome);
+        return "redirect:/";
+    }
+
+    //</editor-fold>
     @GetMapping ("/manageCustomers")
     public String manageCustomers(Model model) {
         List<Customer> customerList = customerService.fetchAll();
         model.addAttribute("customers", customerList);
         return "home/manageCustomers";
     }
-
-
-    @GetMapping ("/manageContracts")
-    public String manageContracts(Model model) {
-        List<Contract> contractList = contractService.fetchAll();
-        model.addAttribute("contracts", contractList);
-        return "home/manageContracts";
-    }
-    //</editor-fold>
 
     @GetMapping("/updateCustomer/{customerID}")
     public String update(@PathVariable("customerID") int customerID, Model model){
@@ -80,7 +91,6 @@ public class HomeController {
     public String updateCustomerInformation(@ModelAttribute Customer customer, Model model) {
         model.addAttribute("customers", customer);
         customerService.updateCustomerInformation(customer.getCustomerID(), customer);
-        System.out.printf("Customer" + customer);
         return "redirect:/";
     }
 

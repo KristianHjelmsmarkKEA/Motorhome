@@ -1,5 +1,6 @@
 package com.example.demo.Repository;
 
+import com.example.demo.Model.Customer;
 import com.example.demo.Model.Motorhome;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -33,4 +34,17 @@ public class MotorhomeRepo {
         return template.update(sql, motorhomeID) > 0;
     }
 
+    public Motorhome findMotorhomeID(int motorhomeID){
+        String sql = "select * from motorhomes where motorhomeid = ?";
+        RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
+        Motorhome m = template.queryForObject(sql, rowMapper, motorhomeID);
+        return m;
+    }
+
+    public Motorhome updateMotorhomeInformation(int motorhomeID, Motorhome m) {
+        String sql = "UPDATE motorhomes SET odometer = ?, rental_price = ?, in_service =? where motorhomeid = ?";
+        template.update(sql, m.getOdometer(), m.getRentalPrice(), m.isService(), m.getMotorhomeID());
+
+        return null;
+    }
 }

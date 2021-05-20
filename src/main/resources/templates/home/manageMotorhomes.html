@@ -27,6 +27,7 @@
         <th>Number Plate</th>
         <th>Rental Price</th>
         <th>In Service</th>
+        <th>Update motorhome info</th>
     </tr>
     </thead>
     <tbody>
@@ -38,6 +39,11 @@
         <td th:text="${motorhomes.numberPlate}" />
         <td th:text="${motorhomes.rentalPrice} + ' kr.'"/>
         <td th:text="${motorhomes.service}"/>
+        <td>
+            <a th:href="@{'/updateMotorhome/'+${motorhomes.motorhomeID}}">
+                <button class="btn-update" id="btn-update">Edit customer information</button>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>
