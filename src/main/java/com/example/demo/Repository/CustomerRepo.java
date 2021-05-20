@@ -45,7 +45,7 @@ public class CustomerRepo {
 
 
     public List<Customer> fetchAll() {
-        String sql = "select * from customers;";
+        String sql = "select * from customers, address, zipcodes, country WHERE zipcodes.foreign_countryid = country.countryid and address.foreign_zipcodeid = zipcodes.zipcodeid and customers.foreign_addressid = address.addressid  ";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return template.query(sql, rowMapper);
     }
