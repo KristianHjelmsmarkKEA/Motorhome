@@ -2,7 +2,7 @@ package com.example.demo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Customer {
@@ -15,7 +15,7 @@ public class Customer {
     private int phoneNumber;
     private String email;
     private String driverLicense;
-    private Date driverSinceDate;
+    private LocalDate driverSinceDate;
     private int foreign_AddressID;
 
     private int addressID;
@@ -82,11 +82,11 @@ public class Customer {
         this.driverLicense = driverLicense;
     }
 
-    public Date getDriverSinceDate() {
+    public LocalDate getDriverSinceDate() {
         return driverSinceDate;
     }
 
-    public void setDriverSinceDate(Date driverSinceDate) {
+    public void setDriverSinceDate(LocalDate driverSinceDate) {
         this.driverSinceDate = driverSinceDate;
     }
 

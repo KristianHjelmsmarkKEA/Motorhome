@@ -27,6 +27,10 @@
         <th>Email</th>
         <th>Driver License</th>
         <th>Driver License Date</th>
+        <th>Address</th>
+        <th>Zipcode</th>
+        <th>City</th>
+        <th>Country</th>
     </tr>
     </thead>
     <tbody>
@@ -38,13 +42,17 @@
         <td th:text="${customers.email}" />
         <td th:text="${customers.driverLicense}"/>
         <td th:text="${customers.driverSinceDate}"/>
+        <td th:text="${customers.address}" />
+        <td th:text="${customers.zipcode}" />
+        <td th:text="${customers.city}" />
+        <td th:text="${customers.country}" />
     </tr>
     </tbody>
 </table>
 
 <script>
     function userSearch() {
-        var input, filter, table, tr, td, td1, td2, td3, i;
+        var input, filter, table, tr, td, td1, td2, td3, td4, i;
         input = document.getElementById("user-input");
         filter = input.value.toUpperCase();
         table = document.getElementById("filter-table");
@@ -54,11 +62,13 @@
             td1 = tr[i].getElementsByTagName("td")[2];
             td2 = tr[i].getElementsByTagName("td")[3];
             td3 = tr[i].getElementsByTagName("td")[4];
+            td4 = tr[i].getElementsByTagName("td")[8];
             if (td) {
                 if ( (td.textContent.toUpperCase().indexOf(filter) > -1) ||
                     (td1.textContent.toUpperCase().indexOf(filter) > -1) ||
                     (td2.textContent.toUpperCase().indexOf(filter) > -1) ||
-                    (td3.textContent.toUpperCase().indexOf(filter) > -1) )  {
+                    (td3.textContent.toUpperCase().indexOf(filter) > -1) ||
+                    (td4.textContent.toUpperCase().indexOf(filter) > -1) )  {
                     tr[i].style.display = "";
                 } else {
                     tr[i].style.display = "none";
