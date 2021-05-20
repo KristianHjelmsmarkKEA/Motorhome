@@ -35,6 +35,10 @@ public class CustomerService {
         return customerRepo.addCustomer(customer);
     }
 
+    public Customer findCustomerID(int customerID) { return customerRepo.findCustomerID(customerID); }
+
+    public Customer updateCustomerInformation(int customerID, Customer c) {
+        return customerRepo.updateCustomerInformation(customerID, c); }
 
 
 }

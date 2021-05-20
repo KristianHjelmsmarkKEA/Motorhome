@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Update Customer Information</title>
 </head>
 <body>
+
+<form action="/updateCustomerInformation" method="post">
+    <input type="text" name="firstName" th:value="${customers.firstName}" placeholder="${customers.firstName}">
+    <input type="text" name="lastName" th:value="${customers.lastName}" placeholder="${customers.lastName}">
+    <input type="text" name="phoneNumber" th:value="${customers.phoneNumber}" placeholder="${customers.phoneNumber}">
+    <input type="text" name="email" th:value="${customers.email}" placeholder="${customers.email}">
+    <input type="text" name="address" th:value="${customers.address}" placeholder="${customers.address}">
+    <input type="text" name="zipcode" th:value="${customers.zipcode}" placeholder="${customers.zipcode}">
+    <input type="text" name="city" th:value="${customers.city}" placeholder="${customers.city}">
+    <input type="text" name="country" th:value="${customers.country}" placeholder="${customers.country}">
+    <input type="hidden" name="customerID" th:value="${customers.customerID}">
+    <input type="hidden" name="addressID" th:value="${customers.addressID}">
+    <input type="hidden" name="zipcodeID" th:value="${customers.zipcodeID}">
+    <input type="hidden" name="countryID" th:value="${customers.countryID}">
+
+    <input type="submit" value="Save changes">
+</form>
 
 </body>
 </html>

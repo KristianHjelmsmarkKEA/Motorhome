@@ -50,6 +50,27 @@ public class CustomerRepo {
         return template.query(sql, rowMapper);
     }
 
+    public Customer findCustomerID(int customerID){
+        String sql = "select * from customers, address, zipcodes, country WHERE zipcodes.foreign_countryid = country.countryid and address.foreign_zipcodeid = zipcodes.zipcodeid and customers.foreign_addressid = address.addressid AND customerid = ?";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        Customer c = template.queryForObject(sql, rowMapper, customerID);
+        return c;
+    }
+
+    public Customer updateCustomerInformation(int customerID, Customer c){
+        System.out.printf("Customer:" + c);
+        String sql = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ? Where customerid = ?";
+        String sql1 = "UPDATE address SET address = ? Where addressid = ?";
+        String sql2 = "UPDATE zipcodes SET zipcode = ?, city = ? Where zipcodeid = ?";
+        String sql3 = "UPDATE country SET country = ? Where countryid = ?";
+        template.update(sql, c.getFirstName(), c.getLastName(), c.getPhoneNumber(), c.getEmail(),
+                c.getCustomerID());
+        template.update(sql1, c.getAddress(), c.getAddressID());
+        template.update(sql2, c.getZipcode(), c.getCity(), c.getZipcodeID());
+        template.update(sql3, c.getCountry(), c.getCountryID());
+        return null;
+    }
+
 
 
 }

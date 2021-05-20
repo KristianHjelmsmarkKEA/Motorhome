@@ -169,4 +169,27 @@ public class Customer {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerID=" + customerID +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                ", driverLicense='" + driverLicense + '\'' +
+                ", driverSinceDate=" + driverSinceDate +
+                ", foreign_AddressID=" + foreign_AddressID +
+                ", addressID=" + addressID +
+                ", address='" + address + '\'' +
+                ", foreign_ZipcodeID=" + foreign_ZipcodeID +
+                ", zipcodeID=" + zipcodeID +
+                ", zipcode=" + zipcode +
+                ", city='" + city + '\'' +
+                ", foreign_countryID=" + foreign_countryID +
+                ", countryID=" + countryID +
+                ", country='" + country + '\'' +
+                '}';
+    }
 }

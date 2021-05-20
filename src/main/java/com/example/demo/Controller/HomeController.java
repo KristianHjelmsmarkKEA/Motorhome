@@ -70,5 +70,18 @@ public class HomeController {
     }
     //</editor-fold>
 
+    @GetMapping("/updateCustomer/{customerID}")
+    public String update(@PathVariable("customerID") int customerID, Model model){
+        model.addAttribute("customers", customerService.findCustomerID(customerID));
+        return "home/updateCustomer";
+    }
+
+    @PostMapping("/updateCustomerInformation")
+    public String updateCustomerInformation(@ModelAttribute Customer customer, Model model) {
+        model.addAttribute("customers", customer);
+        customerService.updateCustomerInformation(customer.getCustomerID(), customer);
+        System.out.printf("Customer" + customer);
+        return "redirect:/";
+    }
 
 }
