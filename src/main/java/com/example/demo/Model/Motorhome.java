@@ -74,14 +74,6 @@ public class Motorhome {
 
     @Override
     public String toString() {
-        return "Motorhome{" +
-                "motorhomeID=" + motorhomeID +
-                ", brandAndModel='" + brandAndModel + '\'' +
-                ", capacity=" + capacity +
-                ", odometer=" + odometer +
-                ", numberPlate='" + numberPlate + '\'' +
-                ", rentalPrice=" + rentalPrice +
-                ", service=" + inService +
-                '}';
+        return "Motorhome{"+ motorhomeID + brandAndModel + capacity + odometer + numberPlate + rentalPrice + inService + '}';
     }
 }

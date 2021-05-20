@@ -20,18 +20,16 @@
 
 <div class="center-card">
     <h1>Skriv den forventede leje dato</h1>
-        <form action="reservations" method="post">
+        <form action="chooseMotorhome" method="post">
             <div class="date-field">
                 <label for="startDate">Fra den: </label>
-                <input type="date" id="startDate" name="startDate">
+                <input type="date" id="startDate" name="startDate" required>
                 <label for="endDate">Til den: </label>
-                <input type="date" id="endDate" name="endDate">
+                <input type="date" id="endDate" name="endDate" required>
             </div>
             <input type="submit" value="Søg">
         </form>
 </div>
-
-
 
 </body>
 </html>

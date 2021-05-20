@@ -33,26 +33,12 @@ public class HomeController {
     }
 
     //<editor-fold desc="Alle knapper på forsiden">
-    @PostMapping("/enterDateAndLocation")
-    public String enterDateAndLocation(Model model) {
-        //code
-        return "home/reservations";
-    }
-
     @GetMapping("/managePrices")
     public String managePrices(Model model) {
         List<Price> priceList = priceService.fetchAll();
         model.addAttribute("prices", priceList);
         return "home/managePrices";
     }
-
-    @PostMapping("/reservations")
-    public String reservations(@ModelAttribute Contract contract, Model model) {
-        List<Motorhome> availableMotorhomes = motorhomeService.fetchIntervalMotorhomes(contract.getStartDate(), contract.getEndDate());
-        model.addAttribute("availableMotorhomes", availableMotorhomes);
-        return "home/reservations";
-    }
-
 
     @GetMapping ("/manageContracts")
     public String manageContracts(Model model) {
@@ -103,5 +89,27 @@ public class HomeController {
         customerService.updateCustomerInformation(customer.getCustomerID(), customer);
         return "redirect:/";
     }
+
+    @PostMapping("/chooseMotorhome")
+    public String reservations(@ModelAttribute Contract contract, Model model) {
+        List<Motorhome> availableMotorhomes = motorhomeService.fetchIntervalMotorhomes(contract.getStartDate(), contract.getEndDate());
+        model.addAttribute("newContractDate", contract);
+        model.addAttribute("availableMotorhomes", motorhomeService.removeDuplicateBrands(availableMotorhomes));
+
+        return "home/chooseMotorhome";
+    }
+
+    @GetMapping("/extraSelection/{brandAndModel}")
+    public String extraSelection(@PathVariable("brandAndModel") String brandAndModel, @ModelAttribute Contract contract, Model model) {
+        List<Motorhome> sortedMotorhomes = motorhomeService.fetchMotorhomesBrandAndModel(brandAndModel);
+        System.out.println(sortedMotorhomes);
+        return "home/extraSelection";
+    }
+    @GetMapping("extraSelection")
+    public String extraSelection() {
+        return "home/extraSelection";
+    }
+
+
 
 }

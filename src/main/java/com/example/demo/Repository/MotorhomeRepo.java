@@ -2,6 +2,7 @@ package com.example.demo.Repository;
 
 import com.example.demo.Model.Motorhome;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -62,14 +63,22 @@ public class MotorhomeRepo {
                 "(end_date BETWEEN '"+startDate+"' AND '"+endDate+"') OR " +
                 "('"+startDate+"' between start_date AND end_date) OR " +
                 "('"+endDate+"' between start_date AND end_date);";
-
-        return template.queryForObject(sql, Integer.class);
+        try { //Try Catch, til hvis den ikke kan finde nogen foreign_motorhomeid I brug af andre kontrakter.
+            return template.queryForObject(sql, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            System.out.println("Exception caught!!! " + e + ", RETURNING null instead :)");
+            return null;
+        }
     }
 
     public List<Motorhome> fetchIntervalMotorhomes(LocalDate startDate, LocalDate endDate) {
 
         List<Motorhome> allMotorhomesInService = fetchAllInService();
         ArrayList<Motorhome> availableMotorhomes = new ArrayList<>();
+        if (unavailableMotorhomes(startDate, endDate) == null) {
+            return allMotorhomesInService;
+        }
+
         for (Motorhome motorhome : allMotorhomesInService) {
             if (motorhome.getMotorhomeID() != unavailableMotorhomes(startDate, endDate))
                 availableMotorhomes.add(motorhome);
@@ -77,4 +86,25 @@ public class MotorhomeRepo {
         return availableMotorhomes;
     }
 
+    public List<Motorhome> removeDuplicateBrands(List<Motorhome> withDuplicates) {
+        ArrayList<Motorhome> removedDuplicates = new ArrayList<>();
+
+        for (Motorhome motorhome : withDuplicates) {
+            if (!removedDuplicates.toString().contains(motorhome.getBrandAndModel())) {
+                removedDuplicates.add(motorhome);
+            }
+        }
+        return removedDuplicates;
+    }
+
+    public List<Motorhome> fetchMotorhomesBrandAndModel(String brandAndModel) {
+        List<Motorhome> motorhomesInService = fetchAllInService();
+        ArrayList<Motorhome> sortedMotorhomes = new ArrayList<>();
+
+        for (Motorhome motorhome : motorhomesInService) {
+            if (motorhome.getBrandAndModel().contains(brandAndModel))
+                sortedMotorhomes.add(motorhome);
+        }
+        return sortedMotorhomes;
+    }
 }

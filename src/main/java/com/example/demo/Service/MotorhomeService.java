@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +17,10 @@ public class MotorhomeService {
 
     public List<Motorhome> fetchAll(){
         return motorhomeRepo.fetchAll();
+    }
+
+    public List<Motorhome> fetchAllInService() {
+        return motorhomeRepo.fetchAllInService();
     }
 
     public Motorhome addMotorhome(Motorhome motorhome){
@@ -33,5 +38,14 @@ public class MotorhomeService {
     public Motorhome findMotorhome(int motorhomeID) { return motorhomeRepo.findMotorhomeID(motorhomeID); }
 
     public Motorhome updateMotorhomeInformation(int motorhomeID, Motorhome m) {
-        return motorhomeRepo.updateMotorhomeInformation(motorhomeID, m); }
+        return motorhomeRepo.updateMotorhomeInformation(motorhomeID, m);
+    }
+
+    public List<Motorhome> removeDuplicateBrands(List<Motorhome> withDuplicates) {
+        return motorhomeRepo.removeDuplicateBrands(withDuplicates);
+    }
+
+    public List<Motorhome> fetchMotorhomesBrandAndModel(String brandAndModel) {
+        return motorhomeRepo.fetchMotorhomesBrandAndModel(brandAndModel);
+    }
 }
