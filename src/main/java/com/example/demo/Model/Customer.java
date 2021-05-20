@@ -8,7 +8,7 @@ import java.util.Date;
 public class Customer {
 
     @Id
-    //Fields/Attributes
+    //Fields & Attributes
     private int customerID;
     private String firstName;
     private String lastName;
