@@ -22,6 +22,7 @@
     <tr>
         <th>Item-Fee ID</th>
         <th>Item Name</th>
+        <th>Item Category</th>
         <th>Price (kr.)</th>
 
     </tr>
@@ -30,6 +31,7 @@
     <tr th:each="prices: ${prices}">
         <td th:text="${prices.feeID}"/>
         <td th:text="${prices.itemName}"/>
+        <td th:text="${prices.itemCategory}"/>
         <td th:text="${prices.itemPrice} + ' kr.'" ></td>
     </tr>
     </tbody>

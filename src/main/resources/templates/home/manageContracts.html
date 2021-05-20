@@ -23,6 +23,8 @@
         <th>Contract ID</th>
         <th>Start Date</th>
         <th>End Date</th>
+        <th>Start Odometer</th>
+        <th>End Odometer</th>
         <th>Total Price</th>
         <th>Finalized</th>
         <th>Cancelled</th>
@@ -36,6 +38,8 @@
         <td th:text="${contracts.contractID}"/>
         <td th:text="${contracts.startDate}"/>
         <td th:text="${contracts.endDate}" />
+        <td th:text="${contracts.startOdometer}" />
+        <td th:text="${contracts.endOdometer}" />
         <td th:text="${contracts.totalPrice} + ' kr.'"/>
         <td th:text="${contracts.finalizedContract}" />
         <td th:text="${contracts.cancelledContract}" />
