@@ -10,7 +10,7 @@ public class Motorhome {
     private int odometer;
     private String numberPlate;
     private double rentalPrice;
-    private boolean service;
+    private boolean inService;
 
     //Constructor
     public Motorhome(){ }
@@ -48,12 +48,12 @@ public class Motorhome {
         this.odometer = odometer;
     }
 
-    public boolean isService() {
-        return service;
+    public boolean isInService() {
+        return inService;
     }
 
-    public void setService(boolean service) {
-        this.service = service;
+    public void setInService(boolean inService) {
+        this.inService = inService;
     }
 
     public String getNumberPlate() {
@@ -81,7 +81,7 @@ public class Motorhome {
                 ", odometer=" + odometer +
                 ", numberPlate='" + numberPlate + '\'' +
                 ", rentalPrice=" + rentalPrice +
-                ", service=" + service +
+                ", service=" + inService +
                 '}';
     }
 }

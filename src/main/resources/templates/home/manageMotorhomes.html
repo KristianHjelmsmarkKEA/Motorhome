@@ -38,7 +38,7 @@
         <td th:text="${motorhomes.odometer}" />
         <td th:text="${motorhomes.numberPlate}" />
         <td th:text="${motorhomes.rentalPrice} + ' kr.'"/>
-        <td th:text="${motorhomes.service}"/>
+        <td th:text="${motorhomes.inService}"/>
         <td>
             <a th:href="@{'/updateMotorhome/'+${motorhomes.motorhomeID}}">
                 <button class="btn-update" id="btn-update">Edit customer information</button>

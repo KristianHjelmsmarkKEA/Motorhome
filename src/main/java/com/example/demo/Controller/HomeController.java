@@ -64,6 +64,7 @@ public class HomeController {
     @GetMapping ("/manageMotorhomes")
     public String manageMotorhomes(Model model) {
         List<Motorhome> motorhomeList = motorhomeService.fetchAll();
+        System.out.println(motorhomeList);
         model.addAttribute("motorhomes", motorhomeList);
         return "home/manageMotorhomes";
     }

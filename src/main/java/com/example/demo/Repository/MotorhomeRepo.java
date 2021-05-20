@@ -1,6 +1,5 @@
 package com.example.demo.Repository;
 
-import com.example.demo.Model.Customer;
 import com.example.demo.Model.Motorhome;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -33,7 +32,7 @@ public class MotorhomeRepo {
     //SQL Fikset tror jeg
     public Motorhome addMotorhome(Motorhome motorhome){
         String sql = "INSERT INTO motorhomes (VALUES (?, ?, ?, ?, ?, ?)";
-        template.update(sql, motorhome.getBrandAndModel(), motorhome.getCapacity(), motorhome.getOdometer(), motorhome.getNumberPlate(), motorhome.getRentalPrice(), motorhome.isService());
+        template.update(sql, motorhome.getBrandAndModel(), motorhome.getCapacity(), motorhome.getOdometer(), motorhome.getNumberPlate(), motorhome.getRentalPrice(), motorhome.isInService());
         return null;
     }
 
@@ -51,7 +50,7 @@ public class MotorhomeRepo {
 
     public Motorhome updateMotorhomeInformation(int motorhomeID, Motorhome m) {
         String sql = "UPDATE motorhomes SET odometer = ?, rental_price = ?, in_service =? where motorhomeid = ?";
-        template.update(sql, m.getOdometer(), m.getRentalPrice(), m.isService(), m.getMotorhomeID());
+        template.update(sql, m.getOdometer(), m.getRentalPrice(), m.isInService(), m.getMotorhomeID());
 
         return null;
     }
