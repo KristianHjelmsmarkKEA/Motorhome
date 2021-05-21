@@ -18,4 +18,10 @@ public class PriceService {
     public Price addPrice(Price price) {return priceRepo.addPrice(price);}
 
     public Boolean deletePrice(int feeID) {return priceRepo.deletePrice(feeID);}
+
+    public Price findFeeID(int feeID) { return priceRepo.findFeeID(feeID); }
+
+    public Price updateFeeInformation(int feeID, Price p) {
+        return priceRepo.updateFeeInformation(feeID, p); }
+
 }

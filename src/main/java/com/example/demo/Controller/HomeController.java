@@ -40,6 +40,27 @@ public class HomeController {
         return "home/managePrices";
     }
 
+    @GetMapping("/updateItem/{feeID}")
+    public String updateItemInformation(@PathVariable("feeID") int feeID, Model model){
+        model.addAttribute("prices", priceService.findFeeID(feeID));
+        return "home/updateItem";
+    }
+
+    @PostMapping("/updateItemInformation")
+    public String updateItemInformation(@ModelAttribute Price price, Model model) {
+        model.addAttribute("prices", price);
+        priceService.updateFeeInformation(price.getFeeID(), price);
+        return "redirect:/";
+    }
+
+    @GetMapping("/addItem")
+    public String addItem() { return "home/addItem"; }
+    @PostMapping("/addItem")
+    public String addItem(@ModelAttribute Price price) {
+        priceService.addPrice(price);
+        return "redirect:/managePrices";
+    }
+
     @GetMapping ("/manageContracts")
     public String manageContracts(Model model) {
         List<Contract> contractList = contractService.fetchAll();

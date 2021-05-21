@@ -47,4 +47,5 @@ public class Price {
     public String getItemCategory() {return itemCategory;}
 
     public void setItemCategory(String itemCategory) {this.itemCategory = itemCategory;}
+
 }

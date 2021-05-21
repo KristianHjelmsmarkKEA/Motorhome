@@ -1,5 +1,6 @@
 package com.example.demo.Repository;
 
+import com.example.demo.Model.Customer;
 import com.example.demo.Model.Price;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -21,9 +22,10 @@ public class PriceRepo {
         return template.query(sql, rowMapper);
     }
 
-    public Price addPrice(Price price){
-        String sql = "INSERT INTO item_fees (VALUES (?, ?, ?)";
-        template.update(sql, price.getItemName(), price.getItemPrice(), price.getItemCategory());
+    public Price addPrice(Price p){
+        System.out.printf("gustavs is");
+        String sql = "INSERT INTO item_fees (item_name, item_price, foreign_categoryid) VALUES (?, ?, ?)";
+        template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
         return null;
     }
 
@@ -31,4 +33,19 @@ public class PriceRepo {
         String sql = "DELETE FROM item_fees WHERE feeid = ?";
         return template.update(sql, feeID) > 0;
     }
+
+    public Price findFeeID(int feeID){
+        String sql = "select * from item_fees WHERE feeid = ?";
+        RowMapper<Price> rowMapper = new BeanPropertyRowMapper<>(Price.class);
+        Price p = template.queryForObject(sql, rowMapper, feeID);
+        return p;
+    }
+    public Price updateFeeInformation(int feeID, Price p){
+        String sql = "UPDATE item_fees SET item_name = ?, item_price = ? WHERE feeid = ?";
+        template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
+        return null;
+    }
+
+
+
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add item</title>
+    <style>
+        #selection-box {
+            background-color: #0047b3;
+            border: 2px solid white;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: 25%;
+            height: 50px;
+            overflow: hidden;
+            position:absolute; left:25%; top:25%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Add a new item-fee</h1>
+
+    <form action="/addItem" method="post">
+        <label>Enter Item name</label>
+        <input type="text" name="itemName" placeholder="Item Name">
+        <label>Enter Item price</label>
+        <input type="text" name="itemPrice" placeholder="itemPrice">
+
+        <label for="selection-box">Choose a item category</label>
+            <select name="foreign_categoryID" id="selection-box">
+                <option value="1">Accessories</option>
+                <option value="3">Repair</option>
+                <option value="4">Cancellation</option>
+                <option value="5">Transfercost</option>
+                <option value="6">Fuel</option>
+                <option value="7">Others</option>
+            </select>
+
+        <input class="btn-add" id="btn-add" type="submit" value="Create new Item" style="color: #4CAF50">
+    </form>
+</body>
+</html>

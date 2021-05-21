@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Item-Information</title>
+</head>
+<body>
+
+<form action="/updateItemInformation" method="post">
+    <input type="text" name="itemName" th:value="${prices.itemName}" placeholder="${prices.itemName}">
+    <input type="text" name="itemPrice" th:value="${prices.itemPrice}" placeholder="${prices.itemPrice}">
+    <input type="text" name="itemCategory" th:value="${prices.itemCategory}" placeholder="${prices.itemCategory}">
+
+    <input type="hidden" name="customerID" th:value="${prices.feeID}">
+
+    <input type="submit" value="Save changes">
+</form>
+
+</body>
+</html>
