@@ -86,7 +86,7 @@ public class HomeController {
     public String updateMotorhomeInformation(@ModelAttribute Motorhome motorhome, Model model) {
         model.addAttribute("motorhomes", motorhome);
         motorhomeService.updateMotorhomeInformation(motorhome.getMotorhomeID(), motorhome);
-        return "redirect:/";
+        return "redirect:/manageMotorhomes";
     }
 
     //</editor-fold>
