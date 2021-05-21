@@ -22,6 +22,13 @@ public class PriceRepo {
         return template.query(sql, rowMapper);
     }
 
+    // categoryNumber: 1=Accessories 2=Season 3=Repair 4=Cancellation 5=Transfercost 6=Fuel 7= Others.
+    public List <Price> fetchItemsFromCategoryNum(int categoryNumber) {
+        String sql = "SELECT * FROM item_categories, item_fees where foreign_categoryid = categoryid and foreign_categoryid ="+categoryNumber+";";
+        RowMapper<Price> rowMapper = new BeanPropertyRowMapper<>(Price.class);
+        return template.query(sql, rowMapper);
+    }
+
     public Price addPrice(Price p){
         String sql = "INSERT INTO item_fees (item_name, item_price, foreign_categoryid) VALUES (?, ?, ?)";
         template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());

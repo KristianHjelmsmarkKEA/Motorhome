@@ -97,8 +97,8 @@ public class MotorhomeRepo {
         return removedDuplicates;
     }
 
-    public List<Motorhome> fetchMotorhomesBrandAndModel(String brandAndModel) {
-        List<Motorhome> motorhomesInService = fetchAllInService();
+    public List<Motorhome> fetchMotorhomesBrandAndModel(String brandAndModel, LocalDate startDate, LocalDate endDate) {
+        List<Motorhome> motorhomesInService = fetchIntervalMotorhomes(startDate, endDate);
         ArrayList<Motorhome> sortedMotorhomes = new ArrayList<>();
 
         for (Motorhome motorhome : motorhomesInService) {
