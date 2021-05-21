@@ -50,7 +50,7 @@ public class HomeController {
     public String updateItemInformation(@ModelAttribute Price price, Model model) {
         model.addAttribute("prices", price);
         priceService.updateFeeInformation(price.getFeeID(), price);
-        return "redirect:/";
+        return "redirect:/managePrices";
     }
 
     @GetMapping("/addItem")
@@ -86,7 +86,7 @@ public class HomeController {
     public String updateMotorhomeInformation(@ModelAttribute Motorhome motorhome, Model model) {
         model.addAttribute("motorhomes", motorhome);
         motorhomeService.updateMotorhomeInformation(motorhome.getMotorhomeID(), motorhome);
-        return "redirect:/";
+        return "redirect:/manageMotorhomes";
     }
 
     //</editor-fold>
@@ -120,14 +120,13 @@ public class HomeController {
         return "home/chooseMotorhome";
     }
 
-    @GetMapping("/extraSelection/{brandAndModel}")
+    @PostMapping("/extraSelection/{brandAndModel}")
     public String extraSelection(@PathVariable("brandAndModel") String brandAndModel, @ModelAttribute Contract contract, Model model) {
-        List<Motorhome> sortedMotorhomes = motorhomeService.fetchMotorhomesBrandAndModel(brandAndModel);
-        System.out.println(sortedMotorhomes);
-        return "home/extraSelection";
-    }
-    @GetMapping("extraSelection")
-    public String extraSelection() {
+        List<Motorhome> allSortedMotorhomes = motorhomeService.fetchMotorhomesBrandAndModel(brandAndModel, contract.getStartDate(), contract.getEndDate());
+        List<Price> accessories = priceService.fetchItemsFromCategoryNum(1);
+        model.addAttribute("accessories", accessories);
+        model.addAttribute("sortedMotorhomes", allSortedMotorhomes);
+
         return "home/extraSelection";
     }
 
