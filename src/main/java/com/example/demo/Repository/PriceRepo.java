@@ -23,7 +23,6 @@ public class PriceRepo {
     }
 
     public Price addPrice(Price p){
-        System.out.printf("gustavs is");
         String sql = "INSERT INTO item_fees (item_name, item_price, foreign_categoryid) VALUES (?, ?, ?)";
         template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
         return null;
