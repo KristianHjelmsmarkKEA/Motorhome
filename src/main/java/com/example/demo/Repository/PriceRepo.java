@@ -16,7 +16,7 @@ public class PriceRepo {
     JdbcTemplate template;
 
     public List <Price> fetchAll() {
-        String sql = "SELECT * FROM item_fees";
+        String sql = "SELECT * FROM item_categories, item_fees where foreign_categoryid = categoryid";
         RowMapper<Price> rowMapper = new BeanPropertyRowMapper<>(Price.class);
         return template.query(sql, rowMapper);
     }

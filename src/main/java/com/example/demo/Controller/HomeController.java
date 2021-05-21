@@ -93,7 +93,7 @@ public class HomeController {
     @PostMapping("/chooseMotorhome")
     public String reservations(@ModelAttribute Contract contract, Model model) {
         List<Motorhome> availableMotorhomes = motorhomeService.fetchIntervalMotorhomes(contract.getStartDate(), contract.getEndDate());
-        model.addAttribute("newContractDate", contract);
+        model.addAttribute("contractDate", contract);
         model.addAttribute("availableMotorhomes", motorhomeService.removeDuplicateBrands(availableMotorhomes));
 
         return "home/chooseMotorhome";
@@ -109,7 +109,5 @@ public class HomeController {
     public String extraSelection() {
         return "home/extraSelection";
     }
-
-
 
 }

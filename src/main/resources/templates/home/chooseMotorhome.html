@@ -23,8 +23,8 @@
     </ul>
         <ul th:each="motorhome : ${availableMotorhomes}">
             <a th:href="@{'/extraSelection/'+${motorhome.brandAndModel}}">
-                <input type="hidden" name="startDate" th:value="${newContractDate.startDate}"/>
-                <input type="hidden" name="endDate" th:value="${newContractDate.endDate}"/>
+                <input type="hidden" name="startDate" th:value="${contractDate.startDate}"/>
+                <input type="hidden" name="endDate" th:value="${contractDate.endDate}"/>
                 <button class="motorhome-button" name="motorhome">
                     <span th:text="'Autocamper Model: '"/><b th:text="${motorhome.brandAndModel}"/><br/>
                     <span th:text="'Antal Sæder: '"/><b th:text="${motorhome.capacity}"/><br/>

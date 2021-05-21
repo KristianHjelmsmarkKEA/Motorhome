@@ -6,7 +6,11 @@ public class Price {
     private int feeID;
     private String itemName;
     private double itemPrice;
+    private int foreign_categoryID;
+
+    private int categoryID;
     private String itemCategory;
+
 
     //Constructor
     public Price(){ }
@@ -23,6 +27,22 @@ public class Price {
     public double getItemPrice() {return itemPrice;}
 
     public void setItemPrice(double itemPrice) {this.itemPrice = itemPrice;}
+
+    public int getForeign_categoryID() {
+        return foreign_categoryID;
+    }
+
+    public void setForeign_categoryID(int foreign_categoryID) {
+        this.foreign_categoryID = foreign_categoryID;
+    }
+
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
 
     public String getItemCategory() {return itemCategory;}
 
