@@ -120,7 +120,7 @@ public class HomeController {
         return "home/chooseMotorhome";
     }
 
-    @PostMapping("/extraSelection/{brandAndModel}")
+    @GetMapping("extraSelection/{brandAndModel}")
     public String extraSelection(@PathVariable("brandAndModel") String brandAndModel, @ModelAttribute Contract contract, Model model) {
         List<Motorhome> allSortedMotorhomes = motorhomeService.fetchMotorhomesBrandAndModel(brandAndModel, contract.getStartDate(), contract.getEndDate());
         List<Price> accessories = priceService.fetchItemsFromCategoryNum(1);
