@@ -1,9 +1,6 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.Contract;
-import com.example.demo.Model.Customer;
-import com.example.demo.Model.Motorhome;
-import com.example.demo.Model.Price;
+import com.example.demo.Model.*;
 import com.example.demo.Service.ContractService;
 import com.example.demo.Service.CustomerService;
 import com.example.demo.Service.MotorhomeService;
@@ -121,13 +118,21 @@ public class HomeController {
     }
 
     @GetMapping("extraSelection/{brandAndModel}")
-    public String extraSelection(@PathVariable("brandAndModel") String brandAndModel, @ModelAttribute Contract contract, Model model) {
+    public String extraSelection(@PathVariable("brandAndModel") String brandAndModel, Model model, Contract contract) {
+        System.out.println(contract);
         List<Motorhome> allSortedMotorhomes = motorhomeService.fetchMotorhomesBrandAndModel(brandAndModel, contract.getStartDate(), contract.getEndDate());
         List<Price> accessories = priceService.fetchItemsFromCategoryNum(1);
         model.addAttribute("accessories", accessories);
         model.addAttribute("sortedMotorhomes", allSortedMotorhomes);
 
+
         return "home/extraSelection";
+    }
+
+    @GetMapping("/createContract")
+    public String createContract(Contract contract, ContractDetails contractDetails, Motorhome motorhome, Price price, Model model) {
+
+        return "home/index";
     }
 
 }

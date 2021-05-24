@@ -16,7 +16,37 @@
         <a href="https://www.youtube.com/watch?v=jxo_K7JLZxQ">KEKW</a>
     </div>
 </div>
-<h1>External CSS files dosn't work on this page KEKW it's cuz of @PathVariable and custom URL oh well</h1>
 
+<h1 th:text="'Model: ' + ${brandAndModel}"></h1>
+<form action="/createContract" method="get">
+    <ul th:if="${sortedMotorhomes.empty}">
+        <li colspan="2">
+            <a href="index"> Ingen motorhomes. Tilbage til forsiden</a>
+        </li>
+    </ul>
+    <select name="selected motorhome">
+    <ul th:each="motorhome : ${sortedMotorhomes}">
+        <option>
+        <span th:text="'Odometer: '"/><b th:text="${motorhome.odometer}"/><br/>
+        <span th:text="'Nummerplade: '"/><b th:text="${motorhome.numberPlate}"/><br/>
+        </option>
+    </ul>
+    </select>
+    <h1>Vælg Accessories</h1>
+    <ul th:if="${accessories.empty}">
+        <li colspan="2">
+            <a href="index"> Ingen accessories. Tilbage til forsiden</a>
+        </li>
+    </ul>
+    <ul th:each="price : ${accessories}">
+        <span th:text="'Navn: '"/><b th:text="${price.itemName}"/><br/>
+        <span th:text="'Price: '"/><b th:text="${price.itemPrice}"/><br/>
+        <input type="number" th:name="${price.itemName}"/>
+    </ul>
+
+    <h1>Indtast kilometer til pick-up point</h1>
+        <input type="number" name="inputKM">
+        <input type="submit" value="submit">
+</form>
 </body>
 </html>
