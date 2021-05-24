@@ -15,9 +15,6 @@ public class Contract {
     private LocalDate endDate;
     private int startOdometer;
     private int endOdometer;
-    private double totalPrice;
-    private boolean finalizedContract;
-    private boolean cancelledContract;
     private int foreign_MotorhomeID;
     private int foreign_CustomerID;
     private int foreign_OrderID;
@@ -58,28 +55,6 @@ public class Contract {
 
     public void setEndOdometer(int endOdometer) {this.endOdometer = endOdometer;}
 
-    public double getTotalPrice() { return totalPrice; }
-
-    public void setTotalPrice(double finalPrice) {
-        this.totalPrice = finalPrice;
-    }
-
-    public boolean isFinalizedContract() {
-        return finalizedContract;
-    }
-
-    public void setFinalizedContract(boolean finalizedContract) {
-        this.finalizedContract = finalizedContract;
-    }
-
-    public boolean isCancelledContract() {
-        return cancelledContract;
-    }
-
-    public void setCancelledContract(boolean cancelledContract) {
-        this.cancelledContract = cancelledContract;
-    }
-
     public int getForeign_MotorhomeID() {
         return foreign_MotorhomeID;
     }
@@ -110,9 +85,6 @@ public class Contract {
                 "contractID=" + contractID +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", totalPrice=" + totalPrice +
-                ", finalizedContract=" + finalizedContract +
-                ", cancelledContract=" + cancelledContract +
                 ", foreign_MotorhomeID=" + foreign_MotorhomeID +
                 ", foreign_CustomerID=" + foreign_CustomerID +
                 ", foreign_OrderID=" + foreign_OrderID +
