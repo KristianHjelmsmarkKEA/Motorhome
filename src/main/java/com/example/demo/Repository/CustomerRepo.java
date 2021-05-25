@@ -18,30 +18,26 @@ public class CustomerRepo {
     JdbcTemplate template;
 
 
-    public Customer addCountry(Customer customer){
+    public void addCountry(Customer customer){
         String sql = "INSERT INTO country (country) VALUES (?)";
         template.update(sql, customer.getCountry());
-        return null;
     }
     //SQL STRING SKAL ÆNDRES?
-    public Customer addZipcode(Customer customer) {
+    public void addZipcode(Customer customer) {
         String sql = "INSERT INTO zipcodes (zipcode, city, foreign_countryid) VALUES (?, ?, (select countryid from country where countryid = (select max(countryid) from country)))";
         template.update(sql, customer.getZipcode(), customer.getCity());
-        return null;
     }
 
     //SQL STRING SKAL ÆNDRES
-    public Customer addAddress(Customer customer) {
+    public void addAddress(Customer customer) {
         String sql = " INSERT INTO address (address, foreign_zipcodeid) VALUES (?, (select zipcodeid from zipcodes where zipcodeid = (select max(zipcodeid) from zipcodes)))";
         template.update(sql, customer.getAddress());
-        return null;
     }
 
     //SQL STRING SKAL ÆNDRES
-    public Customer addCustomer(Customer customer) {
+    public void addCustomer(Customer customer) {
         String sql = "INSERT INTO customers (first_name, last_name, phone_number, email, driver_license, driver_since_date, foreign_addressid) VALUES (?, ?, ?, ?, ?, ?, (select addressid from address where addressid = (select max(addressid) from address)))";
         template.update(sql, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getDriverLicense(), customer.getDriverSinceDate());
-        return null;
     }
 
 

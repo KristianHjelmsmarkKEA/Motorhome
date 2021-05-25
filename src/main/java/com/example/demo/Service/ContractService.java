@@ -17,8 +17,8 @@ public class ContractService {
         return contractRepo.fetchAll();
     }
 
-    public Contract addContract(Contract contract){
-        return contractRepo.addContract(contract);
+    public void addContract(Contract contract){
+        contractRepo.addContract(contract);
     }
 
     public Boolean deleteContract(int contractID) { return contractRepo.deleteContract(contractID); }

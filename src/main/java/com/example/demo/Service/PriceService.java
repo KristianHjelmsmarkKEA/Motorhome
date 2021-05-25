@@ -17,8 +17,8 @@ public class PriceService {
         return priceRepo.fetchAll();
     }
 
-    public Price addPrice(Price price) {
-        return priceRepo.addPrice(price);
+    public void addPrice(Price price) {
+        priceRepo.addPrice(price);
     }
 
     public Boolean deletePrice(int feeID) {
@@ -29,8 +29,8 @@ public class PriceService {
         return priceRepo.findFeeID(feeID);
     }
 
-    public Price updateFeeInformation(int feeID, Price p) {
-        return priceRepo.updateFeeInformation(feeID, p);
+    public void updateFeeInformation(int feeID, Price p) {
+        priceRepo.updateFeeInformation(feeID, p);
     }
 
     public List<Price> fetchItemsFromCategoryNum(int categoryNumber) {

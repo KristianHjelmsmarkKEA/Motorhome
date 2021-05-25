@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -23,10 +24,9 @@ public class ContractRepo {
     }
 
     //SQL STRING SKAL ÆNDRES
-    public Contract addContract(Contract contract){
+    public void addContract(Contract contract){
         String sql = "INSERT INTO contracts (VALUES (?, ?, ?, ?, ?, ?)";
         template.update(sql, contract.getStartDate());
-        return null;
     }
 
     public Boolean deleteContract(int contractID){

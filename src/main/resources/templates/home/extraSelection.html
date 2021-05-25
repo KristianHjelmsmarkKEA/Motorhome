@@ -18,18 +18,20 @@
 </div>
 
 <h1 th:text="'Model: ' + ${brandAndModel}"></h1>
-<form action="/createContract" method="get">
+<form action="/createContract" method="post">
+    <input type="hidden" name="startDate" th:value="${contractDate.startDate}">
+    <input type="hidden" name="endDate" th:value="${contractDate.endDate}">
     <ul th:if="${sortedMotorhomes.empty}">
         <li colspan="2">
             <a href="index"> Ingen motorhomes. Tilbage til forsiden</a>
         </li>
     </ul>
-    <select name="selected motorhome">
+    <select name="motorhomeID">
     <ul th:each="motorhome : ${sortedMotorhomes}">
-        <option>
+        <option th:value="${motorhome.motorhomeID}">
         <span th:text="'Odometer: '"/><b th:text="${motorhome.odometer}"/><br/>
         <span th:text="'Nummerplade: '"/><b th:text="${motorhome.numberPlate}"/><br/>
-        </option>
+        </option>>
     </ul>
     </select>
     <h1>Vælg Accessories</h1>
@@ -38,15 +40,33 @@
             <a href="index"> Ingen accessories. Tilbage til forsiden</a>
         </li>
     </ul>
-    <ul th:each="price : ${accessories}">
+    <ul th:each="price, i : ${accessories}">
+        <span th:text="${price.feeID}"/><br/>
         <span th:text="'Navn: '"/><b th:text="${price.itemName}"/><br/>
         <span th:text="'Price: '"/><b th:text="${price.itemPrice}"/><br/>
-        <input type="number" th:name="${price.itemName}"/>
+        <input type="number" name="amount" min="0" max="10" value="0" required/>
+        <input type="hidden" name="foreign_feeID" th:value="${price.feeID}"/>
     </ul>
 
     <h1>Indtast kilometer til pick-up point</h1>
-        <input type="number" name="inputKM" value="0" min="0" max="99999999" required/>
-        <input type="submit" value="submit">
+    <ul th:each="price, i : ${transferCost}">
+        <span th:text="${price.feeID}"/><br/>
+        <span th:text="''"/><b th:text="${price.itemName}"/><br/>
+        <span th:text="'Price: '"/><b th:text="${price.itemPrice}"/><br/>
+        <input type="number" name="amount" min="0" max="1000" value="0" required>
+        <input type="hidden" name="foreign_feeID" th:value="${price.feeID}">
+    </ul>
+    <input type="submit" value="submit">
+
+    </ul>
+    <select name="feeID">
+        <ul th:each="price : ${seasons}">
+            <option th:value="${price.feeID}">
+                <span th:text="'Season: '"/><b th:text="${price.itemName}"/><br/>
+                <span th:text="'Price: '"/><b th:text="${price.itemPrice}"/><br/>
+            </option>>
+        </ul>
+    </select>
 </form>
 </body>
 </html>

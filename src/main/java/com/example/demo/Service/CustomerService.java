@@ -19,20 +19,20 @@ public class CustomerService {
         return customerRepo.fetchAll();
     }
 
-    public Customer addCountry(Customer customer){
-        return customerRepo.addCountry(customer);
+    public void addCountry(Customer customer){
+        customerRepo.addCountry(customer);
     }
 
-    public Customer addZipcode(Customer customer){
-        return customerRepo.addZipcode(customer);
+    public void addZipcode(Customer customer){
+        customerRepo.addZipcode(customer);
     }
 
-    public Customer addAddress(Customer customer){
-        return customerRepo.addAddress(customer);
+    public void addAddress(Customer customer){
+        customerRepo.addAddress(customer);
     }
 
-    public Customer addCustomer(Customer customer){
-        return customerRepo.addCustomer(customer);
+    public void addCustomer(Customer customer){
+        customerRepo.addCustomer(customer);
     }
 
     public Customer findCustomerID(int customerID) { return customerRepo.findCustomerID(customerID); }

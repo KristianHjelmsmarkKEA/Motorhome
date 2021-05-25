@@ -107,32 +107,4 @@ public class HomeController {
         customerService.updateCustomerInformation(customer.getCustomerID(), customer);
         return "redirect:/";
     }
-
-    @PostMapping("/chooseMotorhome")
-    public String reservations(@ModelAttribute Contract contract, Model model) {
-        List<Motorhome> availableMotorhomes = motorhomeService.fetchIntervalMotorhomes(contract.getStartDate(), contract.getEndDate());
-        model.addAttribute("contractDate", contract);
-        model.addAttribute("availableMotorhomes", motorhomeService.removeDuplicateBrands(availableMotorhomes));
-
-        return "home/chooseMotorhome";
-    }
-
-    @GetMapping("extraSelection/{brandAndModel}")
-    public String extraSelection(@PathVariable("brandAndModel") String brandAndModel, Model model, Contract contract) {
-        System.out.println(contract);
-        List<Motorhome> allSortedMotorhomes = motorhomeService.fetchMotorhomesBrandAndModel(brandAndModel, contract.getStartDate(), contract.getEndDate());
-        List<Price> accessories = priceService.fetchItemsFromCategoryNum(1);
-        model.addAttribute("accessories", accessories);
-        model.addAttribute("sortedMotorhomes", allSortedMotorhomes);
-
-
-        return "home/extraSelection";
-    }
-
-    @GetMapping("/createContract")
-    public String createContract(Contract contract, ContractDetails contractDetails, Motorhome motorhome, Price price, Model model) {
-
-        return "home/index";
-    }
-
 }

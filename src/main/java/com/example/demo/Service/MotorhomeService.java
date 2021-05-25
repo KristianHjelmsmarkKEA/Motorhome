@@ -23,8 +23,8 @@ public class MotorhomeService {
         return motorhomeRepo.fetchAllInService();
     }
 
-    public Motorhome addMotorhome(Motorhome motorhome){
-        return motorhomeRepo.addMotorhome(motorhome);
+    public void addMotorhome(Motorhome motorhome){
+        motorhomeRepo.addMotorhome(motorhome);
     }
 
     public Boolean deleteMotorhome(int motorhomeID){

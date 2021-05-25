@@ -15,15 +15,30 @@ public class Contract {
     private LocalDate endDate;
     private int startOdometer;
     private int endOdometer;
-    private int foreign_MotorhomeID;
-    private int foreign_CustomerID;
-    private int foreign_OrderID;
     private double totalPrice;
     private boolean finalizedContract;
     private boolean cancelledContract;
+    private int foreign_MotorhomeID;
+    private int foreign_CustomerID;
+    private int foreign_OrderID;
+
 
     //Constructor
-    public Contract(){ }
+
+
+    public Contract(int contractID, LocalDate startDate, LocalDate endDate, int startOdometer, int endOdometer, double totalPrice, int foreign_MotorhomeID, int foreign_CustomerID, int foreign_OrderID) {
+        this.contractID = contractID;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startOdometer = startOdometer;
+        this.endOdometer = endOdometer;
+        this.totalPrice = totalPrice;
+        this.foreign_MotorhomeID = foreign_MotorhomeID;
+        this.foreign_CustomerID = foreign_CustomerID;
+        this.foreign_OrderID = foreign_OrderID;
+    }
+
+    public Contract() { }
 
     //Getters & Setters
     public int getContractID() {
@@ -57,6 +72,7 @@ public class Contract {
     public int getEndOdometer() {return endOdometer;}
 
     public void setEndOdometer(int endOdometer) {this.endOdometer = endOdometer;}
+
     public double getTotalPrice() { return totalPrice; }
 
     public void setTotalPrice(double finalPrice) {
@@ -109,6 +125,9 @@ public class Contract {
                 "contractID=" + contractID +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
+                ", startOdometer=" + startOdometer +
+                ", endOdometer=" + endOdometer +
+                ", totalPrice=" + totalPrice +
                 ", foreign_MotorhomeID=" + foreign_MotorhomeID +
                 ", foreign_CustomerID=" + foreign_CustomerID +
                 ", foreign_OrderID=" + foreign_OrderID +
