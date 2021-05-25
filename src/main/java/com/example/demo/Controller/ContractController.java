@@ -1,10 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.*;
-import com.example.demo.Service.ContractService;
-import com.example.demo.Service.MotorhomeService;
-import com.example.demo.Service.PriceService;
-import com.example.demo.Service.ContractDetailsService;
+import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +21,8 @@ public class ContractController {
     PriceService priceService;
     @Autowired
     ContractDetailsService contractDetailsService;
+    @Autowired
+    CustomerService customerService;
 
     final int AVG_MAX_KM_PR_DAY = 400;
 
@@ -90,6 +89,32 @@ public class ContractController {
     public String addCustomerToContract(Contract intialContract, Customer customer, Model model) {
 
         return "home/contractReciept";
+    }
+
+    @GetMapping("/finalizeContractTable")
+    public String finalizeContractTable(Model model) {
+        List<Contract> ongoingContractsList = contractService.fetchOngoingContracts();
+        //List<Customer> customerList = customerService.fetchAll();
+        //model.addAttribute("customers", customerList);
+        model.addAttribute("ongoingContracts", ongoingContractsList);
+        return "home/finalizeContractTable";
+    }
+
+    @GetMapping("/finalizeContract/{contractID}")
+    public String finalizeContract(@PathVariable("contractID") int contractID, Model model) {
+        model.addAttribute("contracts", contractService.findOngoingContractID(contractID));
+        System.out.println(contractID);
+        return "home/finalizeContractPage";
+
+    }
+
+    @PostMapping("/finalizeContractPage")
+    public String finalizeContractPage(@ModelAttribute Contract contract, Model model) {
+        model.addAttribute("contracts", contract);
+
+
+        //contractService.finalizeContractInformation();
+        return "redirect:/finalizeContract";
     }
 
 

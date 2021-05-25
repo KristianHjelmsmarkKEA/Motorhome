@@ -23,6 +23,11 @@ public class ContractService {
 
     public Boolean deleteContract(int contractID) { return contractRepo.deleteContract(contractID); }
 
+    public List<Contract> fetchOngoingContracts() {
+        return contractRepo.fetchOngoingContracts();
+    }
+
+    public Contract findOngoingContractID(int contractID) { return contractRepo.findOngoingContractID(contractID); }
 
 
 }
