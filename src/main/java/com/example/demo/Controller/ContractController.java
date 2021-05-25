@@ -56,8 +56,10 @@ public class ContractController {
     @PostMapping("/createContract")
     public String createContract(@RequestParam("amount") String amount, @RequestParam("foreign_feeID") String foreign_feeID,
                                 @ModelAttribute("motorhomeID") Motorhome motorhome, Contract contractDates, Price season, Model model) {
+
         System.out.println("Amount of each item"+amount+"of the assosiated foreignkey"+foreign_feeID);
         System.out.println("Season price FeeID (4=1.6, 5=1.3, 6=1.0):"+season.getFeeID());
+
         contractDetailsService.generateOrderID();
 
         Price selectedSeason = priceService.findFeeID(season.getFeeID());
@@ -70,19 +72,14 @@ public class ContractController {
         double totalPrice = contractDetailsService.calculateTotalPrice(orderID, selectedMotorhome.getRentalPrice(), selectedSeason.getItemPrice());
 
 
-        Contract finalContract = new Contract();
+        Contract initialContract = new Contract(contractDates.getStartDate(), contractDates.getEndDate(), selectedMotorhome.getOdometer(),
+                selectedMotorhome.getOdometer()+((int) daysBetween * AVG_MAX_KM_PR_DAY),totalPrice,selectedMotorhome.getMotorhomeID(),0,orderID);
 
-        finalContract.setStartDate(contractDates.getStartDate());
-        finalContract.setEndDate(contractDates.getEndDate());
-        finalContract.setStartOdometer(selectedMotorhome.getOdometer());
-        finalContract.setEndOdometer(selectedMotorhome.getOdometer()+((int) daysBetween * AVG_MAX_KM_PR_DAY));
-        finalContract.setTotalPrice(totalPrice);
-        finalContract.setForeign_MotorhomeID(selectedMotorhome.getMotorhomeID());
-        finalContract.setForeign_CustomerID(1);
-        finalContract.setForeign_OrderID(orderID);
+
+        model.addAttribute("initialContract", initialContract);
 
         System.out.println("CONTRACT DETAILS JUST CREATED:"+details);
-        System.out.println("INITIAL CONTRACT JUST CREATED:"+finalContract);
+        System.out.println("INITIAL CONTRACT JUST CREATED:"+initialContract);
 
         return "home/index";
     }
