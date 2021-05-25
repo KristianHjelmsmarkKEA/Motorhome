@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -40,6 +41,7 @@ public class ContractDetailsRepo {
         return template.queryForObject(sql, Integer.class);
     }
 
+
     public void generateOrderID(){
         String sql = "INSERT INTO orders (orderid) VALUES (null)";
         template.update(sql);
@@ -49,6 +51,7 @@ public class ContractDetailsRepo {
         String sql = "INSERT INTO contract_details (amount, calculated_price, foreign_feeid, foreign_orderid) VALUES (?, ?, ?, ?)";
         template.update(sql, cd.getAmount(), cd.getCalculatedPrice(), cd.getForeign_feeID(), cd.getForeign_orderID());
     }
+
 
     public void addListToContractDetails (List<ContractDetails> allContractDetails) {
         for (ContractDetails contractDetails : allContractDetails) {
@@ -99,6 +102,15 @@ public class ContractDetailsRepo {
         System.out.println("CALCULATION METHOD = orderID="+orderID+"rentalPrice="+rentalPrice+"seasonModifier="+seasonModifier);
         List<ContractDetails> contractDetailsList = fetchAllFromOrderID(orderID);
         double totalPrice = (rentalPrice*seasonModifier);
+        for (ContractDetails contractDetails : contractDetailsList) {
+            totalPrice += contractDetails.getCalculatedPrice();
+        }
+        return totalPrice;
+    }
+
+    public double calculateTotalPriceFinalized(int orderID, double estimatedPrice) {
+        List<ContractDetails> contractDetailsList = fetchAllFromOrderID(orderID);
+        double totalPrice = estimatedPrice;
         for (ContractDetails contractDetails : contractDetailsList) {
             totalPrice += contractDetails.getCalculatedPrice();
         }

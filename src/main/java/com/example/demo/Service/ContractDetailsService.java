@@ -16,6 +16,9 @@ public class ContractDetailsService {
 
     public List<ContractDetails> fetchAll() {return contractDetailsRepo.fetchAll();}
 
+    public List<ContractDetails> fetchAllFromOrderID(int orderID) { return contractDetailsRepo.fetchAllFromOrderID(orderID); }
+
+
     public ArrayList<ContractDetails> createContractDetails(String amount, String feeID) {
         return contractDetailsRepo.createContractDetails(amount, feeID);
     }
@@ -38,5 +41,9 @@ public class ContractDetailsService {
 
     public double calculateTotalPrice(int orderID, double rentalPrice, double seasonModifier) {
         return contractDetailsRepo.calculateTotalPrice(orderID, rentalPrice, seasonModifier);
+    }
+
+    public double calculateTotalPriceFinalized(int orderID, double totalPrice) {
+        return contractDetailsRepo.calculateTotalPriceFinalized(orderID, totalPrice);
     }
 }
