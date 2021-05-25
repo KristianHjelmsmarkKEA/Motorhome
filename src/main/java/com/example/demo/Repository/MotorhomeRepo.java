@@ -1,5 +1,6 @@
 package com.example.demo.Repository;
 
+import com.example.demo.Model.Contract;
 import com.example.demo.Model.Motorhome;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -8,8 +9,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.sql.Array;
 import java.util.List;
 
 @Repository
@@ -55,15 +58,20 @@ public class MotorhomeRepo {
         return null;
     }
 
-
-    public Integer unavailableMotorhomes(LocalDate startDate, LocalDate endDate) {
+    public List<Integer> unavailableMotorhomes(LocalDate startDate, LocalDate endDate) {
         String sql = "SELECT foreign_motorhomeid from contracts where" +
                 "(start_date BETWEEN '"+startDate+"' AND '"+endDate+"') OR " +
                 "(end_date BETWEEN '"+startDate+"' AND '"+endDate+"') OR " +
                 "('"+startDate+"' between start_date AND end_date) OR " +
                 "('"+endDate+"' between start_date AND end_date);";
         try { //Try Catch, til hvis den ikke kan finde nogen foreign_motorhomeid I brug af andre kontrakter.
-            return template.queryForObject(sql, Integer.class);
+            RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
+            List<Contract> listContracts = template.query(sql, rowMapper);
+            ArrayList<Integer> listInts = new ArrayList<>();
+            for (Contract contract : listContracts) {
+                listInts.add(contract.getForeign_MotorhomeID());
+            }
+            return listInts;
         } catch (EmptyResultDataAccessException e) {
             System.out.println("Exception caught!!! " + e + ", RETURNING null instead :)");
             return null;
@@ -73,16 +81,28 @@ public class MotorhomeRepo {
     public List<Motorhome> fetchIntervalMotorhomes(LocalDate startDate, LocalDate endDate) {
 
         List<Motorhome> allMotorhomesInService = fetchAllInService();
-        ArrayList<Motorhome> availableMotorhomes = new ArrayList<>();
+        ArrayList<Motorhome> unAvailableMotorhomes = new ArrayList<>();
+
         if (unavailableMotorhomes(startDate, endDate) == null) {
             return allMotorhomesInService;
         }
 
+        List<Integer> unavailableMH = unavailableMotorhomes(startDate, endDate);
+
         for (Motorhome motorhome : allMotorhomesInService) {
-            if (motorhome.getMotorhomeID() != unavailableMotorhomes(startDate, endDate))
-                availableMotorhomes.add(motorhome);
+            for (int i = 0; i < unavailableMH.size(); i++) {
+                if (motorhome.getMotorhomeID() == unavailableMH.get(i)) {
+                    if (!unAvailableMotorhomes.contains(motorhome)) { //Adds Motorhome Object to unAvailableMotorhomes
+                        unAvailableMotorhomes.add(motorhome);
+                    }
+                }
+            }
         }
-        return availableMotorhomes;
+        for (int i = 0; i < unAvailableMotorhomes.size(); i++) { //Removes all unAvailableMotorhome Objects from return value.
+            allMotorhomesInService.remove(unAvailableMotorhomes.get(i));
+        }
+
+        return allMotorhomesInService;
     }
 
     public List<Motorhome> removeDuplicateBrands(List<Motorhome> withDuplicates) {
