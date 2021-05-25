@@ -23,16 +23,16 @@
         <li colspan="2"> Ingen Autocampers tilgængelig </li>
     </ul>
         <ul th:each="motorhome : ${availableMotorhomes}">
-            <a th:href="@{'/extraSelection/'+${motorhome.brandAndModel}}">
-                <input type="hidden" name="startDate" th:value="${contractDate.startDate}"/>
-                <input type="hidden" name="endDate" th:value="${contractDate.endDate}"/>
-
+            <form  th:action="@{'/extraSelection/'+${motorhome.brandAndModel}}">
+                <input type="hidden" name="startDate" th:value="${contractDate.startDate}">
+                <input type="hidden" name="endDate" th:value="${contractDate.endDate}">
                 <button class="motorhome-button" name="motorhome">
                     <span th:text="'Autocamper Model: '"/><b th:text="${motorhome.brandAndModel}"/><br/>
                     <span th:text="'Antal Sæder: '"/><b th:text="${motorhome.capacity}"/><br/>
                     <span th:text="'Pris pr. dag: '"/><b th:text="${motorhome.rentalPrice}+' kr.'"/>
                 </button>
-            </a>
+                <form th:object="${contracts}"></form>
+            </form>
         </ul>
     </div>
 

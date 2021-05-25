@@ -9,6 +9,7 @@ public class ContractDetails {
     @Id
     //Fields & Attributes
     private int detailsID;
+    private int amount;
     private double calculatedPrice;
     private int foreign_feeID;
     private int foreign_orderID;
@@ -16,12 +17,27 @@ public class ContractDetails {
     //Constructor
     public ContractDetails() {}
 
+    public ContractDetails(int amount, double calculatedPrice, int foreign_feeID, int foreign_orderID) {
+        this.amount = amount;
+        this.calculatedPrice = calculatedPrice;
+        this.foreign_feeID = foreign_feeID;
+        this.foreign_orderID = foreign_orderID;
+    }
+
     public int getDetailsID() {
         return detailsID;
     }
 
     public void setDetailsID(int detailsID) {
         this.detailsID = detailsID;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public double getCalculatedPrice() {
@@ -46,5 +62,16 @@ public class ContractDetails {
 
     public void setForeign_orderID(int foreign_orderID) {
         this.foreign_orderID = foreign_orderID;
+    }
+
+    @Override
+    public String toString() {
+        return "ContractDetails{" +
+                "detailsID=" + detailsID +
+                ", amount=" + amount +
+                ", calculatedPrice=" + calculatedPrice +
+                ", foreign_feeID=" + foreign_feeID +
+                ", foreign_orderID=" + foreign_orderID +
+                '}';
     }
 }

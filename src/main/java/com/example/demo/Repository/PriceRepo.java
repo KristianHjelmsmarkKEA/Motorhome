@@ -29,10 +29,9 @@ public class PriceRepo {
         return template.query(sql, rowMapper);
     }
 
-    public Price addPrice(Price p){
+    public void addPrice(Price p){
         String sql = "INSERT INTO item_fees (item_name, item_price, foreign_categoryid) VALUES (?, ?, ?)";
         template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
-        return null;
     }
 
     public Boolean deletePrice(int feeID){
@@ -46,10 +45,9 @@ public class PriceRepo {
         Price p = template.queryForObject(sql, rowMapper, feeID);
         return p;
     }
-    public Price updateFeeInformation(int feeID, Price p){
+    public void updateFeeInformation(int feeID, Price p){
         String sql = "UPDATE item_fees SET item_name = ?, item_price = ? WHERE feeid = ?";
         template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
-        return null;
     }
 
 

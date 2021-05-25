@@ -31,10 +31,9 @@ public class MotorhomeRepo {
     }
 
     //SQL Fikset tror jeg
-    public Motorhome addMotorhome(Motorhome motorhome){
+    public void addMotorhome(Motorhome motorhome){
         String sql = "INSERT INTO motorhomes (VALUES (?, ?, ?, ?, ?, ?)";
         template.update(sql, motorhome.getBrandAndModel(), motorhome.getCapacity(), motorhome.getOdometer(), motorhome.getNumberPlate(), motorhome.getRentalPrice(), motorhome.isInService());
-        return null;
     }
 
     public Boolean deleteMotorhome(int motorhomeID){
