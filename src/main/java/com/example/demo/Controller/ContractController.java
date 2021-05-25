@@ -86,4 +86,12 @@ public class ContractController {
 
         return "home/index";
     }
+
+    @PostMapping("/addCustomerToContract")
+    public String addCustomerToContract() {
+
+        return "home/contractReciept";
+    }
+
+
 }
