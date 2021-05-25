@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,23 +68,26 @@ public class ContractController {
         contractDetailsService.addListToContractDetails(details);
         int orderID = contractDetailsService.returnNewestOrderID();
         long daysBetween = ChronoUnit.DAYS.between(contractDates.getStartDate(),contractDates.getEndDate());
-        double totalPrice = contractDetailsService.calculateTotalPrice(orderID, selectedMotorhome.getRentalPrice(), selectedSeason.getItemPrice());
+        double motorhomeFullRentalPrice = (int) daysBetween * selectedMotorhome.getRentalPrice();
+        double totalPrice = contractDetailsService.calculateTotalPrice(orderID, motorhomeFullRentalPrice, selectedSeason.getItemPrice());
 
 
         Contract initialContract = new Contract(contractDates.getStartDate(), contractDates.getEndDate(), selectedMotorhome.getOdometer(),
                 selectedMotorhome.getOdometer()+((int) daysBetween * AVG_MAX_KM_PR_DAY),totalPrice,selectedMotorhome.getMotorhomeID(),0,orderID);
-
-
+        model.addAttribute("prices", priceService.fetchAll());
+        model.addAttribute("details", details);
         model.addAttribute("initialContract", initialContract);
-
+        model.addAttribute("customers", new Customer());
+        model.addAttribute("selectedMotorhome", selectedMotorhome);
+        model.addAttribute("motorhomeTotalPrice", motorhomeFullRentalPrice*selectedSeason.getItemPrice());
         System.out.println("CONTRACT DETAILS JUST CREATED:"+details);
         System.out.println("INITIAL CONTRACT JUST CREATED:"+initialContract);
 
-        return "home/index";
+        return "home/createContract";
     }
 
-    @PostMapping("/addCustomerToContract")
-    public String addCustomerToContract() {
+    @GetMapping("/createContract")
+    public String addCustomerToContract(Contract intialContract, Customer customer, Model model) {
 
         return "home/contractReciept";
     }

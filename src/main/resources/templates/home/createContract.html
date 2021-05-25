@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Nordic Motorhome Rentals</title>
+    <link rel="stylesheet" type="text/css" href="header.css">
+    <link rel="stylesheet" type="text/css" href="createContract.css">
+</head>
+<body>
+<div class="header-box">
+    <a href="/" class="logo">Nordic Motorhome Rentals</a>
+    <div class="header-menu">
+        <a href="manageCustomers">Kunder</a>
+        <a href="manageMotorhomes">Autocampere</a>
+        <a href="manageContracts">Kontrakter</a>
+        <a href="managePrices">Priser</a>
+        <a href="https://www.youtube.com/watch?v=jXg1zCbqQ5g">Shark POG</a>
+    </div>
+</div>
+
+<div class="top-card">
+    <h2>Current Contract</h2>
+    <label for="startDate"><b>Start date:</b><span th:text="${initialContract.startDate}+' - '"/></label>
+        <input name="startDate" id="startDate" type="hidden" th:value="${initialContract.startDate}">
+    <label for="endDate"><b>End Date:</b><span th:text="${initialContract.endDate}"/></label>
+        <input name="endDate" id="endDate" type="hidden" th:value="${initialContract.endDate}"><br>
+    <label for="startOdometer"><b>Start Odometer:</b><span th:text="' '+${initialContract.startOdometer} + ' km.'"/></label>
+        <input name="startOdometer" id="startOdometer" type="hidden" th:value="${initialContract.startOdometer}"><br>
+    <span th:text="'Motorhome: '+${selectedMotorhome.brandAndModel}+': '+${motorhomeTotalPrice}+'£'"/>
+    <div th:each="contractDetails : ${details}">
+        <div th:each="item : ${prices}">
+            <div th:if="${contractDetails.foreign_feeID == item.feeID}">
+                <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '£'"/>
+            </div>
+        </div>
+    </div>
+
+    <label for="totalPrice"><b>Total Price:</b> <span th:text="${initialContract.totalPrice}+'£'"/></label>
+        <input name="totalPrice" id="totalPrice" type="hidden" th:value="${initialContract.totalPrice}">
+    <input name="endOdometer" type="hidden" th:value="${initialContract.endOdometer}">
+    <input name="foreign_MotorhomeID" type="hidden" th:value="${initialContract.foreign_MotorhomeID}">
+    <input name="foreign_OrderID" type="hidden" th:value="${initialContract.foreign_OrderID}">
+</div>
+
+
+<div class="left-card">
+
+</div>
+
+
+<div class="right-card">
+
+</div>
+</body>
+</html>
