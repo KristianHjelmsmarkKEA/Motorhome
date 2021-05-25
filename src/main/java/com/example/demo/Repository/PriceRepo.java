@@ -50,6 +50,4 @@ public class PriceRepo {
         template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
     }
 
-
-
 }

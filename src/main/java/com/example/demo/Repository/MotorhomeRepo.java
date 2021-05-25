@@ -50,6 +50,12 @@ public class MotorhomeRepo {
         Motorhome m = template.queryForObject(sql, rowMapper, motorhomeID);
         return m;
     }
+    public Motorhome findMotorhomeBrandAndModel(int motorhomeID){
+        String sql = "select * from motorhomes brand_and_model where motorhomeid = ?";
+        RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
+        Motorhome m = template.queryForObject(sql, rowMapper, motorhomeID);
+        return m;
+    }
 
     public Motorhome updateMotorhomeInformation(int motorhomeID, Motorhome m) {
         String sql = "UPDATE motorhomes SET odometer = ?, rental_price = ?, in_service =? where motorhomeid = ?";

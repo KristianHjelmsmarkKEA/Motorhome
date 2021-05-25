@@ -48,4 +48,7 @@ public class MotorhomeService {
     public List<Motorhome> fetchMotorhomesBrandAndModel(String brandAndModel, LocalDate startDate, LocalDate endDate) {
         return motorhomeRepo.fetchMotorhomesBrandAndModel(brandAndModel, startDate, endDate);
     }
+
+    public Motorhome findMotorhomeBrandAndModel(int motorhomeID) { return motorhomeRepo.findMotorhomeBrandAndModel(motorhomeID); }
+
 }

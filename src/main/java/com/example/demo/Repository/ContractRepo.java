@@ -2,6 +2,7 @@ package com.example.demo.Repository;
 
 import com.example.demo.Model.Contract;
 import com.example.demo.Model.Motorhome;
+import com.example.demo.Model.Price;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -46,4 +47,13 @@ public class ContractRepo {
         Contract c = template.queryForObject(sql, rowMapper, contractID);
         return c;
     }
+
+    public void finalizeContractInformation(Contract c){
+        String sql = "UPDATE contracts SET total_price = ?, finalized_contract = 1 WHERE contractid = ?";
+        template.update(sql,c.getTotalPrice(), c.getContractID());
+    }
+
+
+
+
 }

@@ -11,7 +11,7 @@
     <input type="text" name="itemPrice" th:value="${prices.itemPrice}" placeholder="${prices.itemPrice}">
     <input type="text" name="itemCategory" th:value="${prices.itemCategory}" placeholder="${prices.itemCategory}">
 
-    <input type="hidden" name="customerID" th:value="${prices.feeID}">
+    <input type="hidden" th:value="${prices.feeID}">
 
     <input type="submit" value="Save changes">
 </form>

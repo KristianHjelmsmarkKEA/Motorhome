@@ -94,27 +94,61 @@ public class ContractController {
     @GetMapping("/finalizeContractTable")
     public String finalizeContractTable(Model model) {
         List<Contract> ongoingContractsList = contractService.fetchOngoingContracts();
-        //List<Customer> customerList = customerService.fetchAll();
-        //model.addAttribute("customers", customerList);
         model.addAttribute("ongoingContracts", ongoingContractsList);
+
         return "home/finalizeContractTable";
     }
 
     @GetMapping("/finalizeContract/{contractID}")
-    public String finalizeContract(@PathVariable("contractID") int contractID, Model model) {
-        model.addAttribute("contracts", contractService.findOngoingContractID(contractID));
-        System.out.println(contractID);
-        return "home/finalizeContractPage";
+    public String finalizeContract(@PathVariable("contractID") int contractID, @ModelAttribute Contract contract,
+                                   Model model, @ModelAttribute ContractDetails contractDetails  ) {
 
+        Contract contractFinalization = contractService.findOngoingContractID(contractID);
+        Motorhome selectedMotorhome = motorhomeService.findMotorhomeBrandAndModel(contractFinalization.getForeign_MotorhomeID());
+        List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
+        List<Price> repairs = priceService.fetchItemsFromCategoryNum(3);
+        List<Price> fuel = priceService.fetchItemsFromCategoryNum(6);
+
+
+        model.addAttribute("repair", repairs);
+        model.addAttribute("fuel", fuel);
+        model.addAttribute("details", currentDetails);
+        model.addAttribute("prices", priceService.fetchAll());
+        model.addAttribute("contracts", contractFinalization);
+        model.addAttribute("selectedMotorhome", selectedMotorhome);
+
+
+        return "home/finalizeContractPage";
     }
 
     @PostMapping("/finalizeContractPage")
-    public String finalizeContractPage(@ModelAttribute Contract contract, Model model) {
-        model.addAttribute("contracts", contract);
+    public String finalizeContractPage(@ModelAttribute Contract contract, Model model, @RequestParam("amount") String amount, @RequestParam("foreign_feeID") String foreign_feeID,
+                                       @ModelAttribute("foreign_MotorhomeID") Motorhome motorhome) {
+
+        Contract contractFinalization = contractService.findOngoingContractID(contract.getContractID());
+        System.out.println(contractFinalization);
 
 
-        //contractService.finalizeContractInformation();
-        return "redirect:/finalizeContract";
+        List<ContractDetails> details = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
+        contractDetailsService.addListToContractDetails(details);
+        model.addAttribute("details", details);
+        System.out.println(details);
+
+
+        double finalizedTotalPrice = contractDetailsService.calculateTotalPriceFinalized(contractFinalization.getForeign_OrderID(), contractFinalization.getTotalPrice());
+
+        System.out.println(contractDetailsService.calculateTotalPriceFinalized(contractFinalization.getForeign_OrderID(), finalizedTotalPrice));
+
+        System.out.println(contract.getContractID());
+
+        model.addAttribute("contracts", contractFinalization);
+        model.addAttribute("motorhome", motorhome);
+
+        contractFinalization.setTotalPrice(finalizedTotalPrice);
+        System.out.println(contractFinalization);
+        contractService.finalizeContractInformation(contractFinalization);
+
+        return "redirect:/finalizeContractTable";
     }
 
 

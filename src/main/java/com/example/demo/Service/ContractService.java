@@ -29,5 +29,7 @@ public class ContractService {
 
     public Contract findOngoingContractID(int contractID) { return contractRepo.findOngoingContractID(contractID); }
 
+    public void finalizeContractInformation(Contract c) { contractRepo.finalizeContractInformation(c); }
+
 
 }
