@@ -26,8 +26,7 @@ public class Contract {
     //Constructor
 
 
-    public Contract(int contractID, LocalDate startDate, LocalDate endDate, int startOdometer, int endOdometer, double totalPrice, int foreign_MotorhomeID, int foreign_CustomerID, int foreign_OrderID) {
-        this.contractID = contractID;
+    public Contract(LocalDate startDate, LocalDate endDate, int startOdometer, int endOdometer, double totalPrice, int foreign_MotorhomeID, int foreign_CustomerID, int foreign_OrderID) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.startOdometer = startOdometer;
