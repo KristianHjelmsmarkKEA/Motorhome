@@ -55,9 +55,16 @@ public class ContractRepo {
         return c;
     }
 
-    public void finalizeContractInformation(Contract c){
-        String sql = "UPDATE contracts SET total_price = ?, finalized_contract = 1 WHERE contractid = ?";
-        template.update(sql,c.getTotalPrice(), c.getContractID());
+    public void saveContractInformation(Contract c, boolean trueFinalFalseCancel){
+        boolean finalized = false, cancelled = false;
+        if (trueFinalFalseCancel) {
+            finalized = true;
+        } else {
+            cancelled = true;
+        }
+        System.out.println("Finalized"+finalized+" Cancelled"+cancelled);
+        String sql = "UPDATE contracts SET total_price = ?, finalized_contract = ?, cancelled_contract = ? WHERE contractid = ?";
+        template.update(sql,c.getTotalPrice(), finalized, cancelled, c.getContractID());
     }
 
 

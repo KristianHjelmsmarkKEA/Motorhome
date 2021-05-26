@@ -49,4 +49,8 @@ public class ContractDetailsService {
     public double calculateTotalPriceFinalized(List<ContractDetails> fuelAndRepairDetails, double totalPrice) {
         return contractDetailsRepo.calculateTotalPriceFinalized(fuelAndRepairDetails, totalPrice);
     }
+
+    public double calculateTotalPriceCancelled(double priceModifier, double currentContractPrice) {
+        return contractDetailsRepo.calculateTotalPriceCancelled(priceModifier, currentContractPrice);
+    }
 }

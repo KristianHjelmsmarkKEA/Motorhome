@@ -125,4 +125,13 @@ public class ContractDetailsRepo {
         return totalPrice;
 
     }
+
+    public double calculateTotalPriceCancelled(double priceModifier, double currentContractPrice) {
+
+        double calculatedCancelFee = priceModifier*currentContractPrice;
+        if (calculatedCancelFee < 200) {
+            calculatedCancelFee = 200;
+        }
+        return calculatedCancelFee;
+    }
 }

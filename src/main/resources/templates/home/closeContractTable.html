@@ -23,7 +23,7 @@
         <th>Motorhome ID</th>
         <th>Customer ID</th>
         <th>Order ID</th>
-        <th>Finalize Contract</th>
+        <th>Close Contract</th>
     </tr>
     </thead>
     <tbody>
@@ -41,7 +41,10 @@
         <td th:text="${contracts.foreign_OrderID}"/>
         <td>
             <a th:href="@{'/finalizeContract/'+${contracts.contractID}}">
-                <button class="btn-finalize" id="btn-finalize">Færdiggør kontrakt</button>
+                <button class="btn-finalize" >Færdiggør kontrakt</button>
+            </a>
+            <a th:href="@{'/cancelContract/'+${contracts.contractID}}">
+                <button class="btn-finalize" >Annuller kontrakt</button>
             </a>
         </td>
     </tr>

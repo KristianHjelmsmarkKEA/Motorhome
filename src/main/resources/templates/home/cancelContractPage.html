@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalize Contract</title>
+
+</head>
+<body>
+
+<form action="/cancelContractPage" method="post">
+
+    <div class="top-card">
+        <h2>Current Contract Information</h2>
+        <label for="startDate"><b>Start date:</b><span th:text="${contracts.startDate}+' - '"/></label>
+        <input name="startDate" id="startDate" type="hidden" th:value="${contracts.startDate}">
+        <label for="endDate"><b>End Date:</b><span th:text="${contracts.endDate}"/></label>
+        <input name="endDate" id="endDate" type="hidden" th:value="${contracts.endDate}"><br>
+        <label for="startOdometer"><b>Start Odometer:</b><span th:text="' '+${contracts.startOdometer} + ' km.'"/></label>
+        <input name="startOdometer" id="startOdometer" type="hidden" th:value="${contracts.startOdometer}"><br>
+        <span th:text="'Motorhome: '+${selectedMotorhome.brandAndModel}"/><br>
+        <span th:text="'Contracts current total price: '+${contracts.totalPrice}+'£'"></span>
+        <h1>Current contract item fees: </h1>
+        <div th:each="contractDetails : ${details}">
+            <div th:each="item : ${prices}">
+                <div th:if="${contractDetails.foreign_feeID == item.feeID}">
+                    <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '£'"/>
+                </div>
+            </div>
+        </div>
+
+        <h1>Vælg Anullering</h1>
+        <select name="feeID">
+            <ul th:each="price : ${cancelFees}">
+                <option th:value="${price.feeID}">
+                    <span th:text="'Cancel '"/><b th:text="${price.itemName}"/><br/>
+                    <span th:text="'Price: '"/><b th:text="${price.itemPrice}"/><br/>
+                </option>
+            </ul>
+        </select>
+        <input type="hidden" name="contractID" th:value="${contracts.contractID}">
+        <input type="hidden" name="totalPrice" th:value="${contracts.totalPrice}">
+        <h3>Annuller kontrakt: <input type="submit" value="submit"></h3>
+    </div>
+
+
+
+</form>
+
+</body>
+</html>
