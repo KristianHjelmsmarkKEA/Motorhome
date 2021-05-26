@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -48,6 +49,18 @@ public class PriceRepo {
     public void updateFeeInformation(int feeID, Price p){
         String sql = "UPDATE item_fees SET item_name = ?, item_price = ? WHERE feeid = ?";
         template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
+    }
+
+    public List<Price> removeCategoryPrice(List<Price> listToRemove, int category) {
+        List<Price> newPriceList = new ArrayList<>();
+        for (Price price : listToRemove) {
+            if (price.getCategoryID() != category) {
+                newPriceList.add(price);
+            }
+        }
+        System.out.println("Old Price List" + listToRemove);
+        System.out.println("New Price List" + newPriceList);
+        return newPriceList;
     }
 
 }

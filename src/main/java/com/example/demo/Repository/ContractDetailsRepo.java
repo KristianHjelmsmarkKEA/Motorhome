@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -33,13 +32,22 @@ public class ContractDetailsRepo {
         RowMapper<ContractDetails> rowMapper = new BeanPropertyRowMapper<>(ContractDetails.class);
         return template.query(sql, rowMapper, orderID);
     }
-    public List<ContractDetails> fetchCatagoryFromOrderID(int category, int orderID) {
+    public List<ContractDetails> fetchCategoryFromOrderID(int category, int orderID) {
         String sql = "SELECT detailsid, amount, calculated_price, foreign_feeid, foreign_orderid " +
                 "FROM motorhome.contract_details INNER JOIN motorhome.item_fees ON contract_details.foreign_feeid = item_fees.feeid " +
                 "WHERE foreign_orderID= ? AND foreign_categoryid = ?;";
         RowMapper<ContractDetails> rowMapper = new BeanPropertyRowMapper<>(ContractDetails.class);
         return template.query(sql, rowMapper, orderID, category);
     }
+
+    public ContractDetails fetchObjectCategoryFromOrderID(int category, int orderID) {
+        List<ContractDetails> seasonDetailList = fetchCategoryFromOrderID(category, orderID);
+        ContractDetails seasonDetail = new ContractDetails();
+        for (int i = 0; i<seasonDetailList.size(); i++)
+            seasonDetail = seasonDetailList.get(i);
+        return seasonDetail;
+    }
+
 
     public Integer returnNewestOrderID() {
         String sql = "SELECT orderid FROM orders where orderid = (select max(orderid) from orders)";
@@ -59,14 +67,16 @@ public class ContractDetailsRepo {
 
 
     public void addListToContractDetails (List<ContractDetails> allContractDetails) {
+        int counter= 0;
         for (ContractDetails contractDetails : allContractDetails) {
             addContractDetails(contractDetails);
+            counter++;
+            System.out.println(counter+": "+contractDetails);
         }
     }
 
 
-    public ArrayList<ContractDetails> createContractDetails(String amount, String feeID) {
-        int orderID = returnNewestOrderID();
+    public ArrayList<ContractDetails> createContractDetails(String amount, String feeID, int orderID) {
         ArrayList<Integer> amountList = convertStringToIntArrayList(amount);
         ArrayList<Integer> feeIDList = convertStringToIntArrayList(feeID);
         ArrayList<Double> calculatedPrize = calculatedPriceOfFees(amountList, feeIDList);

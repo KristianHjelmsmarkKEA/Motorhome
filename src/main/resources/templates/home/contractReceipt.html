@@ -19,11 +19,33 @@
 </div>
 
 <div class="top-card">
-    <h1 style="float: left;">Nordic Motorhome Rentals</h1><b style="float:right;" th:text="'Dato: '+${#dates.format(#dates.createNow(), 'dd MMM yyyy')}"></b><br>
+    <h1 style="float: left;">Nordic Motorhome Rentals</h1>
+    <b style="float:right;" th:text="'Dato: '+${#dates.format(#dates.createNow(), 'dd MMM yyyy')}"></b><br>
+    <b style="float:right;" th:text="'Kontrakt #'+${mainContract.contractID}"></b><br>
     <div id="new-line">
-    <b>Start date: </b><span th:text="${initialContract.startDate}"/><br>
-    <b>End Date: </b><span th:text="${initialContract.endDate}"/><br>
+    <b>Start date: </b><span th:text="${mainContract.startDate}"/><br>
+    <b>End Date: </b><span th:text="${mainContract.endDate}"/><br>
     </div>
+    <br>
+    <table style="width:100%; text-align: left;">
+        <tr>
+            <th>Kunde Info</th>
+            <th>Kontrakt Info</th>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="${chosenCustomer.firstName} + ' ' + ${chosenCustomer.lastName}"/><br>
+                <span th:text="${chosenCustomer.address} + ', '"/><br>
+                <span th:text="${chosenCustomer.city}+', '+${chosenCustomer.zipcode}"/>
+            </td>
+            <td>
+                <span th:text="'Order ID: '+${mainContract.foreign_OrderID}"/><br>
+                <span th:text="'Kunde ID: '+${mainContract.foreign_CustomerID}"/><br>
+                <span th:text="${chosenCustomer.country}"/>
+            </td>
+        </tr>
+    </table>
+    <br>
     <table id="receipt-table">
         <thead>
         <tr>
@@ -54,7 +76,7 @@
             <th></th>
             <th></th>
             <th><b>TOTAL PRICE: </b></th>
-            <th th:text="${initialContract.totalPrice}+'£'"/>
+            <th th:text="${mainContract.totalPrice}+'£'"/>
         </tr>
         </tbody>
     </table>
