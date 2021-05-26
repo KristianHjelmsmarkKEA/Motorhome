@@ -27,11 +27,18 @@
         <th>Item-Fee ID</th>
         <th>Item Name</th>
         <th>Item Category</th>
-        <th>Price (kr.)</th>
-        <th>Update Item-information</th></thA>
+        <th>Price</th>
+        <th>Update Item-information</th>
     </tr>
     </thead>
     <tbody>
+    <div th:each="contractDetails : ${details}">
+        <div th:each="item : ${prices}">
+            <div th:if="${contractDetails.foreign_feeID == item.feeID}">
+                <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '£'"/>
+            </div>
+        </div>
+    </div>
     <tr th:each="prices: ${prices}">
         <td th:text="${prices.feeID}"/>
         <td th:text="${prices.itemName}"/>

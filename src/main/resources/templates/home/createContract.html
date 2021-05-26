@@ -5,6 +5,7 @@
     <title>Nordic Motorhome Rentals</title>
     <link rel="stylesheet" type="text/css" href="header.css">
     <link rel="stylesheet" type="text/css" href="createContract.css">
+    <link rel="stylesheet" type="text/css" href="tableLayout.css">
 </head>
 <body>
 <div class="header-box">
@@ -17,15 +18,16 @@
         <a href="https://www.youtube.com/watch?v=jXg1zCbqQ5g">Shark POG</a>
     </div>
 </div>
+<form action="/newCustomerToContract" method="post" name="contractInfo">
 
 <div class="top-card">
     <h2>Current Contract</h2>
     <label for="startDate"><b>Start date:</b><span th:text="${initialContract.startDate}+' - '"/></label>
         <input name="startDate" id="startDate" type="hidden" th:value="${initialContract.startDate}">
-    <label for="endDate"><b>End Date:</b><span th:text="${initialContract.endDate}"/></label>
-        <input name="endDate" id="endDate" type="hidden" th:value="${initialContract.endDate}"><br>
-    <label for="startOdometer"><b>Start Odometer:</b><span th:text="' '+${initialContract.startOdometer} + ' km.'"/></label>
-        <input name="startOdometer" id="startOdometer" type="hidden" th:value="${initialContract.startOdometer}"><br>
+    <label for="endDate"><b>End Date:</b><span th:text="${initialContract.endDate}"/></label>><br>
+        <input name="endDate" id="endDate" type="hidden" th:value="${initialContract.endDate}"/>
+    <label for="startOdometer"><b>Start Odometer:</b><span th:text="' '+${initialContract.startOdometer} + ' km.'"/></label><br>
+        <input name="startOdometer" id="startOdometer" type="hidden" th:value="${initialContract.startOdometer}">
     <span th:text="'Motorhome: '+${selectedMotorhome.brandAndModel}+': '+${motorhomeTotalPrice}+'£'"/>
     <div th:each="contractDetails : ${details}">
         <div th:each="item : ${prices}">
@@ -44,12 +46,65 @@
 
 
 <div class="left-card">
+    <form th:action="@{/newCustomerToContract}" th:object="${customers}" method="post">
+        <label for="firstName">Enter First Name</label>
+        <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name"><br>
+        <label for="lastName">Enter Last Name</label>
+        <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name"><br>
+        <label for="phoneNumber">Enter Phone Number</label>
+        <input type="text" th:field="*{phoneNumber}" id="phoneNumber" placeholder="Phone Number"><br>
+        <label for="email">Enter Email</label>
+        <input type="text" th:field="*{email}" id="email" placeholder="Email"><br>
+        <label for="driverLicense">Enter Driver License</label>
+        <input type="text" th:field="*{driverLicense}" id="driverLicense" placeholder="driver License"><br>
+        <label for="driverSinceDate">Enter driver license Date</label>
+        <input type="date" th:field="*{driverSinceDate}" id="driverSinceDate"><br>
+        <label for="address">Enter Address</label>
+        <input type="text" th:field="*{address}" id="address" placeholder="Address"><br>
+        <label for="zipcode">Enter Zipcode</label>
+        <input type="text" th:field="*{zipcode}" id="zipcode" placeholder="Zipcode"><br>
+        <label for="city">Enter City</label>
+        <input type="text" th:field="*{city}" id="city" placeholder="City"><br>
+        <label for="country">Enter Country</label>
+        <input type="text" th:field="*{country}" id="country" placeholder="Country"><br>
 
+        <input class="btn-add" type="submit" value="Create new Customer" style="color: #4CAF50">
+    </form>
 </div>
 
 
 <div class="right-card">
-
+    <h1>CHOOSE DOSN'T WORK :(</h1>
+    <table id="filter-table">
+        <thead>
+    <tr>
+        <th>ID</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Driver License</th>
+        <th>Choose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer: ${allCustomers}">
+        <td th:text="${customer.customerID}"/>
+        <td th:text="${customer.firstName}"/>
+        <td th:text="${customer.lastName}" />
+        <td th:text="${customer.phoneNumber}" />
+        <td th:text="${customer.email}" />
+        <td th:text="${customer.driverLicense}"/>
+        <td>
+            <form th:action="@{/newCustomerToContract}" th:object="${customerChosen}" method="post">
+                <input type="hidden" name="customerID" th:value="${customer.customerID}" />
+                <input type="submit">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+    </table>
 </div>
+</form>
 </body>
 </html>

@@ -25,9 +25,16 @@ public class ContractRepo {
     }
 
     //SQL STRING SKAL ÆNDRES
+
+    public void addPrice(Price p){
+        String sql = "INSERT INTO item_fees (item_name, item_price, foreign_categoryid) VALUES (?, ?, ?)";
+        template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
+    }
     public void addContract(Contract contract){
-        String sql = "INSERT INTO contracts (VALUES (?, ?, ?, ?, ?, ?)";
-        template.update(sql, contract.getStartDate());
+        String sql = "INSERT INTO contracts (start_date, end_date, start_odometer, end_odometer, " +
+                "total_price, foreign_motorhomeid, foreign_customerid, foreign_orderid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        template.update(sql, contract.getStartDate(), contract.getEndDate(), contract.getStartOdometer(), contract.getEndOdometer(),
+                contract.getTotalPrice(), contract.getForeign_MotorhomeID(), contract.getForeign_CustomerID(), contract.getForeign_OrderID());
     }
 
     public Boolean deleteContract(int contractID){

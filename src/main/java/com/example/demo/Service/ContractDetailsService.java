@@ -18,6 +18,9 @@ public class ContractDetailsService {
 
     public List<ContractDetails> fetchAllFromOrderID(int orderID) { return contractDetailsRepo.fetchAllFromOrderID(orderID); }
 
+    public List<ContractDetails> fetchSeasonFromCategoryOrderID(int category, int orderID) {
+        return contractDetailsRepo.fetchSeasonFromCategoryOrderID(category, orderID);
+    }
 
     public ArrayList<ContractDetails> createContractDetails(String amount, String feeID) {
         return contractDetailsRepo.createContractDetails(amount, feeID);

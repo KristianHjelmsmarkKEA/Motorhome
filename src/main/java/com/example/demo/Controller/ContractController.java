@@ -43,6 +43,7 @@ public class ContractController {
         System.out.println("Start Date= " + contractDates.getStartDate() + "End Date= " + contractDates.getEndDate());
 
         model.addAttribute("accessories", accessories);
+        model.addAttribute("customer", new Customer());
         model.addAttribute("transferCost", transferCost);
         model.addAttribute("seasons", seasons);
         model.addAttribute("sortedMotorhomes", allSortedMotorhomes);
@@ -59,13 +60,15 @@ public class ContractController {
         System.out.println("Season price FeeID (4=1.6, 5=1.3, 6=1.0):"+season.getFeeID());
 
         contractDetailsService.generateOrderID();
+        int orderID = contractDetailsService.returnNewestOrderID();
 
         Price selectedSeason = priceService.findFeeID(season.getFeeID());
         Motorhome selectedMotorhome = motorhomeService.findMotorhome(motorhome.getMotorhomeID());
 
         ArrayList<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID);
+        details.add(new ContractDetails(1, (selectedMotorhome.getRentalPrice()*selectedSeason.getItemPrice()) , selectedSeason.getFeeID(), orderID));
         contractDetailsService.addListToContractDetails(details);
-        int orderID = contractDetailsService.returnNewestOrderID();
+
         long daysBetween = ChronoUnit.DAYS.between(contractDates.getStartDate(),contractDates.getEndDate());
         double motorhomeFullRentalPrice = (int) daysBetween * selectedMotorhome.getRentalPrice();
         double totalPrice = contractDetailsService.calculateTotalPrice(orderID, motorhomeFullRentalPrice, selectedSeason.getItemPrice());
@@ -77,18 +80,58 @@ public class ContractController {
         model.addAttribute("details", details);
         model.addAttribute("initialContract", initialContract);
         model.addAttribute("customers", new Customer());
+        model.addAttribute("contract", new Contract());
         model.addAttribute("selectedMotorhome", selectedMotorhome);
         model.addAttribute("motorhomeTotalPrice", motorhomeFullRentalPrice*selectedSeason.getItemPrice());
+        model.addAttribute("allCustomers", customerService.fetchAll());
         System.out.println("CONTRACT DETAILS JUST CREATED:"+details);
         System.out.println("INITIAL CONTRACT JUST CREATED:"+initialContract);
 
         return "home/createContract";
     }
 
-    @GetMapping("/createContract")
-    public String addCustomerToContract(Contract intialContract, Customer customer, Model model) {
+    @PostMapping("/newCustomerToContract")
+    public String newCustomerToContractPost(@ModelAttribute Customer customer,  @ModelAttribute("initialContract") Contract initialContract, Model model) {
 
-        return "home/contractReciept";
+        Customer chosenCustomer;
+
+
+        if (customer.getCustomerID() != 0) { //If customer is chosen
+            chosenCustomer = customerService.findCustomerID(customer.getCustomerID());
+        } else { //else if customer is chosen
+            chosenCustomer = customer;
+        }
+        System.out.println(chosenCustomer);
+        System.out.println(initialContract);
+
+
+        int newCustomerID = customerService.addCustomerAddressZipcodeCountry(chosenCustomer);
+        initialContract.setForeign_CustomerID(newCustomerID);
+
+        contractService.addContract(initialContract);
+        long daysBetween = ChronoUnit.DAYS.between(initialContract.getStartDate(),initialContract.getEndDate());
+        List<ContractDetails> seasonDetailList = contractDetailsService.fetchSeasonFromCategoryOrderID(2, initialContract.getForeign_OrderID());
+        System.out.println(seasonDetailList);
+        ContractDetails seasonDetail = new ContractDetails();
+        for (int i = 0; i<seasonDetailList.size(); i++)
+            seasonDetail = seasonDetailList.get(i);
+
+        model.addAttribute("seasonDetail", seasonDetail);
+        model.addAttribute("chosenCustomer", chosenCustomer);
+        model.addAttribute("initialContract", initialContract);
+        model.addAttribute("prices", priceService.fetchAll());
+        model.addAttribute("details", contractDetailsService.fetchAllFromOrderID(initialContract.getForeign_OrderID()));
+        model.addAttribute("selectedMotorhome", motorhomeService.findMotorhome(initialContract.getForeign_MotorhomeID()));
+        model.addAttribute("daysBetween", (int)daysBetween);
+        model.addAttribute("motorhomeTotalPrice", ((int)daysBetween*seasonDetail.getCalculatedPrice()));
+
+        return "home/contractReceipt";
+    }
+
+    @PostMapping("/contractReceipt")
+    public String addCustomerToContract(Contract intialContract, Customer customer, Model model) {
+        model.addAttribute("customer", new Customer());
+        return "home/contractReceipt";
     }
 
     @GetMapping("/finalizeContractTable")

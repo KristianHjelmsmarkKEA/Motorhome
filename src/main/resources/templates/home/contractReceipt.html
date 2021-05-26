@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Nordic Motorhome Rentals</title>
+    <link rel="stylesheet" type="text/css" href="header.css">
+    <link rel="stylesheet" type="text/css" href="createContract.css">
+</head>
+<body>
+<div class="header-box">
+    <a href="/" class="logo">Nordic Motorhome Rentals</a>
+    <div class="header-menu">
+        <a href="manageCustomers">Kunder</a>
+        <a href="manageMotorhomes">Autocampere</a>
+        <a href="manageContracts">Kontrakter</a>
+        <a href="managePrices">Priser</a>
+        <a href="https://www.youtube.com/watch?v=jXg1zCbqQ5g">Shark POG</a>
+    </div>
+</div>
+
+<div class="top-card">
+
+    <b>Start date: </b><span th:text="${initialContract.startDate}"/><br>
+    <b>End Date: </b><span th:text="${initialContract.endDate}"/><br>
+    <table>
+        <thead>
+        <tr>
+            <th>Antal</th>
+            <th>Beskrivelse</th>
+            <th>Pris</th>
+            <th>Fuld pris</th>
+        </tr>
+        </thead>
+        <tbody>
+        <div th:each="contractDetails : ${details}">
+            <div th:each="item : ${prices}">
+                <tr th:if="${contractDetails.foreign_feeID == item.feeID}">
+                    <td th:text="${contractDetails.amount}"/>
+                    <td th:text="${item.itemName}"/>
+                    <td th:text="${item.itemPrice} + '£'"/>
+                    <td th:text="${contractDetails.calculatedPrice} + '£'"/>
+                </tr>
+            </div>
+        </div>
+        <tr>
+            <td th:text="'Dage: '+ ${daysBetween}"/>
+            <td th:text="${selectedMotorhome.brandAndModel} + ' #' + ${selectedMotorhome.numberPlate}"/>
+            <td th:text="${seasonDetail.calculatedPrice}+'£'"/>
+            <td th:text="${motorhomeTotalPrice}+'£'"/>
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th><b>TOTAL PRICE</b></th>
+            <th style="text-align: right;" th:text="${initialContract.totalPrice}+'£'"/>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

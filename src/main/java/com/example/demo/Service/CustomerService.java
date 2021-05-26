@@ -35,6 +35,10 @@ public class CustomerService {
         customerRepo.addCustomer(customer);
     }
 
+    public int addCustomerAddressZipcodeCountry(Customer customer){
+        return customerRepo.addCustomerAddressZipcodeCountry(customer);
+    }
+
     public Customer findCustomerID(int customerID) { return customerRepo.findCustomerID(customerID); }
 
     public Customer updateCustomerInformation(int customerID, Customer c) {

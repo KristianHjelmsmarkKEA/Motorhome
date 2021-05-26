@@ -35,6 +35,13 @@ public class ContractDetailsRepo {
         RowMapper<ContractDetails> rowMapper = new BeanPropertyRowMapper<>(ContractDetails.class);
         return template.query(sql, rowMapper, orderID);
     }
+    public List<ContractDetails> fetchSeasonFromCategoryOrderID(int category, int orderID) {
+        String sql = "SELECT detailsid, amount, calculated_price, foreign_feeid, foreign_orderid " +
+                "FROM motorhome.contract_details INNER JOIN motorhome.item_fees ON contract_details.foreign_feeid = item_fees.feeid " +
+                "WHERE foreign_orderID= ? AND foreign_categoryid = ?;";
+        RowMapper<ContractDetails> rowMapper = new BeanPropertyRowMapper<>(ContractDetails.class);
+        return template.query(sql, rowMapper, orderID, category);
+    }
 
     public Integer returnNewestOrderID() {
         String sql = "SELECT orderid FROM orders where orderid = (select max(orderid) from orders)";

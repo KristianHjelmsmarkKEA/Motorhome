@@ -22,29 +22,40 @@ public class CustomerRepo {
         String sql = "INSERT INTO country (country) VALUES (?)";
         template.update(sql, customer.getCountry());
     }
-    //SQL STRING SKAL ÆNDRES?
+
     public void addZipcode(Customer customer) {
         String sql = "INSERT INTO zipcodes (zipcode, city, foreign_countryid) VALUES (?, ?, (select countryid from country where countryid = (select max(countryid) from country)))";
         template.update(sql, customer.getZipcode(), customer.getCity());
     }
 
-    //SQL STRING SKAL ÆNDRES
     public void addAddress(Customer customer) {
         String sql = " INSERT INTO address (address, foreign_zipcodeid) VALUES (?, (select zipcodeid from zipcodes where zipcodeid = (select max(zipcodeid) from zipcodes)))";
         template.update(sql, customer.getAddress());
     }
 
-    //SQL STRING SKAL ÆNDRES
     public void addCustomer(Customer customer) {
         String sql = "INSERT INTO customers (first_name, last_name, phone_number, email, driver_license, driver_since_date, foreign_addressid) VALUES (?, ?, ?, ?, ?, ?, (select addressid from address where addressid = (select max(addressid) from address)))";
         template.update(sql, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getDriverLicense(), customer.getDriverSinceDate());
     }
 
+    public int addCustomerAddressZipcodeCountry(Customer customer){
+        addCountry(customer);
+        addZipcode(customer);
+        addAddress(customer);
+        addCustomer(customer);
+        return returnNewCustomerID();
+    }
 
     public List<Customer> fetchAll() {
         String sql = "select * from customers, address, zipcodes, country WHERE zipcodes.foreign_countryid = country.countryid and address.foreign_zipcodeid = zipcodes.zipcodeid and customers.foreign_addressid = address.addressid  ";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return template.query(sql, rowMapper);
+    }
+    public int returnNewCustomerID(){
+        String sql = "select * from motorhome.customers where customerid = (select max(customerid) from motorhome.customers);";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        Customer c = template.queryForObject(sql, rowMapper);
+        return c.getCustomerID();
     }
 
     public Customer findCustomerID(int customerID){
