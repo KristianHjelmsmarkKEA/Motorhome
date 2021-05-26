@@ -94,20 +94,19 @@ public class ContractController {
     public String newCustomerToContractPost(@ModelAttribute Customer customer,  @ModelAttribute("initialContract") Contract initialContract, Model model) {
 
         Customer chosenCustomer;
-
+        int newCustomerID;
 
         if (customer.getCustomerID() != 0) { //If customer is chosen
             chosenCustomer = customerService.findCustomerID(customer.getCustomerID());
-        } else { //else if customer is chosen
+            newCustomerID = customer.getCustomerID();
+        } else { //else if customer is created
             chosenCustomer = customer;
+            newCustomerID = customerService.addCustomerAddressZipcodeCountry(chosenCustomer);
         }
         System.out.println(chosenCustomer);
         System.out.println(initialContract);
 
-
-        int newCustomerID = customerService.addCustomerAddressZipcodeCountry(chosenCustomer);
         initialContract.setForeign_CustomerID(newCustomerID);
-
         contractService.addContract(initialContract);
         long daysBetween = ChronoUnit.DAYS.between(initialContract.getStartDate(),initialContract.getEndDate());
         List<ContractDetails> seasonDetailList = contractDetailsService.fetchSeasonFromCategoryOrderID(2, initialContract.getForeign_OrderID());
