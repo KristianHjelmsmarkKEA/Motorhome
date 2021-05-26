@@ -1,8 +1,6 @@
 package com.example.demo.Repository;
 
 import com.example.demo.Model.ContractDetails;
-import com.example.demo.Model.Customer;
-import com.example.demo.Model.Motorhome;
 import com.example.demo.Model.Price;
 import com.example.demo.Service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,9 +103,9 @@ public class ContractDetailsRepo {
         return calculatedPrice;
     }
 
-    public double calculateTotalPrice(int orderID, double rentalPrice, double seasonModifier) {
-        System.out.println("CALCULATION METHOD = orderID="+orderID+"rentalPrice="+rentalPrice+"seasonModifier="+seasonModifier);
-        List<ContractDetails> contractDetailsList = fetchAllFromOrderID(orderID);
+    public double calculateTotalPrice(List<ContractDetails> contractDetailsList, double rentalPrice, double seasonModifier) {
+        System.out.println("CALCULATION METHOD = rentalPrice="+rentalPrice+"seasonModifier="+seasonModifier);
+
         double totalPrice = (rentalPrice*seasonModifier);
         for (ContractDetails contractDetails : contractDetailsList) {
             totalPrice += contractDetails.getCalculatedPrice();

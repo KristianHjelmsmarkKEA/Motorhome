@@ -42,8 +42,8 @@ public class ContractDetailsService {
         contractDetailsRepo.addListToContractDetails(allContractDetails);
     }
 
-    public double calculateTotalPrice(int orderID, double rentalPrice, double seasonModifier) {
-        return contractDetailsRepo.calculateTotalPrice(orderID, rentalPrice, seasonModifier);
+    public double calculateTotalPrice(List<ContractDetails> contractDetailsList, double rentalPrice, double seasonModifier) {
+        return contractDetailsRepo.calculateTotalPrice(contractDetailsList, rentalPrice, seasonModifier);
     }
 
     public double calculateTotalPriceFinalized(List<ContractDetails> fuelAndRepairDetails, double totalPrice) {

@@ -12,7 +12,7 @@
 
 
 
-#filter-table {
+#receipt-table {
     border-collapse: collapse;
     width: 60%;
     margin-left: auto;
@@ -20,24 +20,24 @@
     margin-bottom: 60px;
 }
 
-#filter-table th{
+#receipt-table th{
     border: 1px solid black;
     background-color: #ffbd80;
     height: 50px;
     color: black;
 }
 
-#filter-table td{
+#receipt-table td{
     border: 1px solid black;
     color: black;
 
 }
 
-#filter-table tr:nth-child(even){
+#receipt-table tr:nth-child(even){
     background-color: #fff2e6;
 }
 
-#filter-table tr:nth-child(odd){
+#receipt-table tr:nth-child(odd){
     background-color: #ffd9b3;
 }
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Nordic Motorhome Rentals</title>
     <link rel="stylesheet" type="text/css" href="header.css">
-    <link rel="stylesheet" type="text/css" href="createContract.css">
+    <link rel="stylesheet" type="text/css" href="receipt.css">
 </head>
 <body>
 <div class="header-box">
@@ -19,10 +19,12 @@
 </div>
 
 <div class="top-card">
-
+    <h1 style="float: left;">Nordic Motorhome Rentals</h1><b style="float:right;" th:text="'Dato: '+${#dates.format(#dates.createNow(), 'dd MMM yyyy')}"></b><br>
+    <div id="new-line">
     <b>Start date: </b><span th:text="${initialContract.startDate}"/><br>
     <b>End Date: </b><span th:text="${initialContract.endDate}"/><br>
-    <table>
+    </div>
+    <table id="receipt-table">
         <thead>
         <tr>
             <th>Antal</th>
@@ -51,7 +53,7 @@
         <tr>
             <th></th>
             <th></th>
-            <th><b>TOTAL PRICE</b></th>
+            <th><b>TOTAL PRICE: </b></th>
             <th th:text="${initialContract.totalPrice}+'£'"/>
         </tr>
         </tbody>

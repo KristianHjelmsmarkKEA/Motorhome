@@ -77,7 +77,7 @@
 
 <div class="right-card">
     <input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for customer">
-    <table id="filter-table">
+    <table id="receipt-table">
         <thead>
         <tr>
             <th>ID</th>
@@ -120,7 +120,7 @@
         var input, filter, table, tr, td, td1, td2, td3, i;
         input = document.getElementById("user-input");
         filter = input.value.toUpperCase();
-        table = document.getElementById("filter-table");
+        table = document.getElementById("receipt-table");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {  <!--tjekker hver td og om de skal kunne filtreres ud fra -->
             td = tr[i].getElementsByTagName("td")[1];

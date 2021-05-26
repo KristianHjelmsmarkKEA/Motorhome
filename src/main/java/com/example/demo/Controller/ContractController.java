@@ -56,9 +56,6 @@ public class ContractController {
     public String createContract(@RequestParam("amount") String amount, @RequestParam("foreign_feeID") String foreign_feeID,
                                 @ModelAttribute("motorhomeID") Motorhome motorhome, Contract contractDates, Price season, Model model) {
 
-        System.out.println("Amount of each item"+amount+"of the assosiated foreignkey"+foreign_feeID);
-        System.out.println("Season price FeeID (4=1.6, 5=1.3, 6=1.0):"+season.getFeeID());
-
         contractDetailsService.generateOrderID();
         int orderID = contractDetailsService.returnNewestOrderID();
 
@@ -66,12 +63,14 @@ public class ContractController {
         Motorhome selectedMotorhome = motorhomeService.findMotorhome(motorhome.getMotorhomeID());
 
         ArrayList<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID);
-        details.add(new ContractDetails(1, (selectedMotorhome.getRentalPrice()*selectedSeason.getItemPrice()) , selectedSeason.getFeeID(), orderID));
-        contractDetailsService.addListToContractDetails(details);
+        ArrayList<ContractDetails> detailsWithSeason = new ArrayList<>(details);
+        detailsWithSeason.add(new ContractDetails(1, (selectedMotorhome.getRentalPrice()*selectedSeason.getItemPrice()) , selectedSeason.getFeeID(), orderID));
+        contractDetailsService.addListToContractDetails(detailsWithSeason);
 
         long daysBetween = ChronoUnit.DAYS.between(contractDates.getStartDate(),contractDates.getEndDate());
         double motorhomeFullRentalPrice = (int) daysBetween * selectedMotorhome.getRentalPrice();
-        double totalPrice = contractDetailsService.calculateTotalPrice(orderID, motorhomeFullRentalPrice, selectedSeason.getItemPrice());
+        double totalPrice = contractDetailsService.calculateTotalPrice(details, motorhomeFullRentalPrice, selectedSeason.getItemPrice());
+        System.out.println("TOTAL PRICE CALCULATED: " + totalPrice);
 
 
         Contract initialContract = new Contract(contractDates.getStartDate(), contractDates.getEndDate(), selectedMotorhome.getOdometer(),
@@ -84,8 +83,8 @@ public class ContractController {
         model.addAttribute("selectedMotorhome", selectedMotorhome);
         model.addAttribute("motorhomeTotalPrice", motorhomeFullRentalPrice*selectedSeason.getItemPrice());
         model.addAttribute("allCustomers", customerService.fetchAll());
-        System.out.println("CONTRACT DETAILS JUST CREATED:"+details);
-        System.out.println("INITIAL CONTRACT JUST CREATED:"+initialContract);
+
+        System.out.println("INITIAL CONTRACT JUST CREATED: in /CreateContract");
 
         return "home/createContract";
     }

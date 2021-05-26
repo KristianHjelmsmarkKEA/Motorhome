@@ -1,0 +1,48 @@
+.top-card {
+
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 16px;
+    position: relative;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 300mm;
+    height: 300mm;
+    font-size: 24px;
+}
+
+#new-line {
+    clear: both;
+    display: block;
+    position: relative;
+}
+
+
+
+#receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+}
+
+#receipt-table th{
+    height: 50px;
+}
+
+#receipt-table td{
+    border-bottom: 1px solid #ddd;
+
+}
+
+#receipt-table tr:nth-child(even){
+
+}
+
+#receipt-table tr:nth-child(odd){
+
+}
