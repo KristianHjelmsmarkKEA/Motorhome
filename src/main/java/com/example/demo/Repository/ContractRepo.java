@@ -63,7 +63,7 @@ public class ContractRepo {
             cancelled = true;
         }
         System.out.println("Finalized"+finalized+" Cancelled"+cancelled);
-        String sql = "UPDATE contracts SET total_price = ?, finalized_contract = ?, cancelled_contract = ? WHERE contractid = ?";
+        String sql = "UPDATE contracts SET total_price = ?, finalized_contract = 1, cancelled_contract = ? WHERE contractid = ?";
         template.update(sql,c.getTotalPrice(), finalized, cancelled, c.getContractID());
     }
 
