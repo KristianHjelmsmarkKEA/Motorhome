@@ -42,7 +42,7 @@
             <span th:text="${price.feeID}"/><br/>
             <span th:text="'Navn: '"/><b th:text="${price.itemName}"/><br/>
             <span th:text="'Price: '"/><b th:text="${price.itemPrice}"/><br/>
-            <input type="number" name="amount" min="0" max="10" value="0" required/>
+            <input type="number" name="amount" min="0" value="0" required/>
             <input type="hidden" name="foreign_feeID" th:value="${price.feeID}"/>
         </ul>
         <input type="hidden" name="contractID" th:value="${contracts.contractID}">

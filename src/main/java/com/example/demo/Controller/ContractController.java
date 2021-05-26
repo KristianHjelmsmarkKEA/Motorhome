@@ -150,6 +150,7 @@ public class ContractController {
         List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
         List<Price> repairs = priceService.fetchItemsFromCategoryNum(3);
         List<Price> fuel = priceService.fetchItemsFromCategoryNum(6);
+        System.out.println(repairs + " " + fuel);
 
 
         model.addAttribute("repair", repairs);
@@ -168,27 +169,15 @@ public class ContractController {
                                        @ModelAttribute("foreign_MotorhomeID") Motorhome motorhome) {
 
         Contract contractFinalization = contractService.findOngoingContractID(contract.getContractID());
-        System.out.println(contractFinalization);
-
-
-        List<ContractDetails> details = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
+        ArrayList<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID);
         contractDetailsService.addListToContractDetails(details);
-        model.addAttribute("details", details);
-        System.out.println(details);
-
-
-        double finalizedTotalPrice = contractDetailsService.calculateTotalPriceFinalized(contractFinalization.getForeign_OrderID(), contractFinalization.getTotalPrice());
-
-        System.out.println(contractDetailsService.calculateTotalPriceFinalized(contractFinalization.getForeign_OrderID(), finalizedTotalPrice));
-
-        System.out.println(contract.getContractID());
-
-        model.addAttribute("contracts", contractFinalization);
-        model.addAttribute("motorhome", motorhome);
+        double finalizedTotalPrice = contractDetailsService.calculateTotalPriceFinalized(details, contractFinalization.getTotalPrice());
 
         contractFinalization.setTotalPrice(finalizedTotalPrice);
-        System.out.println(contractFinalization);
         contractService.finalizeContractInformation(contractFinalization);
+
+        model.addAttribute("details", details);
+        model.addAttribute("contracts", contractFinalization);
 
         return "redirect:/finalizeContractTable";
     }

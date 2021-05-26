@@ -48,5 +48,15 @@ public class Price {
 
     public void setItemCategory(String itemCategory) {this.itemCategory = itemCategory;}
 
-
+    @Override
+    public String toString() {
+        return "Price{" +
+                "feeID=" + feeID +
+                ", itemName='" + itemName + '\'' +
+                ", itemPrice=" + itemPrice +
+                ", foreign_categoryID=" + foreign_categoryID +
+                ", categoryID=" + categoryID +
+                ", itemCategory='" + itemCategory + '\'' +
+                '}';
+    }
 }

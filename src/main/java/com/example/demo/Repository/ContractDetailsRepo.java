@@ -35,7 +35,7 @@ public class ContractDetailsRepo {
         RowMapper<ContractDetails> rowMapper = new BeanPropertyRowMapper<>(ContractDetails.class);
         return template.query(sql, rowMapper, orderID);
     }
-    public List<ContractDetails> fetchSeasonFromCategoryOrderID(int category, int orderID) {
+    public List<ContractDetails> fetchCatagoryFromOrderID(int category, int orderID) {
         String sql = "SELECT detailsid, amount, calculated_price, foreign_feeid, foreign_orderid " +
                 "FROM motorhome.contract_details INNER JOIN motorhome.item_fees ON contract_details.foreign_feeid = item_fees.feeid " +
                 "WHERE foreign_orderID= ? AND foreign_categoryid = ?;";
@@ -115,12 +115,16 @@ public class ContractDetailsRepo {
         return totalPrice;
     }
 
-    public double calculateTotalPriceFinalized(int orderID, double estimatedPrice) {
-        List<ContractDetails> contractDetailsList = fetchAllFromOrderID(orderID);
+    public double calculateTotalPriceFinalized(List<ContractDetails> fuelAndRepairDetails, double estimatedPrice) {
+        System.out.println(estimatedPrice);
         double totalPrice = estimatedPrice;
-        for (ContractDetails contractDetails : contractDetailsList) {
+
+        for (ContractDetails contractDetails : fuelAndRepairDetails) {
             totalPrice += contractDetails.getCalculatedPrice();
+            System.out.println(totalPrice);
         }
+        System.out.println(totalPrice);
         return totalPrice;
+
     }
 }
