@@ -149,8 +149,6 @@ public class ContractController {
         List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
         List<Price> repairs = priceService.fetchItemsFromCategoryNum(3);
         List<Price> fuel = priceService.fetchItemsFromCategoryNum(6);
-        System.out.println(repairs + " " + fuel);
-
 
         model.addAttribute("repair", repairs);
         model.addAttribute("fuel", fuel);
@@ -158,7 +156,6 @@ public class ContractController {
         model.addAttribute("prices", priceService.fetchAll());
         model.addAttribute("contracts", contractFinalization);
         model.addAttribute("selectedMotorhome", selectedMotorhome);
-
 
         return "home/finalizeContractPage";
     }
@@ -171,15 +168,35 @@ public class ContractController {
         ArrayList<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID);
         contractDetailsService.addListToContractDetails(details);
         double finalizedTotalPrice = contractDetailsService.calculateTotalPriceFinalized(details, contractFinalization.getTotalPrice());
-
+        Motorhome selectedMotorhome = motorhomeService.findMotorhome(contractFinalization.getForeign_MotorhomeID());
+        Customer chosenCustomer = customerService.findCustomerID(contractFinalization.getForeign_CustomerID());
+        long daysBetween = ChronoUnit.DAYS.between(contractFinalization.getStartDate(),contractFinalization.getEndDate());
         contractFinalization.setTotalPrice(finalizedTotalPrice);
+
+        List<ContractDetails> seasonDetailList = contractDetailsService.fetchSeasonFromCategoryOrderID(2, contractFinalization.getForeign_OrderID());
+        ContractDetails seasonDetail = new ContractDetails();
+        for (int i = 0; i<seasonDetailList.size(); i++)
+            seasonDetail = seasonDetailList.get(i);
+
+        System.out.println(seasonDetail);
+        double motorhomeFullRentalPrice = (int) daysBetween * selectedMotorhome.getRentalPrice();
+        Price selectedSeason = priceService.findFeeID(seasonDetail.getForeign_feeID());
+
         contractService.finalizeContractInformation(contractFinalization);
 
+        model.addAttribute("seasonDetail", seasonDetail);
         model.addAttribute("details", details);
         model.addAttribute("contracts", contractFinalization);
+        model.addAttribute("prices", priceService.fetchAll());
+        model.addAttribute("selectedMotorhome", selectedMotorhome);
+        model.addAttribute("motorhomeTotalPrice", motorhomeFullRentalPrice*selectedSeason.getItemPrice());
+        model.addAttribute("chosenCustomer", chosenCustomer);
+        model.addAttribute("initialContract", contractFinalization);
+        model.addAttribute("details", contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID()));
+        model.addAttribute("daysBetween", (int)daysBetween);
+        model.addAttribute("motorhomeTotalPrice", ((int)daysBetween*seasonDetail.getCalculatedPrice()));
 
-        return "redirect:/finalizeContractTable";
+        return "home/contractReceipt";
     }
-
 
 }
