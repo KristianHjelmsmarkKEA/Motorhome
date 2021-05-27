@@ -9,10 +9,16 @@
 <form action="/updateItemInformation" method="post">
     <input type="text" name="itemName" th:value="${prices.itemName}" placeholder="${prices.itemName}">
     <input type="text" name="itemPrice" th:value="${prices.itemPrice}" placeholder="${prices.itemPrice}">
-    <input type="text" name="itemCategory" th:value="${prices.itemCategory}" placeholder="${prices.itemCategory}">
-
-    <input type="hidden" th:value="${prices.feeID}">
-
+    <label for="selection-box">Choose a item category</label>
+    <select name="foreign_categoryID" id="selection-box">
+        <option value="1">Accessories</option>
+        <option value="3">Repair</option>
+        <option value="4">Cancellation</option>
+        <option value="5">Transfercost</option>
+        <option value="6">Fuel</option>
+        <option value="7">Others</option>
+    </select>
+    <input type="hidden" name="feeID" th:value="${prices.feeID}">
     <input type="submit" value="Save changes">
 </form>
 
