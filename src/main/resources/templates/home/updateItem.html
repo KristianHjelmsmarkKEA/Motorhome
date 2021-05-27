@@ -3,14 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Item-Information</title>
+    <style>
+        #selection-box {
+            background-color: #0047b3;
+            border: 2px solid white;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: 25%;
+            height: 50px;
+            overflow: hidden;
+            position:absolute; left:25%; top:25%;
+        }
+    </style>
 </head>
 <body>
 
 <form action="/updateItemInformation" method="post">
     <input type="text" name="itemName" th:value="${prices.itemName}" placeholder="${prices.itemName}">
-    <input type="text" name="itemPrice" th:value="${prices.itemPrice}" placeholder="${prices.itemPrice}">
-    <input type="text" name="itemCategory" th:value="${prices.itemCategory}" placeholder="${prices.itemCategory}">
-
+    <input type="text" name="itemPrice" th:value="${prices.itemPrice}" placeholder="${prices.itemPrice}+'€'">
+    <label for="selection-box">Choose a item category</label>
+    <select name="foreign_categoryID" id="selection-box">
+        <option value="1">Accessories</option>
+        <option value="3">Repair</option>
+        <option value="4">Cancellation</option>
+        <option value="5">Transfercost</option>
+        <option value="6">Fuel</option>
+        <option value="7">Others</option>
+    </select>
     <input type="hidden" th:value="${prices.feeID}">
 
     <input type="submit" value="Save changes">

@@ -23,7 +23,7 @@
         <div th:each="contractDetails : ${details}">
             <div th:each="item : ${prices}">
                 <div th:if="${contractDetails.foreign_feeID == item.feeID}">
-                    <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '£'"/>
+                    <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '€'"/>
                 </div>
             </div>
         </div>

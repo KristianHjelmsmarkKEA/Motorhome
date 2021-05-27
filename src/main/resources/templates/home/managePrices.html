@@ -35,7 +35,7 @@
     <div th:each="contractDetails : ${details}">
         <div th:each="item : ${prices}">
             <div th:if="${contractDetails.foreign_feeID == item.feeID}">
-                <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '£'"/>
+                <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '€'"/>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <td th:text="${prices.feeID}"/>
         <td th:text="${prices.itemName}"/>
         <td th:text="${prices.itemCategory}"/>
-        <td th:text="${prices.itemPrice} + ' kr.'" ></td>
+        <td th:text="${prices.itemPrice} + '€'" ></td>
         <td>
             <a th:href="@{'/updateItem/'+${prices.feeID}}">
                 <button class="btn-update" id="btn-update">Edit Item-information</button>

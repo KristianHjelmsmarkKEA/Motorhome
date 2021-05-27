@@ -29,7 +29,7 @@
                 <button class="motorhome-button" name="motorhome">
                     <span th:text="'Autocamper Model: '"/><b th:text="${motorhome.brandAndModel}"/><br/>
                     <span th:text="'Antal Sæder: '"/><b th:text="${motorhome.capacity}"/><br/>
-                    <span th:text="'Pris pr. dag: '"/><b th:text="${motorhome.rentalPrice}+' kr.'"/>
+                    <span th:text="'Pris pr. dag: '"/><b th:text="${motorhome.rentalPrice}+'€'"/>
                 </button>
                 <form th:object="${contracts}"></form>
             </form>

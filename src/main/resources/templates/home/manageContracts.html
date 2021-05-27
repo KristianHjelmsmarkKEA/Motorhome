@@ -40,7 +40,7 @@
         <td th:text="${contracts.endDate}" />
         <td th:text="${contracts.startOdometer}" />
         <td th:text="${contracts.endOdometer}" />
-        <td th:text="${contracts.totalPrice} + ' kr.'"/>
+        <td th:text="${#numbers.formatDecimal(contracts.totalPrice, 0,2)} + '€'"/>
         <td th:text="${contracts.finalizedContract}" />
         <td th:text="${contracts.cancelledContract}" />
         <td th:text="${contracts.foreign_MotorhomeID}"/>

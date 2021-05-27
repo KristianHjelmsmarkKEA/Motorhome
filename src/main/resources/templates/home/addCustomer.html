@@ -9,21 +9,21 @@
 
 <form action="/addCustomer" method="post">
     <label for="firstName">Enter First Name</label>
-    <input type="text" name="firstName" id="firstName" placeholder="First Name">
+    <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
     <label for="lastName">Enter Last Name</label>
-    <input type="text" name="lastName" id="lastName" placeholder="Last Name">
+    <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
     <label for="phoneNumber">Enter Phone Number</label>
-    <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+    <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}" required>
     <label for="email">Enter Email</label>
-    <input type="text" name="email" id="email" placeholder="Email">
+    <input type="email" name="email" id="email" placeholder="Email" required>
     <label for="address">Enter Address</label>
-    <input type="text" name="address" id="address" placeholder="Address">
+    <input type="text" name="address" id="address" placeholder="Address" required>
     <label for="zipcode">Enter Zipcode</label>
-    <input type="text" name="zipcode" id="zipcode" placeholder="Zipcode">
+    <input type="number" name="zipcode" id="zipcode" placeholder="Zipcode" required>
     <label for="city">Enter City</label>
-    <input type="text" name="city" id="city" placeholder="City">
+    <input type="text" name="city" id="city" placeholder="City" required>
     <label for="country">Enter Country</label>
-    <input type="text" name="country" id="country" placeholder="Country">
+    <input type="text" name="country" id="country" placeholder="Country" required>
 
     <input class="btn-add" id="btn-add" type="submit" value="Create new Item" style="color: #4CAF50">
 </form>

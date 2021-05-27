@@ -25,16 +25,16 @@
     <span><b>Start date:</b><span th:text="${initialContract.startDate}+' - '"/></span>
     <span><b>End Date:</b><span th:text="${initialContract.endDate}"/></span>><br>
     <span><b>Start Odometer:</b><span th:text="' '+${initialContract.startOdometer} + ' km.'"/></span><br>
-    <span th:text="'Motorhome: '+${selectedMotorhome.brandAndModel}+': '+${motorhomeTotalPrice}+'£'"/>
+    <span th:text="'Motorhome: '+${selectedMotorhome.brandAndModel}+': '+${motorhomeTotalPrice}+'€'"/>
     <div th:each="contractDetails : ${details}">
         <div th:each="item : ${prices}">
             <div th:if="${contractDetails.foreign_feeID == item.feeID}">
-                <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '£'"/>
+                <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '€'"/>
             </div>
         </div>
     </div>
 
-    <span><b>Total Price:</b> <span th:text="${initialContract.totalPrice}+'£'"/></span>
+    <span><b>Total Price:</b> <span th:text="${initialContract.totalPrice}+'€'"/></span>
 
 </div>
 

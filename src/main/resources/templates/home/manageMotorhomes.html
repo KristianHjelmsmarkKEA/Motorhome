@@ -37,7 +37,7 @@
         <td th:text="${motorhomes.capacity}" />
         <td th:text="${motorhomes.odometer}" />
         <td th:text="${motorhomes.numberPlate}" />
-        <td th:text="${motorhomes.rentalPrice} + ' kr.'"/>
+        <td th:text="${motorhomes.rentalPrice} + '€'"/>
         <td th:text="${motorhomes.inService}"/>
         <td>
             <a th:href="@{'/updateMotorhome/'+${motorhomes.motorhomeID}}">

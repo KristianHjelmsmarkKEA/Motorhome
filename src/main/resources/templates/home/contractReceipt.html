@@ -61,22 +61,22 @@
                 <tr th:if="${contractDetails.foreign_feeID == item.feeID}">
                     <td th:text="${contractDetails.amount}"/>
                     <td th:text="${item.itemName}"/>
-                    <td th:text="${item.itemPrice} + '£'"/>
-                    <td th:text="${contractDetails.calculatedPrice} + '£'"/>
+                    <td th:text="${item.itemPrice} + '€'"/>
+                    <td th:text="${contractDetails.calculatedPrice} + '€'"/>
                 </tr>
             </div>
         </div>
         <tr>
             <td th:text="'Dage: '+ ${daysBetween}"/>
-            <td th:text="${selectedMotorhome.brandAndModel} + ' #' + ${selectedMotorhome.numberPlate}"/>
-            <td th:text="${seasonDetail.calculatedPrice}+'£'"/>
-            <td th:text="${motorhomeTotalPrice}+'£'"/>
+            <td th:text="'Autocamper: '+${selectedMotorhome.brandAndModel} + ' #' + ${selectedMotorhome.numberPlate}"/>
+            <td th:text="${seasonDetail.calculatedPrice}+'€'"/>
+            <td th:text="${motorhomeTotalPrice}+'€'"/>
         </tr>
         <tr>
             <th></th>
             <th></th>
             <th><b>TOTAL PRICE: </b></th>
-            <th th:text="${mainContract.totalPrice}+'£'"/>
+            <th th:text="${mainContract.totalPrice}+'€'"/>
         </tr>
         </tbody>
     </table>
