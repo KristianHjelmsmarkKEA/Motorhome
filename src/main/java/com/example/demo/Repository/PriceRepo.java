@@ -47,8 +47,8 @@ public class PriceRepo {
         return p;
     }
     public void updateFeeInformation(int feeID, Price p){
-        String sql = "UPDATE item_fees SET item_name = ?, item_price = ? WHERE feeid = ?";
-        template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
+        String sql = "UPDATE item_fees SET item_name = ?, item_price = ?, foreign_categoryid = ?  WHERE feeid = ?";
+        template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID(), feeID);
     }
 
     public List<Price> removeCategoryPrice(List<Price> listToRemove, int category) {
