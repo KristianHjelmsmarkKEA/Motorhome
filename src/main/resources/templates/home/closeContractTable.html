@@ -17,7 +17,7 @@
         <a href="https://www.youtube.com/watch?v=jXg1zCbqQ5g">Shark POG</a>
     </div>
 </div>
-<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for customer">
+<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for: Contract ID, Motorhome ID, Customer ID or Order ID">
 <table id="receipt-table">
     <thead>
     <tr>
@@ -27,8 +27,6 @@
         <th>Start Odometer</th>
         <th>End Odometer</th>
         <th>Estimated Price</th>
-        <th>Finalized</th>
-        <th>Cancelled</th>
         <th>Motorhome ID</th>
         <th>Customer ID</th>
         <th>Order ID</th>
@@ -43,8 +41,6 @@
         <td th:text="${contracts.startOdometer}" />
         <td th:text="${contracts.endOdometer}" />
         <td th:text="${contracts.totalPrice} + '€'"/>
-        <td th:text="${contracts.finalizedContract}" />
-        <td th:text="${contracts.cancelledContract}" />
         <td th:text="${contracts.foreign_MotorhomeID}"/>
         <td th:text="${contracts.foreign_CustomerID}"/>
         <td th:text="${contracts.foreign_OrderID}"/>
@@ -73,9 +69,9 @@
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {  <!--tjekker hver td og om de skal kunne filtreres ud fra -->
             td = tr[i].getElementsByTagName("td")[0];
-            td1 = tr[i].getElementsByTagName("td")[1];
-            td2 = tr[i].getElementsByTagName("td")[2];
-            td3 = tr[i].getElementsByTagName("td")[8];
+            td1 = tr[i].getElementsByTagName("td")[8];
+            td2 = tr[i].getElementsByTagName("td")[9];
+            td3 = tr[i].getElementsByTagName("td")[10];
             if (td) {
                 if ( (td.textContent.toUpperCase().indexOf(filter) > -1) ||
                     (td1.textContent.toUpperCase().indexOf(filter) > -1) ||
