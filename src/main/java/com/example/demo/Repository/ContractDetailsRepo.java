@@ -65,13 +65,9 @@ public class ContractDetailsRepo {
         template.update(sql, cd.getAmount(), cd.getCalculatedPrice(), cd.getForeign_feeID(), cd.getForeign_orderID());
     }
 
-
     public void addListToContractDetails (List<ContractDetails> allContractDetails) {
-        int counter= 0;
         for (ContractDetails contractDetails : allContractDetails) {
             addContractDetails(contractDetails);
-            counter++;
-            System.out.println(counter+": "+contractDetails);
         }
     }
 
