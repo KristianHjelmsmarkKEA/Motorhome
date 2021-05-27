@@ -26,6 +26,7 @@ public class HomeController {
     /** Homepage */
     @GetMapping("/")
     public String index(){
+        System.out.println("and FUCK you");
         return "home/index";
     }
 

@@ -37,4 +37,8 @@ public class PriceService {
         return priceRepo.fetchItemsFromCategoryNum(categoryNumber);
     }
 
+    public List<Price> removeCategoryPrice(List<Price> listToRemove, int category) {
+        return priceRepo.removeCategoryPrice(listToRemove, category);
+    }
+
 }

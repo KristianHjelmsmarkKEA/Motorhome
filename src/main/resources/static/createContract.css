@@ -2,7 +2,7 @@
     box-sizing: border-box;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
     padding: 16px;
-    background-color: #ffd9b3;
+    background-color: #C0DA74;
     width: 95.5%;
     position: relative;
     margin-left: auto;
@@ -15,7 +15,7 @@
     box-sizing: border-box;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
     padding: 16px;
-    background-color: #ffd9b3;
+    background-color: #C0DA74;
     width: 46.5%;
     float: left;
     margin-left: 2%;
@@ -29,7 +29,7 @@
     box-sizing: border-box;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
     padding: 16px;
-    background-color: #ffd9b3;
+    background-color: #C0DA74;
     width: 46.5%;
     float: right;
     margin-right: 2%;

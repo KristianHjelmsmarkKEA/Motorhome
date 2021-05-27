@@ -18,12 +18,16 @@ public class ContractDetailsService {
 
     public List<ContractDetails> fetchAllFromOrderID(int orderID) { return contractDetailsRepo.fetchAllFromOrderID(orderID); }
 
-    public List<ContractDetails> fetchSeasonFromCategoryOrderID(int category, int orderID) {
-        return contractDetailsRepo.fetchCatagoryFromOrderID(category, orderID);
+    public List<ContractDetails> fetchCategoryFromOrderID(int category, int orderID) {
+        return contractDetailsRepo.fetchCategoryFromOrderID(category, orderID);
     }
 
-    public ArrayList<ContractDetails> createContractDetails(String amount, String feeID) {
-        return contractDetailsRepo.createContractDetails(amount, feeID);
+    public ContractDetails fetchObjectCategoryFromOrderID(int category, int orderID) {
+        return contractDetailsRepo.fetchObjectCategoryFromOrderID(category, orderID);
+    }
+
+    public ArrayList<ContractDetails> createContractDetails(String amount, String feeID, int orderID) {
+        return contractDetailsRepo.createContractDetails(amount, feeID, orderID);
     }
 
     public Integer returnNewestOrderID() {
