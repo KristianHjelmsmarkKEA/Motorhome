@@ -130,10 +130,17 @@ public class ContractController {
         return "home/closeContractTable";
     }
 
+    /*Author Kristian
+    Der oprettes en instans af contractFinalization, metodekaldet findOngoingContractID() bruger sql og rowMapper til,
+    at oprette en collection af ongoing contracts, som vises i en tabel, hvor man kan vælge en specifik ongoingContract.
+    @PathVariable henter variablen "contractID" ud fra den valgte ongoingContract i tabellen.
+    selectedMotorhome variablen er en instans, som får værdien af autocamperens model og mærkes information.
+    currentDetails variablen er en instans/collection af alle tidligere vare, som er tilknyttet til kontrakten.
+    repairs og fuel er de nye tilføjede "vare/services", som brugeren kan vælge at tilføje på webapplikationen
+    model.addAttribute bruges til, at binde en række collections og instanser til model attributes.
+     */
     @GetMapping("/finalizeContract/{contractID}")
-    public String finalizeContract(@PathVariable("contractID") int contractID, @ModelAttribute Contract contract,
-                                   Model model, @ModelAttribute ContractDetails contractDetails  ) {
-        System.out.println("Editing contract with ID:" + contractID);
+    public String finalizeContract(@PathVariable("contractID") int contractID, Model model ) {
         Contract contractFinalization = contractService.findOngoingContractID(contractID);
         Motorhome selectedMotorhome = motorhomeService.findMotorhomeBrandAndModel(contractFinalization.getForeign_MotorhomeID());
         List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
@@ -150,10 +157,17 @@ public class ContractController {
         return "home/finalizeContractPage";
     }
 
+    /*Author Kristian
+    Denne metode vises som en kvittering i webapplikationen.
+    @RequestParam(amount) og (foreign_feeID) bruges til at extracte form parametrene String amount og String foreign_feeID
+    fra finalizeContractPage.html, details variablen opretter en ny instans med en collection af de tilføjede vare, og tilføjer
+    dem efterfølgende med addListToContractDetails(), så man får en samlet collection af vare/pris-tilføjelser til kontrakten.
+    Den endelige pris bliver fundet med finalizedTotalPrice variablen og setTotalPrice(finalizedTotalPrice) opdatere DB med ny endelig pris.
+    saveContractInformation() metodekaldet opdatere DB boolean værdi fra 0 til 1, så kontrakten registreres som færdig.
+     */
     @PostMapping("/finalizeContractPage")
-    public String finalizeContractPage(@ModelAttribute Contract contract, Model model, @RequestParam("amount") String amount, @RequestParam("foreign_feeID") String foreign_feeID,
-                                       @ModelAttribute("foreign_MotorhomeID") Motorhome motorhome) {
-
+    public String finalizeContractPage(@ModelAttribute Contract contract, Model model, @RequestParam("amount") String amount,
+                                       @RequestParam("foreign_feeID") String foreign_feeID) {
         Contract contractFinalization = contractService.findOngoingContractID(contract.getContractID());
         List<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID, contractFinalization.getForeign_OrderID());
         contractDetailsService.addListToContractDetails(details);
@@ -161,12 +175,11 @@ public class ContractController {
         Motorhome selectedMotorhome = motorhomeService.findMotorhome(contractFinalization.getForeign_MotorhomeID());
         Customer chosenCustomer = customerService.findCustomerID(contractFinalization.getForeign_CustomerID());
         long daysBetween = ChronoUnit.DAYS.between(contractFinalization.getStartDate(),contractFinalization.getEndDate());
-        contractFinalization.setTotalPrice(finalizedTotalPrice);
 
+        contractFinalization.setTotalPrice(finalizedTotalPrice);
         ContractDetails seasonDetail = contractDetailsService.fetchObjectCategoryFromOrderID(2, contractFinalization.getForeign_OrderID());
 
         contractService.saveContractInformation(contractFinalization, true);
-
 
         model.addAttribute("seasonDetail", seasonDetail);
         model.addAttribute("prices", priceService.removeCategoryPrice(priceService.fetchAll(),2));

@@ -45,12 +45,20 @@ public class ContractRepo {
         return template.update(sql, contractID) > 0;
     }
 
+    /*Author
+
+
+     */
     public List<Contract> fetchOngoingContracts() {
         String sql = "SELECT * FROM contracts where finalized_contract = 0 and cancelled_contract = 0";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return template.query(sql, rowMapper);
     }
 
+    /*Author
+    Har contractID med som parameter, så man kan søge efter den specifikke contract ud fra contractID,
+    derefter mappes c, med en collection af den specifikke kontrakts coullums indhold
+     */
     public Contract findOngoingContractID(int contractID){
         String sql = "select * from contracts where contractID = ?";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
@@ -58,14 +66,16 @@ public class ContractRepo {
         return c;
     }
 
-    public void saveContractInformation(Contract c, boolean trueFinalFalseCancel){
+    /*Author
+    Har en Contract c med som parameter, trueFinalFalseCancel er en boolean, der bruges til at sætte
+    kontraktens finalized og cancelled's værdi til true/false i DB. */
+    public void saveContractInformation(Contract c, boolean trueFinalFalseCancel) {
         boolean finalized = false, cancelled = false;
         if (trueFinalFalseCancel) {
             finalized = true;
         } else {
             cancelled = true;
         }
-        System.out.println("Finalized"+finalized+" Cancelled"+cancelled);
         String sql = "UPDATE contracts SET total_price = ?, finalized_contract = ?, cancelled_contract = ? WHERE contractid = ?";
         template.update(sql,c.getTotalPrice(), finalized, cancelled, c.getContractID());
     }
