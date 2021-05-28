@@ -1,10 +1,10 @@
 body {
-    background-color: #e4efc3;
+    background-color: #F0EFEB;
 }
 
 .header-box {
     overflow: hidden;
-    background-color: #C0DA74;
+    background-color: #C5DEDD;
     padding: 20px 10px;
 }
 
@@ -25,7 +25,7 @@ body {
 }
 
 .header-box a:hover {
-    background-color: #a4c936;
+    background-color: #DBE7E4;
     color: black;
 }
 

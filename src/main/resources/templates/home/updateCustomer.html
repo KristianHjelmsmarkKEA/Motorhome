@@ -3,36 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Customer Information</title>
-    <link rel="stylesheet" type="text/css" href="../updateInfoPage.css">
+    <link rel="stylesheet" type="text/css" href="header.css">
+    <link rel="stylesheet" type="text/css" href="tableLayout.css">
     <style>
+        .center-card {
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+            padding: 16px;
+            background-color: #C5DEDD;
+            width: 65%;
+            position:relative;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 50px;
+            text-align:center;
+            min-height:500px;
+            font-size:24px;
+        }
         body {
-            background-color: #fff2e6;
+            background-color: #F0EFEB;
         }
     </style>
 </head>
 <body>
 
-<h1>Update customer information and submit changes</h1>
-<br><br>
-<div class="box">
-<form action="/updateCustomerInformation" method="post">
 
-    <br><br> <label>First name: </label>
-    <input type="text" name="firstName" th:value="${customers.firstName}" placeholder="${customers.firstName}">
-    <br><br> <label>Last name: </label>
-    <input type="text" name="lastName" th:value="${customers.lastName}" placeholder="${customers.lastName}">
-    <br><br> <label>Phonenumber: </label>
-    <input type="text" name="phoneNumber" th:value="${customers.phoneNumber}" placeholder="${customers.phoneNumber}">
-    <br><br> <label>Email: </label>
-    <input type="text" name="email" th:value="${customers.email}" placeholder="${customers.email}">
-    <br><br> <label>Address: </label>
-    <input type="text" name="address" th:value="${customers.address}" placeholder="${customers.address}">
-    <br><br> <label>Zipcode: </label>
-    <input type="text" name="zipcode" th:value="${customers.zipcode}" placeholder="${customers.zipcode}">
-    <br><br> <label>City: </label>
-    <input type="text" name="city" th:value="${customers.city}" placeholder="${customers.city}">
-    <br><br> <label>Country: </label>
-    <input type="text" name="country" th:value="${customers.country}" placeholder="${customers.country}">
+<div class="center-card">
+    <h1>Opdater kunde-information</h1>
+    <form action="/updateCustomerInformation" method="post">
+        <label>Fornavn: </label>
+        <input type="text" name="firstName" th:value="${customers.firstName}" placeholder="${customers.firstName}">
+        <br><br> <label>Efternavn: </label>
+        <input type="text" name="lastName" th:value="${customers.lastName}" placeholder="${customers.lastName}">
+        <br><br> <label>Telefonnummer: </label>
+        <input type="text" name="phoneNumber" th:value="${customers.phoneNumber}" placeholder="${customers.phoneNumber}">
+        <br><br> <label>Email: </label>
+        <input type="text" name="email" th:value="${customers.email}" placeholder="${customers.email}">
+        <br><br> <label>Adresse: </label>
+        <input type="text" name="address" th:value="${customers.address}" placeholder="${customers.address}">
+        <br><br> <label>Postnummer: </label>
+        <input type="text" name="zipcode" th:value="${customers.zipcode}" placeholder="${customers.zipcode}">
+        <br><br> <label>By: </label>
+        <input type="text" name="city" th:value="${customers.city}" placeholder="${customers.city}">
+        <br><br> <label>Land: </label>
+        <input type="text" name="country" th:value="${customers.country}" placeholder="${customers.country}">
 
     <input type="hidden" name="customerID" th:value="${customers.customerID}">
     <input type="hidden" name="addressID" th:value="${customers.addressID}">
@@ -40,7 +54,7 @@
     <input type="hidden" name="countryID" th:value="${customers.countryID}">
 
     <br><br>
-    <input type="submit" value="Save changes">
+    <input type="submit" value="Gem ændringer">
 </form>
 
 </div>

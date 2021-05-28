@@ -120,14 +120,11 @@ public class ContractDetailsRepo {
     }
 
     public double calculateTotalPriceFinalized(List<ContractDetails> fuelAndRepairDetails, double estimatedPrice) {
-        System.out.println(estimatedPrice);
         double totalPrice = estimatedPrice;
 
         for (ContractDetails contractDetails : fuelAndRepairDetails) {
             totalPrice += contractDetails.getCalculatedPrice();
-            System.out.println(totalPrice);
         }
-        System.out.println(totalPrice);
         return totalPrice;
 
     }

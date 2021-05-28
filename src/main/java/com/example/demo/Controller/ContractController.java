@@ -156,7 +156,6 @@ public class ContractController {
 
         Contract contractFinalization = contractService.findOngoingContractID(contract.getContractID());
         List<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID, contractFinalization.getForeign_OrderID());
-        System.out.println("Finalize Details"+details);
         contractDetailsService.addListToContractDetails(details);
         double finalizedTotalPrice = contractDetailsService.calculateTotalPriceFinalized(details, contractFinalization.getTotalPrice());
         Motorhome selectedMotorhome = motorhomeService.findMotorhome(contractFinalization.getForeign_MotorhomeID());
@@ -166,12 +165,8 @@ public class ContractController {
 
         ContractDetails seasonDetail = contractDetailsService.fetchObjectCategoryFromOrderID(2, contractFinalization.getForeign_OrderID());
 
-        System.out.println(seasonDetail);
-
         contractService.saveContractInformation(contractFinalization, true);
 
-        System.out.println("DETAILS TO FIND ON HTML"+contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID()));
-        System.out.println("Contract Object order ID:"+contractFinalization.getForeign_OrderID());
 
         model.addAttribute("seasonDetail", seasonDetail);
         model.addAttribute("prices", priceService.removeCategoryPrice(priceService.fetchAll(),2));

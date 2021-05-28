@@ -3,42 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Item-Information</title>
+    <link rel="stylesheet" type="text/css" href="header.css">
+    <link rel="stylesheet" type="text/css" href="tableLayout.css">
     <style>
-        #selection-box {
-            background-color: #0047b3;
-            border: 2px solid white;
-            color: white;
-            padding: 15px 30px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            width: 25%;
-            height: 50px;
-            overflow: hidden;
-            position:absolute; left:25%; top:25%;
+        .center-card {
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+            padding: 16px;
+            background-color: #C5DEDD;
+            width: 65%;
+            position:relative;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 50px;
+            text-align:center;
+            min-height:500px;
+            font-size:24px;
         }
     </style>
 </head>
 <body>
 
-<form action="/updateItemInformation" method="post">
-    <input type="text" name="itemName" th:value="${prices.itemName}" placeholder="${prices.itemName}">
-    <input type="text" name="itemPrice" th:value="${prices.itemPrice}" placeholder="${prices.itemPrice}">
-    <label for="selection-box">Choose a item category</label>
-    <select name="foreign_categoryID" id="selection-box">
-        <option value="1">Accessories</option>
-        <option value="3">Repair</option>
-        <option value="4">Cancellation</option>
-        <option value="5">Transfercost</option>
-        <option value="6">Fuel</option>
-        <option value="7">Others</option>
-    </select>
-    <input type="hidden" name="feeID" th:value="${prices.feeID}">
-    <input type="submit" value="Save changes">
-</form>
-
+<div class="center-card">
+<h1>Opdater vare-information</h1>
+    <form action="/updateItemInformation" method="post">
+        <label>Opdater vare navn: </label>
+        <input type="text" name="itemName" th:value="${prices.itemName}" placeholder="${prices.itemName}">
+        <br><br><label>Opdater vare pris (€): </label>
+        <input type="text" name="itemPrice" th:value="${prices.itemPrice}" placeholder="${prices.itemPrice}">
+        <br><br><label for="selection-box">Vælg vare kategori: </label>
+        <select name="foreign_categoryID" id="selection-box">
+            <option value="1">Accessories</option>
+            <option value="3">Repair</option>
+            <option value="4">Cancellation</option>
+            <option value="5">Transfercost</option>
+            <option value="6">Fuel</option>
+            <option value="7">Others</option>
+        </select><br><br>
+        <input type="hidden" name="feeID" th:value="${prices.feeID}">
+        <input type="submit" value="Gem ændringer">
+    </form>
+</div>
 </body>
 </html>
