@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Finalize Contract</title>
+    <link rel="stylesheet" type="text/css" href="../header.css">
+    <link rel="stylesheet" type="text/css" href="../tableLayout.css">
+    <style>
+        .center-card {
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+            padding: 16px;
+            background-color: #C5DEDD;
+            width: 65%;
+            position:relative;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 50px;
+            text-align:center;
+            min-height:500px;
+            font-size:24px;
+        }
+    </style>
 
 </head>
 <body>
 
-<form action="/cancelContractPage" method="post">
+<div class="center-card">
+    <form action="/cancelContractPage" method="post">
 
-    <div class="top-card">
         <h2>Current Contract Information</h2>
         <label for="startDate"><b>Start date:</b><span th:text="${contracts.startDate}+' - '"/></label>
         <input name="startDate" id="startDate" type="hidden" th:value="${contracts.startDate}">
@@ -40,11 +58,8 @@
         <input type="hidden" name="contractID" th:value="${contracts.contractID}">
         <input type="hidden" name="totalPrice" th:value="${contracts.totalPrice}">
         <h3>Annuller kontrakt: <input type="submit" value="submit"></h3>
-    </div>
-
-
-
-</form>
+    </form>
+</div>
 
 </body>
 </html>
