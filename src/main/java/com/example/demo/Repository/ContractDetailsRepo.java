@@ -109,6 +109,7 @@ public class ContractDetailsRepo {
     public double calculateTotalPrice(List<ContractDetails> contractDetailsList, double rentalPrice, double seasonModifier) {
         System.out.println("CALCULATION METHOD = rentalPrice="+rentalPrice+"seasonModifier="+seasonModifier);
 
+
         double totalPrice = rentalPrice * seasonModifier;
         for (ContractDetails contractDetails : contractDetailsList) {
             totalPrice += contractDetails.getCalculatedPrice();

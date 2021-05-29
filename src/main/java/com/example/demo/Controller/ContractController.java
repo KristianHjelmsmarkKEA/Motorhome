@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -141,7 +140,7 @@ public class ContractController {
      */
     @GetMapping("/finalizeContract/{contractID}")
     public String finalizeContract(@PathVariable("contractID") int contractID, Model model ) {
-        Contract contractFinalization = contractService.findOngoingContractID(contractID);
+        Contract contractFinalization = contractService.findContractByContractID(contractID);
         Motorhome selectedMotorhome = motorhomeService.findMotorhomeBrandAndModel(contractFinalization.getForeign_MotorhomeID());
         List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
         List<Price> repairs = priceService.fetchItemsFromCategoryNum(3);
@@ -168,7 +167,7 @@ public class ContractController {
     @PostMapping("/finalizeContractPage")
     public String finalizeContractPage(@ModelAttribute Contract contract, Model model, @RequestParam("amount") String amount,
                                        @RequestParam("foreign_feeID") String foreign_feeID) {
-        Contract contractFinalization = contractService.findOngoingContractID(contract.getContractID());
+        Contract contractFinalization = contractService.findContractByContractID(contract.getContractID());
         List<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID, contractFinalization.getForeign_OrderID());
         contractDetailsService.addListToContractDetails(details);
         double finalizedTotalPrice = contractDetailsService.calculateTotalPriceFinalized(details, contractFinalization.getTotalPrice());
@@ -178,6 +177,15 @@ public class ContractController {
 
         contractFinalization.setTotalPrice(finalizedTotalPrice);
         ContractDetails seasonDetail = contractDetailsService.fetchObjectCategoryFromOrderID(2, contractFinalization.getForeign_OrderID());
+
+
+        System.out.println(contract);
+        selectedMotorhome.setOdometer(contract.getEndOdometer());
+        motorhomeService.updateMotorhomeInformation(selectedMotorhome);
+        contractFinalization.setEndOdometer(contract.getEndOdometer());
+        contractFinalization.setStartOdometer(contract.getStartOdometer());
+        System.out.println(contract);
+
 
         contractService.saveContractInformation(contractFinalization, true);
 
@@ -197,7 +205,7 @@ public class ContractController {
     @GetMapping("/cancelContract/{contractID}")
     public String cancelContract(@PathVariable("contractID") int contractID, @ModelAttribute Contract contract, Model model, @ModelAttribute ContractDetails contractDetails) {
         System.out.println("Cancelling contract with ID: " + contractID);
-        Contract contractFinalization = contractService.findOngoingContractID(contractID);
+        Contract contractFinalization = contractService.findContractByContractID(contractID);
         Motorhome selectedMotorhome = motorhomeService.findMotorhomeBrandAndModel(contractFinalization.getForeign_MotorhomeID());
         List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
         List<Price> cancelFees = priceService.fetchItemsFromCategoryNum(4);
@@ -214,7 +222,7 @@ public class ContractController {
     @PostMapping("/cancelContractPage")
     public String cancelContractPage(@ModelAttribute Contract contract, Model model, Price selectedCancelFee,
                                      @ModelAttribute("foreign_MotorhomeID") Motorhome motorhome) {
-        Contract contractFinalization = contractService.findOngoingContractID(contract.getContractID());
+        Contract contractFinalization = contractService.findContractByContractID(contract.getContractID());
         Price cancelFee = priceService.findFeeID(selectedCancelFee.getFeeID());
         double cancelTotalPrice = contractDetailsService.calculateTotalPriceCancelled(cancelFee.getItemPrice(), contractFinalization.getTotalPrice());
         ContractDetails cancelDetails = new ContractDetails(1, cancelTotalPrice, cancelFee.getFeeID(), contractFinalization.getForeign_OrderID());

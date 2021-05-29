@@ -84,7 +84,7 @@ public class HomeController {
 
     @GetMapping ("/receiptPage/{contractID}")
     public String receiptPage(@PathVariable("contractID") int contractID, Model model) {
-        Contract contract = contractService.findOngoingContractID(contractID);
+        Contract contract = contractService.findContractByContractID(contractID);
         int daysBetween = (int)ChronoUnit.DAYS.between(contract.getStartDate(), contract.getEndDate());
         ContractDetails seasonDetail = contractDetailsService.fetchObjectCategoryFromOrderID(2, contract.getForeign_OrderID());
 
@@ -98,6 +98,7 @@ public class HomeController {
         model.addAttribute("motorhomeTotalPrice", (daysBetween * seasonDetail.getCalculatedPrice()));
         return "home/contractReceipt";
     }
+
     //Tabel-oversigt over alle autocamper
     @GetMapping ("/manageMotorhomes")
     public String manageMotorhomes(Model model) {
