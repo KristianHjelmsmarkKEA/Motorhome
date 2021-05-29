@@ -1,7 +1,7 @@
 package com.example.demo.Repository;
 
 import com.example.demo.Model.ContractDetails;
-import com.example.demo.Model.PriceCalculator;
+import com.example.demo.Model.Price;
 import com.example.demo.Service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -19,8 +19,6 @@ public class ContractDetailsRepo {
     JdbcTemplate template;
     @Autowired
     PriceService priceService;
-
-    PriceCalculator priceCalculator;
 
 
     public List<ContractDetails> fetchAll() {
@@ -75,9 +73,10 @@ public class ContractDetailsRepo {
 
 
     public ArrayList<ContractDetails> createContractDetails(String amount, String feeID, int orderID) {
+        System.out.println(amount + " " + feeID);
         ArrayList<Integer> amountList = convertStringToIntArrayList(amount);
         ArrayList<Integer> feeIDList = convertStringToIntArrayList(feeID);
-        ArrayList<Double> calculatedPrize = priceCalculator.calculatedPriceOfFees(amountList, feeIDList);
+        ArrayList<Double> calculatedPrize = calculatedPriceOfFees(amountList, feeIDList);
         ArrayList<ContractDetails> contractDetails = new ArrayList<>();
         for (int i = 0; i < amountList.size(); i++) {
             contractDetails.add(new ContractDetails(amountList.get(i),calculatedPrize.get(i),feeIDList.get(i),orderID));
@@ -95,4 +94,45 @@ public class ContractDetailsRepo {
         return listInt;
     }
 
+    public ArrayList<Double> calculatedPriceOfFees(ArrayList<Integer> amount, ArrayList<Integer> feeID) {
+        ArrayList<Double> calculatedPrice = new ArrayList<>();
+        List<Price> prices = priceService.fetchAll();
+
+        for (Price price : prices) {
+            for (int i = 0; i < feeID.size(); i++) {
+                if (price.getFeeID() == feeID.get(i)) {
+                    calculatedPrice.add(amount.get(i)*price.getItemPrice());
+                }
+            }
+        }
+        return calculatedPrice;
+    }
+    public double calculateTotalPrice(List<ContractDetails> contractDetailsList, double rentalPrice, double seasonModifier) {
+        System.out.println("CALCULATION METHOD = rentalPrice="+rentalPrice+"seasonModifier="+seasonModifier);
+
+        double totalPrice = rentalPrice * seasonModifier;
+        for (ContractDetails contractDetails : contractDetailsList) {
+            totalPrice += contractDetails.getCalculatedPrice();
+        }
+        return totalPrice;
+    }
+
+    public double calculateTotalPriceFinalized(List<ContractDetails> fuelAndRepairDetails, double estimatedPrice) {
+        double totalPrice = estimatedPrice;
+
+        for (ContractDetails contractDetails : fuelAndRepairDetails) {
+            totalPrice += contractDetails.getCalculatedPrice();
+        }
+        return totalPrice;
+
+    }
+
+    public double calculateTotalPriceCancelled(double priceModifier, double currentContractPrice) {
+
+        double calculatedCancelFee = priceModifier * currentContractPrice;
+        if (calculatedCancelFee < 200) {
+            calculatedCancelFee = 200;
+        }
+        return calculatedCancelFee;
+    }
 }
