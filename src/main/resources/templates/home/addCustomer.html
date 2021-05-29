@@ -3,29 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Customer</title>
+    <link rel="stylesheet" type="text/css" href="../header.css">
+    <link rel="stylesheet" type="text/css" href="../tableLayout.css">
+    <style>
+        .center-card {
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+            padding: 16px;
+            background-color: #C5DEDD;
+            width: 65%;
+            position:relative;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 50px;
+            text-align:center;
+            min-height:700px;
+            font-size:24px;
+        }
+        body {
+            background-color: #F0EFEB;
+        }
+    </style>
 </head>
 <body>
-<h1>Add a new customer</h1>
 
-<form action="/addCustomer" method="post">
-    <label for="firstName">Enter First Name</label>
-    <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
-    <label for="lastName">Enter Last Name</label>
-    <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
-    <label for="phoneNumber">Enter Phone Number</label>
-    <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}" required>
-    <label for="email">Enter Email</label>
-    <input type="email" name="email" id="email" placeholder="Email" required>
-    <label for="address">Enter Address</label>
-    <input type="text" name="address" id="address" placeholder="Address" required>
-    <label for="zipcode">Enter Zipcode</label>
-    <input type="number" name="zipcode" id="zipcode" placeholder="Zipcode" required>
-    <label for="city">Enter City</label>
-    <input type="text" name="city" id="city" placeholder="City" required>
-    <label for="country">Enter Country</label>
-    <input type="text" name="country" id="country" placeholder="Country" required>
-
-    <input class="btn-add" id="btn-add" type="submit" value="Create new Item" style="color: #4CAF50">
+<div class="center-card">
+    <h1>Opret ny kunde</h1>
+    <form action="/addCustomer" method="post">
+        <label for="firstName">Fornavn: </label>
+        <input type="text" name="firstName" id="firstName" placeholder="Fornavn" required>
+        <br><br><label for="lastName">Efternavn: </label>
+        <input type="text" name="lastName" id="lastName" placeholder="Efternavn" required>
+        <br><br><label for="phoneNumber">Telefonnummer: </label>
+        <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Telefonnummer" pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}" required>
+        <br><br><label for="email">Email: </label>
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <br><br><label for="driverLicense">Driver License: </label>
+        <input type="text" name="driverLicense" id="driverLicense" placeholder="Driver License" required>
+        <br><br><label for="driverSinceDate">Kørekort dato: </label>
+        <input type="date" name="driverSinceDate" id="driverSinceDate" placeholder="Kørekort dato" required>
+        <br><br><label for="address">Adresse: </label>
+        <input type="text" name="address" id="address" placeholder="Address" required>
+        <br><br><label for="zipcode">Postnummer: </label>
+        <input type="number" name="zipcode" id="zipcode" placeholder="Zipcode" required>
+        <br><br><label for="city">By: </label>
+        <input type="text" name="city" id="city" placeholder="City" required>
+        <br><br><label for="country">Land: </label>
+        <input type="text" name="country" id="country" placeholder="Country" required>
+        <br><br>
+        <input class="btn-add" id="btn-add" type="submit" value="Tilføj ny kunde">
 </form>
+</div>
 </body>
 </html>

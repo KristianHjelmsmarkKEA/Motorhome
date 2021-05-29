@@ -35,11 +35,6 @@ public class PriceRepo {
         template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
     }
 
-    public Boolean deletePrice(int feeID){
-        String sql = "DELETE FROM item_fees WHERE feeid = ?";
-        return template.update(sql, feeID) > 0;
-    }
-
     public Price findFeeID(int feeID){
         String sql = "select * from item_fees WHERE feeid = ?";
         RowMapper<Price> rowMapper = new BeanPropertyRowMapper<>(Price.class);

@@ -71,6 +71,7 @@ public class HomeController {
         return "redirect:/managePrices";
     }
 
+
     //Tabel-oversigt over alle kontrakter
     @GetMapping ("/manageContracts")
     public String manageContracts(Model model) {
@@ -107,6 +108,17 @@ public class HomeController {
         motorhomeService.updateMotorhomeInformation(motorhome.getMotorhomeID(), motorhome);
         return "redirect:/manageMotorhomes";
     }
+    /*Author
+    Tilføjelse af ny autocamper i DB.
+    .addMotorhome() opdatere DB med indtastet information fra hjemmeside index/addMotorhome.
+    */
+    @GetMapping("/addMotorhome")
+    public String addMotorhome() { return "home/addMotorhome"; }
+    @PostMapping("/addMotorhome")
+    public String addMotorhome(@ModelAttribute Motorhome motorhome) {
+        motorhomeService.addMotorhome(motorhome);
+        return "redirect:/manageMotorhomes";
+    }
 
     //Tabel-oversigt over alle kunder og deres informationer
     @GetMapping ("/manageCustomers")
@@ -135,5 +147,20 @@ public class HomeController {
     public String updateCustomerInformation(@ModelAttribute Customer customer, Model model) {
         customerService.updateCustomerInformation(customer.getCustomerID(), customer);
         return "redirect:/";
+    }
+
+    /*Author
+Tilføjelse af ny vare i DB.
+.addPrice opdatere DB med indtastet information fra hjemmeside index/addItem.
+*/
+    @GetMapping("/addCustomer")
+    public String addCustomer() { return "home/addCustomer"; }
+    @PostMapping("/addCustomer")
+    public String addCustomer(@ModelAttribute Customer customer) {
+        customerService.addCountry(customer);
+        customerService.addZipcode(customer);
+        customerService.addAddress(customer);
+        customerService.addCustomer(customer);
+        return "redirect:/manageCustomers";
     }
 }

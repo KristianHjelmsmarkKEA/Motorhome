@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Motorhome</title>
+    <link rel="stylesheet" type="text/css" href="../header.css">
+    <link rel="stylesheet" type="text/css" href="../tableLayout.css">
+    <style>
+        .center-card {
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+            padding: 16px;
+            background-color: #C5DEDD;
+            width: 65%;
+            position:relative;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 50px;
+            text-align:center;
+            min-height:700px;
+            font-size:24px;
+        }
+        body {
+            background-color: #F0EFEB;
+        }
+    </style>
+</head>
+<body>
+
+<div class="center-card">
+    <h1>Opret ny autocamper</h1>
+    <form action="/addMotorhome" method="post">
+        <label for="brandAndModel">Model og mærke: </label>
+        <input type="text" name="brandAndModel" id="brandAndModel" placeholder="Model og mærke" required>
+        <br><br><label for="capacity">Kapacitet: </label>
+        <input type="text" name="capacity" id="capacity" placeholder="Kapacitet" required>
+        <br><br><label for="odometer">odometer: </label>
+        <input type="number" name="odometer" id="odometer" placeholder="odometer" required>
+        <br><br><label for="numberPlate">Nummerplade: </label>
+        <input type="text" name="numberPlate" id="numberPlate" placeholder="Nummerplade" required>
+        <br><br><label for="rentalPrice">Leje pris pr. dag: </label>
+        <input type="number" name="rentalPrice" id="rentalPrice" placeholder="Pris" required>
+
+        <br><br>
+        <input class="btn-add" id="btn-add" type="submit" value="Tilføj ny autocamper">
+    </form>
+</div>
+
+</body>
+</html>

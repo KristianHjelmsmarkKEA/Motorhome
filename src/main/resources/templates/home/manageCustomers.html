@@ -16,6 +16,10 @@
         <a href="managePrices">Priser</a>
     </div>
 </div>
+<a href="/addCustomer">
+    <button class="btn-create" id="btn-btn-create">Tilføj kunde</button>
+</a>
+
 <input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for customer">
 <table id="receipt-table">
     <thead>
@@ -49,7 +53,7 @@
         <td th:text="${customers.country}" />
         <td>
             <a th:href="@{'/updateCustomer/'+${customers.customerID}}">
-                <button class="btn-update" id="btn-update">Edit customer information</button>
+                <button class="btn-update" id="btn-update">Opdater kunde-information</button>
             </a>
         </td>
     </tr>
