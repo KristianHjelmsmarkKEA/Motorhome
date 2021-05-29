@@ -20,7 +20,7 @@
     <button class="btn-create" id="btn-btn-create">Tilføj kunde</button>
 </a>
 
-<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for customer">
+<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for: Customer ID, Name, Lastname, Phone number, Email">
 <table id="receipt-table">
     <thead>
     <tr>
@@ -71,11 +71,11 @@
         table = document.getElementById("receipt-table");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {  <!--tjekker hver td og om de skal kunne filtreres ud fra -->
-            td = tr[i].getElementsByTagName("td")[1];
-            td1 = tr[i].getElementsByTagName("td")[2];
-            td2 = tr[i].getElementsByTagName("td")[3];
-            td3 = tr[i].getElementsByTagName("td")[4];
-            td4 = tr[i].getElementsByTagName("td")[8];
+            td = tr[i].getElementsByTagName("td")[0];
+            td1 = tr[i].getElementsByTagName("td")[1];
+            td2 = tr[i].getElementsByTagName("td")[2];
+            td3 = tr[i].getElementsByTagName("td")[3];
+            td4 = tr[i].getElementsByTagName("td")[4];
             if (td) {
                 if ( (td.textContent.toUpperCase().indexOf(filter) > -1) ||
                     (td1.textContent.toUpperCase().indexOf(filter) > -1) ||

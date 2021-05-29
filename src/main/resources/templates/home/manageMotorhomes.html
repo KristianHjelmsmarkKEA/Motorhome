@@ -20,7 +20,7 @@
     <button class="btn-create" id="btn-btn-create">Tilføj ny autocamper</button>
 </a>
 
-<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for customer">
+<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for: Motorhome ID, Brand, Capacity, Number Plate">
 <table id="receipt-table">
     <thead>
     <tr>
@@ -57,7 +57,7 @@
 <!--td, td1 osv. Er de columns man kan søge på, hvor [i] er column nummerering-->
 <script>
     function userSearch() {
-        var input, filter, table, tr, td, td1, td2, td3, td4, i;
+        var input, filter, table, tr, td, td1, td2, td3, i;
         input = document.getElementById("user-input");
         filter = input.value.toUpperCase();
         table = document.getElementById("receipt-table");
@@ -67,13 +67,11 @@
             td1 = tr[i].getElementsByTagName("td")[1];
             td2 = tr[i].getElementsByTagName("td")[2];
             td3 = tr[i].getElementsByTagName("td")[4];
-            td4 = tr[i].getElementsByTagName("td")[6];
             if (td) {
                 if ( (td.textContent.toUpperCase().indexOf(filter) > -1) ||
                     (td1.textContent.toUpperCase().indexOf(filter) > -1) ||
                     (td2.textContent.toUpperCase().indexOf(filter) > -1) ||
-                    (td3.textContent.toUpperCase().indexOf(filter) > -1) ||
-                    (td4.textContent.toUpperCase().indexOf(filter) > -1) )  {
+                    (td3.textContent.toUpperCase().indexOf(filter) > -1))  {
                     tr[i].style.display = "";
                 } else {
                     tr[i].style.display = "none";
