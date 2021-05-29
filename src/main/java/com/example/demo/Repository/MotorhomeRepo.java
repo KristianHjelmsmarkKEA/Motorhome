@@ -50,11 +50,9 @@ public class MotorhomeRepo {
         return m;
     }
 
-    public Motorhome updateMotorhomeInformation(int motorhomeID, Motorhome m) {
+    public void updateMotorhomeInformation(Motorhome m) {
         String sql = "UPDATE motorhomes SET odometer = ?, rental_price = ?, in_service =? where motorhomeid = ?";
         template.update(sql, m.getOdometer(), m.getRentalPrice(), m.isInService(), m.getMotorhomeID());
-
-        return null;
     }
 
     public List<Integer> unavailableMotorhomes(LocalDate startDate, LocalDate endDate) {
@@ -80,7 +78,7 @@ public class MotorhomeRepo {
     public List<Motorhome> fetchIntervalMotorhomes(LocalDate startDate, LocalDate endDate) {
 
         List<Motorhome> allMotorhomesInService = fetchAllInService();
-        ArrayList<Motorhome> unAvailableMotorhomes = new ArrayList<>();
+        List<Motorhome> unAvailableMotorhomes = new ArrayList<>();
 
         if (unavailableMotorhomes(startDate, endDate) == null) {
             return allMotorhomesInService;
@@ -117,7 +115,7 @@ public class MotorhomeRepo {
 
     public List<Motorhome> fetchMotorhomesBrandAndModel(String brandAndModel, LocalDate startDate, LocalDate endDate) {
         List<Motorhome> motorhomesInService = fetchIntervalMotorhomes(startDate, endDate);
-        ArrayList<Motorhome> sortedMotorhomes = new ArrayList<>();
+        List<Motorhome> sortedMotorhomes = new ArrayList<>();
 
         for (Motorhome motorhome : motorhomesInService) {
             if (motorhome.getBrandAndModel().contains(brandAndModel))

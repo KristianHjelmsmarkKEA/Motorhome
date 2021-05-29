@@ -123,7 +123,7 @@ public class HomeController {
     autocampers information, som bliver opdateret. */
     @PostMapping("/updateMotorhomeInformation")
     public String updateMotorhomeInformation(@ModelAttribute Motorhome motorhome) {
-        motorhomeService.updateMotorhomeInformation(motorhome.getMotorhomeID(), motorhome);
+        motorhomeService.updateMotorhomeInformation(motorhome);
         return "redirect:/manageMotorhomes";
     }
     /*Author
@@ -163,7 +163,7 @@ public class HomeController {
     kundes information, som bliver opdateret. */
     @PostMapping("/updateCustomerInformation")
     public String updateCustomerInformation(@ModelAttribute Customer customer) {
-        customerService.updateCustomerInformation(customer.getCustomerID(), customer);
+        customerService.updateCustomerInformation(customer);
         return "redirect:/";
     }
 

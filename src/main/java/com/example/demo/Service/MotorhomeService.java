@@ -28,8 +28,8 @@ public class MotorhomeService {
 
     public Motorhome findMotorhome(int motorhomeID) { return motorhomeRepo.findMotorhomeID(motorhomeID); }
 
-    public Motorhome updateMotorhomeInformation(int motorhomeID, Motorhome m) {
-        return motorhomeRepo.updateMotorhomeInformation(motorhomeID, m);
+    public void updateMotorhomeInformation(Motorhome m) {
+        motorhomeRepo.updateMotorhomeInformation(m);
     }
 
     public List<Motorhome> removeDuplicateBrands(List<Motorhome> withDuplicates) {

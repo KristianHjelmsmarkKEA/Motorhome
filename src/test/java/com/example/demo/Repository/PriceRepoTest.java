@@ -6,27 +6,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PriceRepoTest {
 
-    @Test
+    @Test //Intet at Teste
     void fetchAll() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void fetchItemsFromCategoryNum() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void addPrice() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void findFeeID() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void updateFeeInformation() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void removeCategoryPrice() {
     }
 }

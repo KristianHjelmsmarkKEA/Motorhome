@@ -19,6 +19,16 @@ public class Motorhome {
     //Constructor
     public Motorhome() {}
 
+    public Motorhome(int motorhomeID, String brandAndModel, int capacity, int odometer, String numberPlate, double rentalPrice, boolean inService) {
+        this.motorhomeID = motorhomeID;
+        this.brandAndModel = brandAndModel;
+        this.capacity = capacity;
+        this.odometer = odometer;
+        this.numberPlate = numberPlate;
+        this.rentalPrice = rentalPrice;
+        this.inService = inService;
+    }
+
     //Getters & Setters
     public int getMotorhomeID() {
         return motorhomeID;

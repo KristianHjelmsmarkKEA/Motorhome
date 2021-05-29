@@ -73,7 +73,6 @@ public class ContractDetailsRepo {
 
 
     public ArrayList<ContractDetails> createContractDetails(String amount, String feeID, int orderID) {
-        System.out.println(amount + " " + feeID);
         ArrayList<Integer> amountList = convertStringToIntArrayList(amount);
         ArrayList<Integer> feeIDList = convertStringToIntArrayList(feeID);
         ArrayList<Double> calculatedPrize = calculatedPriceOfFees(amountList, feeIDList);
@@ -128,10 +127,11 @@ public class ContractDetailsRepo {
     }
 
     public double calculateTotalPriceCancelled(double priceModifier, double currentContractPrice) {
-
         double calculatedCancelFee = priceModifier * currentContractPrice;
-        if (calculatedCancelFee < 200) {
-            calculatedCancelFee = 200;
+        final double cancelTotalPriceLimit = 200;
+
+        if (calculatedCancelFee < cancelTotalPriceLimit) {
+            calculatedCancelFee = cancelTotalPriceLimit;
         }
         return calculatedCancelFee;
     }

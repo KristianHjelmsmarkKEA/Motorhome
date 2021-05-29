@@ -1,32 +1,28 @@
-package com.example.demo.Repository;
+package com.example.demo.Service;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ContractRepoTest {
+class ContractServiceTest {
 
-    @Test //Intet at Teste
+    @Test
     void fetchAll() {
     }
 
-    @Test //Intet at Teste
+    @Test
     void addContract() {
     }
 
-    @Test //Intet at Teste
-    void returnNewContractID() {
-    }
-
-    @Test //Intet at Teste
+    @Test
     void fetchOngoingContracts() {
     }
 
-    @Test//Intet at Teste
+    @Test
     void findOngoingContractID() {
     }
 
-    @Test //Intet at Teste
+    @Test
     void saveContractInformation() {
     }
 }
