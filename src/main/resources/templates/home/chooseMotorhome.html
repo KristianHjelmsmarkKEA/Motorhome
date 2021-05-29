@@ -11,10 +11,10 @@
 <div class="header-box">
     <a href="/" class="logo">Nordic Motorhome Rentals</a>
     <div class="header-menu">
-        <a href="manageCustomers">Kunder</a>
-        <a href="manageMotorhomes">Autocampere</a>
-        <a href="manageContracts">Kontrakter</a>
-        <a href="managePrices">Priser</a>
+        <a href="../manageCustomers">Kunder</a>
+        <a href="../manageMotorhomes">Autocampere</a>
+        <a href="../manageContracts">Kontrakter</a>
+        <a href="../managePrices">Priser</a>
     </div>
 </div>
 <div class="center-card">
@@ -26,12 +26,12 @@
             <form  th:action="@{'/extraSelection/'+${motorhome.brandAndModel}}">
                 <input type="hidden" name="startDate" th:value="${contractDate.startDate}">
                 <input type="hidden" name="endDate" th:value="${contractDate.endDate}">
-                <button class="motorhome-button" name="motorhome">
+
+                <button type="submit" class="motorhome-button">
                     <span th:text="'Autocamper Model: '"/><b th:text="${motorhome.brandAndModel}"/><br/>
                     <span th:text="'Antal Sæder: '"/><b th:text="${motorhome.capacity}"/><br/>
                     <span th:text="'Pris pr. dag: '"/><b th:text="${motorhome.rentalPrice}+'€'"/>
                 </button>
-                <form th:object="${contracts}"></form>
             </form>
         </ul>
     </div>

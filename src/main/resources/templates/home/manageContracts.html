@@ -10,12 +10,13 @@
 <div class="header-box">
     <a href="/" class="logo">Nordic Motorhome Rentals</a>
     <div class="header-menu">
-        <a href="manageCustomers">Kunder</a>
-        <a href="manageMotorhomes">Autocampere</a>
-        <a href="manageContracts">Kontrakter</a>
-        <a href="managePrices">Priser</a>
+        <a href="../manageCustomers">Kunder</a>
+        <a href="../manageMotorhomes">Autocampere</a>
+        <a href="../manageContracts">Kontrakter</a>
+        <a href="../managePrices">Priser</a>
     </div>
 </div>
+
 <input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for customer">
 <table id="receipt-table">
     <thead>
@@ -31,6 +32,7 @@
         <th>Motorhome ID</th>
         <th>Customer ID</th>
         <th>Order ID</th>
+        <th>Receipt</th>
     </tr>
     </thead>
     <tbody>
@@ -46,6 +48,11 @@
         <td th:text="${contracts.foreign_MotorhomeID}"/>
         <td th:text="${contracts.foreign_CustomerID}"/>
         <td th:text="${contracts.foreign_OrderID}"/>
+        <td>
+            <a th:href="@{'/receiptPage/'+${contracts.contractID}}">
+                <button class="btn-update" id="btn-update">Show Receipt</button>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

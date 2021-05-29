@@ -5,11 +5,13 @@ import com.example.demo.Service.ContractService;
 import com.example.demo.Service.CustomerService;
 import com.example.demo.Service.MotorhomeService;
 import com.example.demo.Service.PriceService;
+import com.example.demo.Service.ContractDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
@@ -22,6 +24,8 @@ public class HomeController {
     ContractService contractService;
     @Autowired
     PriceService priceService;
+    @Autowired
+    ContractDetailsService contractDetailsService;
 
     /** Homepage */
     @GetMapping("/")
@@ -32,8 +36,7 @@ public class HomeController {
     //Tabel-oversigt over alle priser, med feeID, navn, kategori og pris
     @GetMapping("/managePrices")
     public String managePrices(Model model) {
-        List<Price> priceList = priceService.fetchAll();
-        model.addAttribute("prices", priceList);
+        model.addAttribute("prices", priceService.fetchAll());
         return "home/managePrices";
     }
 
@@ -54,7 +57,7 @@ public class HomeController {
     .updateFeeInformation henter FeeID'et for objektet, og sørger for, at det er den rette
     vare, som bliver opdateret. */
     @PostMapping("/updateItemInformation")
-    public String updateItemInformation(@ModelAttribute Price price, Model model) {
+    public String updateItemInformation(@ModelAttribute Price price) {
         priceService.updateFeeInformation(price.getFeeID(), price);
         return "redirect:/managePrices";
     }
@@ -74,11 +77,26 @@ public class HomeController {
     //Tabel-oversigt over alle kontrakter
     @GetMapping ("/manageContracts")
     public String manageContracts(Model model) {
-        List<Contract> contractList = contractService.fetchAll();
-        model.addAttribute("contracts", contractList);
+        model.addAttribute("contracts", contractService.fetchAll());
         return "home/manageContracts";
     }
 
+    @GetMapping ("/receiptPage/{contractID}")
+    public String receiptPage(@PathVariable("contractID") int contractID, Model model) {
+        Contract contract = contractService.findOngoingContractID(contractID);
+        int daysBetween = (int)ChronoUnit.DAYS.between(contract.getStartDate(), contract.getEndDate());
+        ContractDetails seasonDetail = contractDetailsService.fetchObjectCategoryFromOrderID(2, contract.getForeign_OrderID());
+
+        model.addAttribute("seasonDetail", seasonDetail);
+        model.addAttribute("prices", priceService.removeCategoryPrice(priceService.fetchAll(),2));
+        model.addAttribute("selectedMotorhome", motorhomeService.findMotorhome(contract.getForeign_MotorhomeID()));
+        model.addAttribute("chosenCustomer", customerService.findCustomerID(contract.getForeign_CustomerID()));
+        model.addAttribute("mainContract", contract);
+        model.addAttribute("details", contractDetailsService.fetchAllFromOrderID(contract.getForeign_OrderID()));
+        model.addAttribute("daysBetween", daysBetween);
+        model.addAttribute("motorhomeTotalPrice", (daysBetween * seasonDetail.getCalculatedPrice()));
+        return "home/contractReceipt";
+    }
     //Tabel-oversigt over alle autocamper
     @GetMapping ("/manageMotorhomes")
     public String manageMotorhomes(Model model) {
@@ -103,7 +121,7 @@ public class HomeController {
     .updateMotorhomeInformation() henter MotorhomeID'et for objektet, og sørger for, at det er den rette
     autocampers information, som bliver opdateret. */
     @PostMapping("/updateMotorhomeInformation")
-    public String updateMotorhomeInformation(@ModelAttribute Motorhome motorhome, Model model) {
+    public String updateMotorhomeInformation(@ModelAttribute Motorhome motorhome) {
         motorhomeService.updateMotorhomeInformation(motorhome.getMotorhomeID(), motorhome);
         return "redirect:/manageMotorhomes";
     }
@@ -143,7 +161,7 @@ public class HomeController {
     .updateCustomerInformation() henter CustomerID'et for objektet, og sørger for, at det er den rette
     kundes information, som bliver opdateret. */
     @PostMapping("/updateCustomerInformation")
-    public String updateCustomerInformation(@ModelAttribute Customer customer, Model model) {
+    public String updateCustomerInformation(@ModelAttribute Customer customer) {
         customerService.updateCustomerInformation(customer.getCustomerID(), customer);
         return "redirect:/";
     }
