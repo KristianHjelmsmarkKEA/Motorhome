@@ -36,11 +36,11 @@
 }
 
 input:checked + .slider {
-    background-color: #a4c936;
+    background-color: #C5DEDD;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #a4c936;
+    box-shadow: 0 0 1px #C5DEDD;
 }
 
 input:checked + .slider:before {
@@ -60,7 +60,7 @@ input:checked + .slider:before {
 
 .box {
     position:relative;
-    background-color: #C0DA74;
+    background-color: #C5DEDD;
     /*background-image: url('https://img.wallpapersafari.com/desktop/1600/900/81/93/3DNUtx.jpg');*/
     background-position: center;
     background-repeat: no-repeat;
@@ -72,7 +72,7 @@ input:checked + .slider:before {
     margin: auto;
 }
 .info-box {
-    background-color: #84a12b;
+    background-color: #C5DEDD;
     border: 2px solid white;
     color: white;
     padding: 15px 30px;

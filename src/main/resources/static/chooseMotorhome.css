@@ -2,7 +2,7 @@
     box-sizing: border-box;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
     padding: 16px;
-    background-color: #C0DA74;
+    background-color: #C5DEDD;
     width: 65%;
     position:relative;
     margin-left: auto;
@@ -28,6 +28,6 @@
 }
 
 .motorhome-button:hover {
-    background-color: #a4c936;
+    background-color: #C5DEDD;
     color:white;
 }
