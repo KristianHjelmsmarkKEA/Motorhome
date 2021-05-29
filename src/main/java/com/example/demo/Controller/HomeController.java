@@ -71,7 +71,6 @@ public class HomeController {
         return "redirect:/managePrices";
     }
 
-
     //Tabel-oversigt over alle kontrakter
     @GetMapping ("/manageContracts")
     public String manageContracts(Model model) {
