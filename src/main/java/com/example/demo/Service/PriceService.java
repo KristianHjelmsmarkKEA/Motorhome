@@ -21,9 +21,6 @@ public class PriceService {
         priceRepo.addPrice(price);
     }
 
-    public Boolean deletePrice(int feeID) {
-        return priceRepo.deletePrice(feeID);
-    }
 
     public Price findFeeID(int feeID) {
         return priceRepo.findFeeID(feeID);
