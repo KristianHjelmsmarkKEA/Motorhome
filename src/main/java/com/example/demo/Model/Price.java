@@ -15,6 +15,16 @@ public class Price {
     //Constructor
     public Price(){ }
 
+    //Constructor2
+    public Price(int feeID, String itemName, double itemPrice, int foreign_categoryID, int categoryID, String itemCategory) {
+        this.feeID = feeID;
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.foreign_categoryID = foreign_categoryID;
+        this.categoryID = categoryID;
+        this.itemCategory = itemCategory;
+    }
+
     //Getters & Setters
     public int getFeeID() {return feeID;}
 

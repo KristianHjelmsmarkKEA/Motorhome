@@ -36,11 +36,6 @@ public class ContractRepo {
         return c.getContractID();
     }
 
-    public Boolean deleteContract(int contractID){
-        String sql = "DELETE FROM contracts WHERE contractid = ?";
-        return template.update(sql, contractID) > 0;
-    }
-
     /*Author
 
      */

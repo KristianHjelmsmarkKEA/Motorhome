@@ -6,39 +6,39 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerRepoTest {
 
-    @Test
+    @Test //Intet at Teste
     void addCountry() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void addZipcode() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void addAddress() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void addCustomer() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void addCustomerAddressZipcodeCountry() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void fetchAll() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void returnNewCustomerID() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void findCustomerID() {
     }
 
-    @Test
+    @Test //Intet at Teste
     void updateCustomerInformation() {
     }
 }
