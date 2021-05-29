@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Customers</title>
+    <title>Extras</title>
     <link rel="stylesheet" type="text/css" href="../header.css">
 </head>
 <body>
@@ -42,7 +42,7 @@
         <input type="hidden" name="foreign_feeID" th:value="${price.feeID}"/>
     </ul>
 
-    <h1>Indtast kilometer til pick-up point</h1>
+    <h1>Indtast kilometer til pick-up og drop-off points </h1>
     <ul th:each="price, i : ${transferCost}">
         <span th:text="${price.feeID}"/><br/>
         <span th:text="''"/><b th:text="${price.itemName}"/><br/>
