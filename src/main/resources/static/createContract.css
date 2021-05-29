@@ -20,8 +20,9 @@
     float: left;
     margin-left: 2%;
     margin-top: 50px;
+    margin-bottom: 50px;
     text-align:center;
-    min-height:2000px;
+    min-height:1000px;
     font-size:24px;
 }
 
@@ -32,10 +33,8 @@
     background-color: #C5DEDD;
     width: 46.5%;
     float: right;
-    margin-right: 2%;
-    margin-left: auto;
-    margin-top: 50px;
+    margin: 50px 2% 50px auto;
     text-align:center;
-    min-height:2000px;
+    min-height:1000px;
     font-size:24px;
 }

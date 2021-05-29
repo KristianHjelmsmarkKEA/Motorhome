@@ -37,10 +37,12 @@
         <span th:text="'Motorhome: '+${selectedMotorhome.brandAndModel}"/><br>
         <span th:text="'Contracts current total price: '+${contracts.totalPrice}+'£'"></span>
         <h1>Nuværende kontrakt vare information: </h1>
-        <div th:each="contractDetails : ${details}">
-            <div th:each="item : ${prices}">
-                <div th:if="${contractDetails.foreign_feeID == item.feeID}">
-                    <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '£'"/>
+            <div th:each="contractDetails : ${details}">
+                <div th:each="item : ${prices}">
+                    <div th:unless="${contractDetails.amount == 0}">
+                        <div th:if="${contractDetails.foreign_feeID == item.feeID}">
+                            <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '£'"/>
+                    </div>
                 </div>
             </div>
         </div>

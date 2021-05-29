@@ -27,8 +27,10 @@
     <span th:text="'Motorhome: '+${selectedMotorhome.brandAndModel}+': '+${motorhomeTotalPrice}+'€'"/>
     <div th:each="contractDetails : ${details}">
         <div th:each="item : ${prices}">
-            <div th:if="${contractDetails.foreign_feeID == item.feeID}">
-                <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '€'"/>
+            <div th:unless="${contractDetails.amount == 0}">
+                <div th:if="${contractDetails.foreign_feeID == item.feeID}">
+                    <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '€'"/>
+                </div>
             </div>
         </div>
     </div>
@@ -40,26 +42,28 @@
 
 <div class="left-card">
     <form th:action="@{/newCustomerToContract}" th:object="${customers}" method="post">
-        <label for="firstName">Enter First Name</label>
-        <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name"><br>
-        <label for="lastName">Enter Last Name</label>
-        <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name"><br>
-        <label for="phoneNumber">Enter Phone Number</label>
-        <input type="text" th:field="*{phoneNumber}" id="phoneNumber" placeholder="Phone Number"><br>
-        <label for="email">Enter Email</label>
+        <h1>Tilføj ny kunde</h1>
+        <label for="firstName">Fornavn: </label>
+        <input type="text" th:field="*{firstName}" id="firstName" placeholder="Fornavn"><br>
+        <br><label for="lastName">Efternavn: </label>
+        <input type="text" th:field="*{lastName}" id="lastName" placeholder="Efternavn"><br>
+        <br><label for="phoneNumber">Telefonnummer: </label>
+        <input type="text" th:field="*{phoneNumber}" id="phoneNumber" placeholder="Telefonnummer"><br>
+        <br><label for="email">Email: </label>
         <input type="text" th:field="*{email}" id="email" placeholder="Email"><br>
-        <label for="driverLicense">Enter Driver License</label>
+        <br><label for="driverLicense">Kørekortnummer: </label>
         <input type="text" th:field="*{driverLicense}" id="driverLicense" placeholder="driver License"><br>
-        <label for="driverSinceDate">Enter driver license Date</label>
+        <br><label for="driverSinceDate">Kørekort dato: </label>
         <input type="date" th:field="*{driverSinceDate}" id="driverSinceDate"><br>
-        <label for="address">Enter Address</label>
-        <input type="text" th:field="*{address}" id="address" placeholder="Address"><br>
-        <label for="zipcode">Enter Zipcode</label>
-        <input type="text" th:field="*{zipcode}" id="zipcode" placeholder="Zipcode"><br>
-        <label for="city">Enter City</label>
-        <input type="text" th:field="*{city}" id="city" placeholder="City"><br>
-        <label for="country">Enter Country</label>
-        <input type="text" th:field="*{country}" id="country" placeholder="Country"><br>
+        <br><label for="address">Adresse: </label>
+        <input type="text" th:field="*{address}" id="address" placeholder="Adresse"><br>
+        <br><label for="zipcode">Postnummer: </label>
+        <input type="text" th:field="*{zipcode}" id="zipcode" placeholder="Postnummer"><br>
+        <br><label for="city">By: </label>
+        <input type="text" th:field="*{city}" id="city" placeholder="By"><br>
+        <br><label for="country">Land: </label>
+        <input type="text" th:field="*{country}" id="country" placeholder="Land"><br>
+        <br>
 
             <input name="startDate" type="hidden" th:value="${initialContract.startDate}">
             <input name="endDate" type="hidden" th:value="${initialContract.endDate}">
@@ -69,7 +73,7 @@
             <input name="foreign_MotorhomeID" type="hidden" th:value="${initialContract.foreign_MotorhomeID}">
             <input name="foreign_OrderID" type="hidden" th:value="${initialContract.foreign_OrderID}">
 
-        <input class="btn-add" type="submit" value="Create new Customer" style="color: #4CAF50">
+        <input class="btn-add" type="submit" value="Tilføj ny kunde">
     </form>
 </div>
 
