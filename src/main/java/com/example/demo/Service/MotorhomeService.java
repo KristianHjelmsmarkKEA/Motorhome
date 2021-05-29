@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,16 +18,8 @@ public class MotorhomeService {
         return motorhomeRepo.fetchAll();
     }
 
-    public List<Motorhome> fetchAllInService() {
-        return motorhomeRepo.fetchAllInService();
-    }
-
     public void addMotorhome(Motorhome motorhome){
         motorhomeRepo.addMotorhome(motorhome);
-    }
-
-    public Boolean deleteMotorhome(int motorhomeID){
-        return motorhomeRepo.deleteMotorhome(motorhomeID);
     }
 
     public List<Motorhome> fetchIntervalMotorhomes(LocalDate startDate, LocalDate endDate) {

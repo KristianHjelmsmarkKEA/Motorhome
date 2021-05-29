@@ -1,6 +1,5 @@
 package com.example.demo.Repository;
 
-import com.example.demo.Model.Customer;
 import com.example.demo.Model.Price;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

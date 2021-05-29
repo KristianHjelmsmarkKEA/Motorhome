@@ -1,9 +1,6 @@
 package com.example.demo.Repository;
 
 import com.example.demo.Model.Contract;
-import com.example.demo.Model.Customer;
-import com.example.demo.Model.Motorhome;
-import com.example.demo.Model.Price;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,7 +22,6 @@ public class ContractRepo {
         return template.query(sql, rowMapper);
     }
 
-
     public int addContract(Contract contract){
         String sql = "INSERT INTO contracts (start_date, end_date, start_odometer, end_odometer, " +
                 "total_price, foreign_motorhomeid, foreign_customerid, foreign_orderid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -46,7 +42,6 @@ public class ContractRepo {
     }
 
     /*Author
-
 
      */
     public List<Contract> fetchOngoingContracts() {
@@ -79,8 +74,5 @@ public class ContractRepo {
         String sql = "UPDATE contracts SET total_price = ?, finalized_contract = ?, cancelled_contract = ? WHERE contractid = ?";
         template.update(sql,c.getTotalPrice(), finalized, cancelled, c.getContractID());
     }
-
-
-
 
 }

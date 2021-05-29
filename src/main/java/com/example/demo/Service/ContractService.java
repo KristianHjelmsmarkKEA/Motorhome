@@ -21,8 +21,6 @@ public class ContractService {
         return contractRepo.addContract(contract);
     }
 
-    public Boolean deleteContract(int contractID) { return contractRepo.deleteContract(contractID); }
-
     public List<Contract> fetchOngoingContracts() {
         return contractRepo.fetchOngoingContracts();
     }

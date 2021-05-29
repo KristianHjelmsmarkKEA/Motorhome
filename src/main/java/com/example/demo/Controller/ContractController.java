@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -24,6 +23,8 @@ public class ContractController {
     ContractDetailsService contractDetailsService;
     @Autowired
     CustomerService customerService;
+
+    PriceCalculator priceCalculator;
 
     final int AVG_MAX_KM_PR_DAY = 400;
 
@@ -70,7 +71,7 @@ public class ContractController {
 
         long daysBetween = ChronoUnit.DAYS.between(contractDates.getStartDate(), contractDates.getEndDate());
         double motorhomeFullRentalPrice = (int) daysBetween * selectedMotorhome.getRentalPrice();
-        double totalPrice = contractDetailsService.calculateTotalPrice(details, motorhomeFullRentalPrice, selectedSeason.getItemPrice());
+        double totalPrice = priceCalculator.calculateTotalPrice(details, motorhomeFullRentalPrice, selectedSeason.getItemPrice());
         Contract initialContract = new Contract(contractDates.getStartDate(), contractDates.getEndDate(), selectedMotorhome.getOdometer(),
                 selectedMotorhome.getOdometer()+((int) daysBetween * AVG_MAX_KM_PR_DAY),totalPrice,selectedMotorhome.getMotorhomeID(),0,orderID);
         model.addAttribute("prices", priceService.fetchAll());
@@ -164,7 +165,7 @@ public class ContractController {
         Contract contractFinalization = contractService.findOngoingContractID(contract.getContractID());
         List<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID, contractFinalization.getForeign_OrderID());
         contractDetailsService.addListToContractDetails(details);
-        contractFinalization.setTotalPrice(contractDetailsService.calculateTotalPriceFinalized(details, contractFinalization.getTotalPrice()));
+        contractFinalization.setTotalPrice(priceCalculator.calculateTotalPriceFinalized(details, contractFinalization.getTotalPrice()));
         contractService.saveContractInformation(contractFinalization, true);
 
         int daysBetween = (int) ChronoUnit.DAYS.between(contractFinalization.getStartDate(),contractFinalization.getEndDate());
@@ -200,7 +201,7 @@ public class ContractController {
     public String cancelContractPage(@ModelAttribute Contract contract, Price selectedCancelFee, Model model) {
         Contract contractFinalization = contractService.findOngoingContractID(contract.getContractID());
         Price cancelFee = priceService.findFeeID(selectedCancelFee.getFeeID());
-        double cancelTotalPrice = contractDetailsService.calculateTotalPriceCancelled(cancelFee.getItemPrice(), contractFinalization.getTotalPrice());
+        double cancelTotalPrice = priceCalculator.calculateTotalPriceCancelled(cancelFee.getItemPrice(), contractFinalization.getTotalPrice());
         ContractDetails cancelDetails = new ContractDetails(1, cancelTotalPrice, cancelFee.getFeeID(), contractFinalization.getForeign_OrderID());
         contractDetailsService.addContractDetails(cancelDetails);
         contractFinalization.setTotalPrice(cancelTotalPrice);

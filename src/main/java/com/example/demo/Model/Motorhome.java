@@ -1,8 +1,12 @@
 package com.example.demo.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Motorhome {
 
-
+    @Id
     //Fields/Attributes
     private int motorhomeID;
     private String brandAndModel;
@@ -13,7 +17,7 @@ public class Motorhome {
     private boolean inService;
 
     //Constructor
-    public Motorhome(){ }
+    public Motorhome() {}
 
     //Getters & Setters
     public int getMotorhomeID() {

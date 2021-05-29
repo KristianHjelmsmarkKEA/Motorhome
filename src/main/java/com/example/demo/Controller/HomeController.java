@@ -27,6 +27,8 @@ public class HomeController {
     @Autowired
     ContractDetailsService contractDetailsService;
 
+    PriceCalculator priceCalculator;
+
     /** Homepage */
     @GetMapping("/")
     public String index(){

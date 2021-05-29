@@ -9,10 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.sql.Array;
 import java.util.List;
 
 @Repository
@@ -37,11 +35,6 @@ public class MotorhomeRepo {
     public void addMotorhome(Motorhome motorhome){
         String sql = "INSERT INTO motorhomes (brand_and_model, capacity, odometer, number_plate, rental_price, in_service) VALUES (?, ?, ?, ?, ?, 1)";
         template.update(sql, motorhome.getBrandAndModel(), motorhome.getCapacity(), motorhome.getOdometer(), motorhome.getNumberPlate(), motorhome.getRentalPrice());
-    }
-
-    public Boolean deleteMotorhome(int motorhomeID){
-        String sql = "DELETE FROM motorhomes WHERE motorhomeid = ?";
-        return template.update(sql, motorhomeID) > 0;
     }
 
     public Motorhome findMotorhomeID(int motorhomeID){
