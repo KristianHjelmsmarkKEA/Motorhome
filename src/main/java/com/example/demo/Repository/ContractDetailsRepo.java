@@ -107,9 +107,6 @@ public class ContractDetailsRepo {
         return calculatedPrice;
     }
     public double calculateTotalPrice(List<ContractDetails> contractDetailsList, double rentalPrice, double seasonModifier) {
-        System.out.println("CALCULATION METHOD = rentalPrice="+rentalPrice+"seasonModifier="+seasonModifier);
-
-
         double totalPrice = rentalPrice * seasonModifier;
         for (ContractDetails contractDetails : contractDetailsList) {
             totalPrice += contractDetails.getCalculatedPrice();
@@ -119,18 +116,15 @@ public class ContractDetailsRepo {
 
     public double calculateTotalPriceFinalized(List<ContractDetails> fuelAndRepairDetails, double estimatedPrice) {
         double totalPrice = estimatedPrice;
-
         for (ContractDetails contractDetails : fuelAndRepairDetails) {
             totalPrice += contractDetails.getCalculatedPrice();
         }
         return totalPrice;
-
     }
 
     public double calculateTotalPriceCancelled(double priceModifier, double currentContractPrice) {
         double calculatedCancelFee = priceModifier * currentContractPrice;
         final double cancelTotalPriceLimit = 200;
-
         if (calculatedCancelFee < cancelTotalPriceLimit) {
             calculatedCancelFee = cancelTotalPriceLimit;
         }

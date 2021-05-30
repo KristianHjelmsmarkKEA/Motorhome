@@ -52,8 +52,6 @@ public class PriceRepo {
                 newPriceList.add(price);
             }
         }
-        System.out.println("Old Price List" + listToRemove);
-        System.out.println("New Price List" + newPriceList);
         return newPriceList;
     }
 

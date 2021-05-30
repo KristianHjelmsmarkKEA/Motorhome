@@ -28,7 +28,7 @@
 <div class="center-card">
     <form action="/cancelContractPage" method="post">
 
-        <h2>Current Contract Information</h2>
+        <h2>Nuværende kontrakt informationer</h2>
         <label for="startDate"><b>Start date:</b><span th:text="${contracts.startDate}+' - '"/></label>
         <input name="startDate" id="startDate" type="hidden" th:value="${contracts.startDate}">
         <label for="endDate"><b>End Date:</b><span th:text="${contracts.endDate}"/></label>
@@ -40,8 +40,10 @@
         <h1>Current contract item fees: </h1>
         <div th:each="contractDetails : ${details}">
             <div th:each="item : ${prices}">
-                <div th:if="${contractDetails.foreign_feeID == item.feeID}">
-                    <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '€'"/>
+                <div th:unless="${contractDetails.amount == 0}">
+                    <div th:if="${contractDetails.foreign_feeID == item.feeID}">
+                        <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '€'"/>
+                    </div>
                 </div>
             </div>
         </div>
