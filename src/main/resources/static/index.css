@@ -2,14 +2,14 @@
     box-sizing: border-box;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
     padding: 16px;
-    background-color: #e4efc3;
+    background-color: #C5DEDD;
     width: 65%;
     position:relative;
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
     text-align:center;
-    min-height:2000px;
+    min-height:500px;
     font-size:24px;
 }
 
@@ -24,7 +24,7 @@ input[type=date] {
     height:40px;
     font-size:20px;
     cursor:pointer;
-    background-color: #C5DEDD;
+    background-color: #DBE7E4;
 }
 
 input[type=date]:hover {

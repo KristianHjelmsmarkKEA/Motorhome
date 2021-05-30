@@ -35,12 +35,13 @@
             <td>
                 <span th:text="${chosenCustomer.firstName} + ' ' + ${chosenCustomer.lastName}"/><br>
                 <span th:text="${chosenCustomer.address} + ', '"/><br>
-                <span th:text="${chosenCustomer.city}+', '+${chosenCustomer.zipcode}"/>
+                <span th:text="${chosenCustomer.city}+', '+${chosenCustomer.zipcode}"/><br>
+                <span th:text="${chosenCustomer.country}"/>
             </td>
             <td>
                 <span th:text="'Order ID: '+${mainContract.foreign_OrderID}"/><br>
                 <span th:text="'Kunde ID: '+${mainContract.foreign_CustomerID}"/><br>
-                <span th:text="${chosenCustomer.country}"/>
+                <span th:text="'Autocamper ID: '+${mainContract.foreign_MotorhomeID}"/><br>
             </td>
         </tr>
     </table>
@@ -57,12 +58,14 @@
         <tbody>
         <div th:each="contractDetails : ${details}">
             <div th:each="item : ${prices}">
+                <div th:unless="${contractDetails.amount == 0}">
                 <tr th:if="${contractDetails.foreign_feeID == item.feeID}">
                     <td th:text="${contractDetails.amount}"/>
                     <td th:text="${item.itemName}"/>
                     <td th:text="${item.itemPrice} + '€'"/>
                     <td th:text="${contractDetails.calculatedPrice} + '€'"/>
                 </tr>
+            </div>
             </div>
         </div>
         <tr>

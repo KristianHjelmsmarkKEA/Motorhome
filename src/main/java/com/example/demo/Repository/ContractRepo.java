@@ -49,7 +49,7 @@ public class ContractRepo {
     Har contractID med som parameter, så man kan søge efter den specifikke contract ud fra contractID,
     derefter mappes c, med en collection af den specifikke kontrakts coullums indhold
      */
-    public Contract findOngoingContractID(int contractID){
+    public Contract findContractByContractID(int contractID){
         String sql = "select * from contracts where contractID = ?";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         Contract c = template.queryForObject(sql, rowMapper, contractID);
@@ -66,8 +66,8 @@ public class ContractRepo {
         } else {
             cancelled = true;
         }
-        String sql = "UPDATE contracts SET total_price = ?, finalized_contract = ?, cancelled_contract = ? WHERE contractid = ?";
-        template.update(sql,c.getTotalPrice(), finalized, cancelled, c.getContractID());
+        String sql = "UPDATE contracts SET start_odometer = ?, end_odometer = ?, total_price = ?, finalized_contract = ?, cancelled_contract = ? WHERE contractid = ?";
+        template.update(sql, c.getStartOdometer(), c.getEndOdometer(), c.getTotalPrice(), finalized, cancelled, c.getContractID());
     }
 
 }
