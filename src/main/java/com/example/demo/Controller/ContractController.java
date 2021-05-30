@@ -140,7 +140,7 @@ public class ContractController {
      */
     @GetMapping("/finalizeContract/{contractID}")
     public String finalizeContract(@PathVariable("contractID") int contractID, Model model ) {
-        Contract contractFinalization = contractService.findOngoingContractID(contractID);
+        Contract contractFinalization = contractService.findContractByContractID(contractID);
         Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractFinalization.getForeign_MotorhomeID());
         List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
         List<Price> repairs = priceService.fetchItemsFromCategoryNum(3);

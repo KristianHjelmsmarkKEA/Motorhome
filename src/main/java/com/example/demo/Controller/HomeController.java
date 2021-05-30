@@ -90,7 +90,7 @@ public class HomeController {
 
         model.addAttribute("seasonDetail", seasonDetail);
         model.addAttribute("prices", priceService.removeCategoryPrice(priceService.fetchAll(),2));
-        model.addAttribute("selectedMotorhome", motorhomeService.findMotorhome(contract.getForeign_MotorhomeID()));
+        model.addAttribute("selectedMotorhome", motorhomeService.findMotorhomeID(contract.getForeign_MotorhomeID()));
         model.addAttribute("chosenCustomer", customerService.findCustomerID(contract.getForeign_CustomerID()));
         model.addAttribute("mainContract", contract);
         model.addAttribute("details", contractDetailsService.fetchAllFromOrderID(contract.getForeign_OrderID()));
@@ -114,7 +114,7 @@ public class HomeController {
     model.addAttribute binder collectionen til "motorhomes" */
     @GetMapping("/updateMotorhome/{motorhomeID}")
     public String updateMotorhome(@PathVariable("motorhomeID") int motorhomeID, Model model) {
-        model.addAttribute("motorhomes", motorhomeService.findMotorhome(motorhomeID));
+        model.addAttribute("motorhomes", motorhomeService.findMotorhomeID(motorhomeID));
         return "home/updateMotorhome";
     }
 
