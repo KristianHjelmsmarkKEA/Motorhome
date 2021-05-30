@@ -181,7 +181,7 @@ public class ContractController {
 
         contractFinalization.setTotalPrice(finalizedTotalPrice);
         selectedMotorhome.setOdometer(contract.getEndOdometer());
-        motorhomeService.updateMotorhomeInformation(selectedMotorhome);
+        motorhomeService.updateMotorhome(selectedMotorhome);
         contractFinalization.setEndOdometer(contract.getEndOdometer());
         contractFinalization.setStartOdometer(contract.getStartOdometer());
 

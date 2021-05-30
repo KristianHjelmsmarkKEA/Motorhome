@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 @Controller
 public class HomeController {
@@ -102,8 +101,7 @@ public class HomeController {
     //Tabel-oversigt over alle autocamper
     @GetMapping ("/manageMotorhomes")
     public String manageMotorhomes(Model model) {
-        List<Motorhome> motorhomeList = motorhomeService.fetchAll();
-        model.addAttribute("motorhomes", motorhomeList);
+        model.addAttribute("motorhomes", motorhomeService.fetchAll());
         return "home/manageMotorhomes";
     }
 
@@ -124,7 +122,7 @@ public class HomeController {
     autocampers information, som bliver opdateret. */
     @PostMapping("/updateMotorhomeInformation")
     public String updateMotorhomeInformation(@ModelAttribute Motorhome motorhome) {
-        motorhomeService.updateMotorhomeInformation(motorhome);
+        motorhomeService.updateMotorhome(motorhome);
         return "redirect:/manageMotorhomes";
     }
     /*Author
@@ -142,8 +140,7 @@ public class HomeController {
     //Tabel-oversigt over alle kunder og deres informationer
     @GetMapping ("/manageCustomers")
     public String manageCustomers(Model model) {
-        List<Customer> customerList = customerService.fetchAll();
-        model.addAttribute("customers", customerList);
+        model.addAttribute("customers", customerService.fetchAll());
         return "home/manageCustomers";
     }
 
@@ -164,7 +161,7 @@ public class HomeController {
     kundes information, som bliver opdateret. */
     @PostMapping("/updateCustomerInformation")
     public String updateCustomerInformation(@ModelAttribute Customer customer) {
-        customerService.updateCustomerInformation(customer);
+        customerService.updateCustomer(customer);
         return "redirect:/";
     }
 

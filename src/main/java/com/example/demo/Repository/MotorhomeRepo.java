@@ -44,7 +44,7 @@ public class MotorhomeRepo {
         return m;
     }
 
-    public void updateMotorhomeInformation(Motorhome m) {
+    public void updateMotorhome(Motorhome m) {
         String sql = "UPDATE motorhomes SET odometer = ?, rental_price = ?, in_service =? where motorhomeid = ?";
         template.update(sql, m.getOdometer(), m.getRentalPrice(), m.isInService(), m.getMotorhomeID());
     }

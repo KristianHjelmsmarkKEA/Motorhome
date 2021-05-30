@@ -63,7 +63,7 @@ public class CustomerRepo {
         return c;
     }
 
-    public Customer updateCustomerInformation(Customer c){
+    public Customer updateCustomer(Customer c){
         String sql = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ? Where customerid = ?";
         String sql1 = "UPDATE address SET address = ? Where addressid = ?";
         String sql2 = "UPDATE zipcodes SET zipcode = ?, city = ? Where zipcodeid = ?";
