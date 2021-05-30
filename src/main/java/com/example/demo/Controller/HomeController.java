@@ -124,7 +124,7 @@ public class HomeController {
     autocampers information, som bliver opdateret. */
     @PostMapping("/updateMotorhomeInformation")
     public String updateMotorhomeInformation(@ModelAttribute Motorhome motorhome) {
-        motorhomeService.updateMotorhomeInformation(motorhome);
+        motorhomeService.updateMotorhome(motorhome);
         return "redirect:/manageMotorhomes";
     }
     /*Author
