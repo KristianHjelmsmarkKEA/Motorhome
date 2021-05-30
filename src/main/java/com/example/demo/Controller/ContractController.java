@@ -59,7 +59,7 @@ public class ContractController {
         int orderID = contractDetailsService.returnNewestOrderID();
 
         Price selectedSeason = priceService.findFeeID(season.getFeeID());
-        Motorhome selectedMotorhome = motorhomeService.findMotorhome(motorhome.getMotorhomeID());
+        Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(motorhome.getMotorhomeID());
 
         ArrayList<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID, orderID);
         ArrayList<ContractDetails> detailsWithSeason = new ArrayList<>(details);
@@ -107,7 +107,7 @@ public class ContractController {
         model.addAttribute("mainContract", initialContract);
         model.addAttribute("prices", priceService.removeCategoryPrice(priceService.fetchAll(),2));
         model.addAttribute("details", contractDetailsService.fetchAllFromOrderID(initialContract.getForeign_OrderID()));
-        model.addAttribute("selectedMotorhome", motorhomeService.findMotorhome(initialContract.getForeign_MotorhomeID()));
+        model.addAttribute("selectedMotorhome", motorhomeService.findMotorhomeID(initialContract.getForeign_MotorhomeID()));
         model.addAttribute("daysBetween", (int)daysBetween);
         model.addAttribute("motorhomeTotalPrice", ((int)daysBetween*seasonDetail.getCalculatedPrice()));
 
@@ -134,7 +134,7 @@ public class ContractController {
     @GetMapping("/finalizeContract/{contractID}")
     public String finalizeContract(@PathVariable("contractID") int contractID, Model model ) {
         Contract contractFinalization = contractService.findContractByContractID(contractID);
-        Motorhome selectedMotorhome = motorhomeService.findMotorhomeBrandAndModel(contractFinalization.getForeign_MotorhomeID());
+        Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractFinalization.getForeign_MotorhomeID());
         List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
         List<Price> repairs = priceService.fetchItemsFromCategoryNum(3);
         List<Price> fuel = priceService.fetchItemsFromCategoryNum(6);
@@ -164,14 +164,14 @@ public class ContractController {
         List<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID, contractFinalization.getForeign_OrderID());
         contractDetailsService.addListToContractDetails(details);
         double finalizedTotalPrice = contractDetailsService.calculateTotalPriceFinalized(details, contractFinalization.getTotalPrice());
-        Motorhome selectedMotorhome = motorhomeService.findMotorhome(contractFinalization.getForeign_MotorhomeID());
+        Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractFinalization.getForeign_MotorhomeID());
         Customer chosenCustomer = customerService.findCustomerID(contractFinalization.getForeign_CustomerID());
         long daysBetween = ChronoUnit.DAYS.between(contractFinalization.getStartDate(),contractFinalization.getEndDate());
         ContractDetails seasonDetail = contractDetailsService.fetchObjectCategoryFromOrderID(2, contractFinalization.getForeign_OrderID());
 
         contractFinalization.setTotalPrice(finalizedTotalPrice);
         selectedMotorhome.setOdometer(contract.getEndOdometer());
-        motorhomeService.updateMotorhomeInformation(selectedMotorhome);
+        motorhomeService.updateMotorhome(selectedMotorhome);
         contractFinalization.setEndOdometer(contract.getEndOdometer());
         contractFinalization.setStartOdometer(contract.getStartOdometer());
 
@@ -194,7 +194,7 @@ public class ContractController {
     @GetMapping("/cancelContract/{contractID}")
     public String cancelContract(@PathVariable("contractID") int contractID, @ModelAttribute Contract contract, Model model, @ModelAttribute ContractDetails contractDetails) {
         Contract contractFinalization = contractService.findContractByContractID(contractID);
-        Motorhome selectedMotorhome = motorhomeService.findMotorhomeBrandAndModel(contractFinalization.getForeign_MotorhomeID());
+        Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractFinalization.getForeign_MotorhomeID());
         List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
         List<Price> cancelFees = priceService.fetchItemsFromCategoryNum(4);
         model.addAttribute("cancelFees", cancelFees);
@@ -217,7 +217,7 @@ public class ContractController {
         contractFinalization.setTotalPrice(cancelTotalPrice);
         contractService.saveContractInformation(contractFinalization, false);
 
-        Motorhome selectedMotorhome = motorhomeService.findMotorhome(contractFinalization.getForeign_MotorhomeID());
+        Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractFinalization.getForeign_MotorhomeID());
         Customer chosenCustomer = customerService.findCustomerID(contractFinalization.getForeign_CustomerID());
         long daysBetween = ChronoUnit.DAYS.between(contractFinalization.getStartDate(), contractFinalization.getEndDate());
 
