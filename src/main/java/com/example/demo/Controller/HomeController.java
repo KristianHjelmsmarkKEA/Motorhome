@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 @Controller
 public class HomeController {
@@ -102,8 +101,7 @@ public class HomeController {
     //Tabel-oversigt over alle autocamper
     @GetMapping ("/manageMotorhomes")
     public String manageMotorhomes(Model model) {
-        List<Motorhome> motorhomeList = motorhomeService.fetchAll();
-        model.addAttribute("motorhomes", motorhomeList);
+        model.addAttribute("motorhomes", motorhomeService.fetchAll());
         return "home/manageMotorhomes";
     }
 
@@ -142,8 +140,7 @@ public class HomeController {
     //Tabel-oversigt over alle kunder og deres informationer
     @GetMapping ("/manageCustomers")
     public String manageCustomers(Model model) {
-        List<Customer> customerList = customerService.fetchAll();
-        model.addAttribute("customers", customerList);
+        model.addAttribute("customers", customerService.fetchAll());
         return "home/manageCustomers";
     }
 
@@ -153,7 +150,7 @@ public class HomeController {
     information ud fra customerID, og mapper den med RowMapper<Customer>, og tilføjer den til en collection.
     model.addAttribute binder collectionen til "customers" */
     @GetMapping("/updateCustomer/{customerID}")
-    public String update(@PathVariable("customerID") int customerID, Model model){
+    public String updateCustomer(@PathVariable("customerID") int customerID, Model model){
         model.addAttribute("customers", customerService.findCustomerID(customerID));
         return "home/updateCustomer";
     }
@@ -164,7 +161,7 @@ public class HomeController {
     kundes information, som bliver opdateret. */
     @PostMapping("/updateCustomerInformation")
     public String updateCustomerInformation(@ModelAttribute Customer customer) {
-        customerService.updateCustomerInformation(customer);
+        customerService.updateCustomer(customer);
         return "redirect:/";
     }
 
