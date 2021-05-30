@@ -169,23 +169,21 @@ public class ContractController {
                                        @RequestParam("foreign_feeID") String foreign_feeID) {
         Contract contractFinalization = contractService.findContractByContractID(contract.getContractID());
         List<ContractDetails> details = contractDetailsService.createContractDetails(amount, foreign_feeID, contractFinalization.getForeign_OrderID());
+
         contractDetailsService.addListToContractDetails(details);
         double finalizedTotalPrice = contractDetailsService.calculateTotalPriceFinalized(details, contractFinalization.getTotalPrice());
+
         Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractFinalization.getForeign_MotorhomeID());
         Customer chosenCustomer = customerService.findCustomerID(contractFinalization.getForeign_CustomerID());
         long daysBetween = ChronoUnit.DAYS.between(contractFinalization.getStartDate(),contractFinalization.getEndDate());
 
-        contractFinalization.setTotalPrice(finalizedTotalPrice);
         ContractDetails seasonDetail = contractDetailsService.fetchObjectCategoryFromOrderID(2, contractFinalization.getForeign_OrderID());
 
-
-        System.out.println(contract);
+        contractFinalization.setTotalPrice(finalizedTotalPrice);
         selectedMotorhome.setOdometer(contract.getEndOdometer());
         motorhomeService.updateMotorhomeInformation(selectedMotorhome);
         contractFinalization.setEndOdometer(contract.getEndOdometer());
         contractFinalization.setStartOdometer(contract.getStartOdometer());
-        System.out.println(contract);
-
 
         contractService.saveContractInformation(contractFinalization, true);
 
@@ -233,7 +231,6 @@ public class ContractController {
         Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractCancellation.getForeign_MotorhomeID());
         Customer chosenCustomer = customerService.findCustomerID(contractCancellation.getForeign_CustomerID());
         long daysBetween = ChronoUnit.DAYS.between(contractCancellation.getStartDate(), contractCancellation.getEndDate());
-
         ContractDetails seasonDetail = contractDetailsService.fetchObjectCategoryFromOrderID(2, contractCancellation.getForeign_OrderID());
 
         model.addAttribute("seasonDetail", seasonDetail);
