@@ -153,7 +153,7 @@ public class HomeController {
     information ud fra customerID, og mapper den med RowMapper<Customer>, og tilføjer den til en collection.
     model.addAttribute binder collectionen til "customers" */
     @GetMapping("/updateCustomer/{customerID}")
-    public String update(@PathVariable("customerID") int customerID, Model model){
+    public String updateCustomer(@PathVariable("customerID") int customerID, Model model){
         model.addAttribute("customers", customerService.findCustomerID(customerID));
         return "home/updateCustomer";
     }
