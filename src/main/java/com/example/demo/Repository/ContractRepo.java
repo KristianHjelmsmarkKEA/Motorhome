@@ -15,13 +15,18 @@ public class ContractRepo {
     @Autowired
     JdbcTemplate template;
 
-
+    /*
+    Mapper alle kontrakters informationer og tilføjer dem til en collection.
+     */
     public List<Contract> fetchAll() {
         String sql = "SELECT * FROM contracts";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return template.query(sql, rowMapper);
     }
 
+    /*
+    Tilføjer en hel ny kontrakt til databasen med alle information.
+     */
     public int addContract(Contract contract){
         String sql = "INSERT INTO contracts (start_date, end_date, start_odometer, end_odometer, " +
                 "total_price, foreign_motorhomeid, foreign_customerid, foreign_orderid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -29,6 +34,10 @@ public class ContractRepo {
                 contract.getTotalPrice(), contract.getForeign_MotorhomeID(), contract.getForeign_CustomerID(), contract.getForeign_OrderID());
         return returnNewContractID();
     }
+
+    /*
+    Mapper det nyeste oprettet contractID.
+     */
     public int returnNewContractID(){
         String sql = "select * from contracts where contractid = (select max(contractid) from contracts);";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
@@ -37,7 +46,7 @@ public class ContractRepo {
     }
 
     /*Author
-
+    Mapper alle igangværende kontrakter, bruges når man skal vælge hvilken kontrakt, som man gerne vil færdiggøre eller annullere.
      */
     public List<Contract> fetchOngoingContracts() {
         String sql = "SELECT * FROM contracts where finalized_contract = 0 and cancelled_contract = 0";

@@ -19,24 +19,33 @@ public class MotorhomeRepo {
     @Autowired
     JdbcTemplate template;
 
+    /*
+    Mapper alle autocampere i vores motorhome.motorhomes tabel
+     */
     public List<Motorhome> fetchAll() {
         String sql = "SELECT * FROM motorhomes";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.query(sql, rowMapper);
     }
 
+    /*
+    Mapper alle autocampere, som er i service, dvs. at de kan udlejes og ikke er til reparation eller lign.
+     */
     public List<Motorhome> fetchAllInService() {
         String sql = "SELECT * FROM motorhomes WHERE in_service = 1";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.query(sql, rowMapper);
     }
 
-    //SQL Fikset tror jeg
+    //Tilføjer en ny autocamper til databasen.
     public void addMotorhome(Motorhome motorhome){
         String sql = "INSERT INTO motorhomes (brand_and_model, capacity, odometer, number_plate, rental_price, in_service) VALUES (?, ?, ?, ?, ?, 1)";
         template.update(sql, motorhome.getBrandAndModel(), motorhome.getCapacity(), motorhome.getOdometer(), motorhome.getNumberPlate(), motorhome.getRentalPrice());
     }
 
+    /*
+    Finder en specifik autocamper via primaryKey motorhomeID
+     */
     public Motorhome findMotorhomeID(int motorhomeID){
         String sql = "select * from motorhomes where motorhomeid = ?";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
@@ -44,11 +53,18 @@ public class MotorhomeRepo {
         return m;
     }
 
+    /*
+    Opdatere en specifik autocamper med nyt odometer, lejepris og om den er i service
+     */
     public void updateMotorhome(Motorhome m) {
         String sql = "UPDATE motorhomes SET odometer = ?, rental_price = ?, in_service =? where motorhomeid = ?";
         template.update(sql, m.getOdometer(), m.getRentalPrice(), m.isInService(), m.getMotorhomeID());
     }
 
+    /*
+    Finder alle autocampere, som ikke er available i den indtastet dato-periode
+    metoden bliver brugt i fetchIntervalMotorhomes()
+     */
     public List<Integer> unavailableMotorhomes(LocalDate startDate, LocalDate endDate) {
         String sql = "SELECT foreign_motorhomeid from contracts where" +
                 "(start_date BETWEEN '"+startDate+"' AND '"+endDate+"') OR " +
@@ -69,6 +85,10 @@ public class MotorhomeRepo {
         }
     }
 
+    /*
+    Fetcher alle autocampere, som er i service, dvs. ikke til reparation og lignende.
+    Derudover, har den metodekald til unavilableMotorhomes(), så vi kun får avilable autocampere tilbage.
+     */
     public List<Motorhome> fetchIntervalMotorhomes(LocalDate startDate, LocalDate endDate) {
 
         List<Motorhome> allMotorhomesInService = fetchAllInService();
@@ -96,6 +116,11 @@ public class MotorhomeRepo {
         return allMotorhomesInService;
     }
 
+    /*
+    Fjerner alle autocampere mærker/modeller, så der kun vises unikke autocampere, dette sker
+    når man skal vælge hvilken autocamper man vil have. Efterfølgende, kan man vælge hvilken autocamper,
+    med samme brand/model man vil have, ud fra deres nummerplade.
+     */
     public List<Motorhome> removeDuplicateBrands(List<Motorhome> withDuplicates) {
         ArrayList<Motorhome> removedDuplicates = new ArrayList<>();
 
@@ -107,6 +132,9 @@ public class MotorhomeRepo {
         return removedDuplicates;
     }
 
+    /*
+    Finder alle de forskellige autocampers mærker og modeller i en sorteret liste.
+     */
     public List<Motorhome> fetchMotorhomesBrandAndModel(String brandAndModel, LocalDate startDate, LocalDate endDate) {
         List<Motorhome> motorhomesInService = fetchIntervalMotorhomes(startDate, endDate);
         List<Motorhome> sortedMotorhomes = new ArrayList<>();
