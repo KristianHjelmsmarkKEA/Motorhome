@@ -5,28 +5,18 @@
     <title>Add Customer</title>
     <link rel="stylesheet" type="text/css" href="../header.css">
     <link rel="stylesheet" type="text/css" href="../tableLayout.css">
-    <style>
-        .center-card {
-            box-sizing: border-box;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-            padding: 16px;
-            background-color: #C5DEDD;
-            width: 65%;
-            position:relative;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 50px;
-            text-align:center;
-            min-height:700px;
-            font-size:24px;
-        }
-        body {
-            background-color: #F0EFEB;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../card.css">
 </head>
 <body>
-
+<div class="header-box">
+    <a href="/"><img class="logo" alt="Nordi Motorhome Rental" src="https://i.imgur.com/pV8Doh3.png"/></a>
+    <div class="header-menu">
+        <a href="../manageCustomers">Kunder</a>
+        <a href="../manageMotorhomes">Autocampere</a>
+        <a href="../manageContracts">Kontrakter</a>
+        <a href="../managePrices">Priser</a>
+    </div>
+</div>
 <div class="center-card">
     <h1>Opret ny kunde</h1>
     <form action="/addCustomer" method="post">
