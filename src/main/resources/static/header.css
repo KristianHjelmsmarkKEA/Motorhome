@@ -1,36 +1,46 @@
 body {
-    background-color: #F0EFEB;
+    background-color: #F9EDDC;
 }
 
 .header-box {
     overflow: hidden;
-    background-color: #C5DEDD;
+    background-color: #FFC759;
     padding: 20px 10px;
+
 }
 
 .header-box a {
     float: left;
-    color: black;
+    color: #726659;
     text-align: center;
     padding: 12px;
     text-decoration: none;
-    font-size: 26px;
-    line-height: 50px;
-    border-radius: 4px;
-}
-
-.header-box a.logo {
-    font-size: 34px;
+    font-size: 36px;
+    line-height: 60px;
+    border-radius: 12px;
+    font-family: Candara, serif;
     font-weight: bold;
+}
+.header-box img {
+    float: left;
+    color: #726659;
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+    border-radius: 12px;
+    width:256px;
+    height:64px;
 }
 
 .header-box a:hover {
-    background-color: #DBE7E4;
-    color: black;
+    background-color: #FFB41F;
+    color: #be1e2d;
+    transition: 0.2s;
 }
 
 .header-menu {
     padding-left: 50px;
     float: left;
 }
+
 

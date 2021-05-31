@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="header-box">
-    <a href="/" class="logo">Nordic Motorhome Rentals</a>
+    <a href="/"><img class="logo" alt="Nordi Motorhome Rental" src="https://i.imgur.com/pV8Doh3.png"/></a>
     <div class="header-menu">
         <a href="../manageCustomers">Kunder</a>
         <a href="../manageMotorhomes">Autocampere</a>
@@ -20,7 +20,8 @@
 
 
 <div class="top-card">
-    <h2>Current Contract</h2>
+    <h2>Estimeret Pris:</h2>
+    <img style="float:right; width:500px; height:86px; margin-right:300px;" src="https://i.imgur.com/eP44bMo.png">
     <span><b>Start date:</b><span th:text="${initialContract.startDate}+' - '"/></span>
     <span><b>End Date:</b><span th:text="${initialContract.endDate}"/></span>><br>
     <span><b>Start Odometer:</b><span th:text="' '+${initialContract.startOdometer} + ' km.'"/></span><br>
@@ -73,7 +74,7 @@
             <input name="foreign_MotorhomeID" type="hidden" th:value="${initialContract.foreign_MotorhomeID}">
             <input name="foreign_OrderID" type="hidden" th:value="${initialContract.foreign_OrderID}">
 
-        <input class="btn-add" type="submit" value="Tilføj ny kunde">
+        <button class="btn-add" type="submit" >Tilføj ny kunde</button>
     </form>
 </div>
 
@@ -110,7 +111,7 @@
                 <input name="totalPrice" type="hidden" th:value="${initialContract.totalPrice}">
                 <input name="foreign_MotorhomeID" type="hidden" th:value="${initialContract.foreign_MotorhomeID}">
                 <input name="foreign_OrderID" type="hidden" th:value="${initialContract.foreign_OrderID}">
-                <input type="submit">
+                <button class="btn-update" type="submit">Vælg</button>
             </form>
             </td>
         </tr>

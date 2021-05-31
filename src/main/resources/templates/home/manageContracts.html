@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="header-box">
-    <a href="/" class="logo">Nordic Motorhome Rentals</a>
+    <a href="/"><img class="logo" alt="Nordi Motorhome Rental" src="https://i.imgur.com/pV8Doh3.png"/></a>
     <div class="header-menu">
         <a href="../manageCustomers">Kunder</a>
         <a href="../manageMotorhomes">Autocampere</a>
@@ -31,6 +31,7 @@
         <th>Motorhome ID</th>
         <th>Customer ID</th>
         <th>Order ID</th>
+        <th>Receipt</th>
     </tr>
     </thead>
     <tbody>
@@ -48,7 +49,7 @@
         <td th:text="${contracts.foreign_OrderID}"/>
         <td>
             <a th:href="@{'/receiptPage/'+${contracts.contractID}}">
-                <button class="btn-update" id="btn-update">Show Receipt</button>
+                <button class="btn-receipt">Show Receipt</button>
             </a>
         </td>
     </tr>

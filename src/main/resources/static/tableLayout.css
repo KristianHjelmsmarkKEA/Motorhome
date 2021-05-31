@@ -6,7 +6,9 @@
     padding: 12px 20px 12px 20px;
     border: 1px solid #ddd;
     width: 40%;
-    margin: 20px 30%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30%;
 
 }
 
@@ -14,15 +16,17 @@
 
 #receipt-table {
     border-collapse: collapse;
-    width: 60%;
+    width: 65%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 60px;
+    font-size: 18px;
+    font-family: Optima, serif;
 }
 
 #receipt-table th{
     border: 1px solid black;
-    background-color: #C5DEDD;
+    background-color: #FFC759;
     height: 50px;
     color: black;
 }
@@ -34,27 +38,111 @@
 }
 
 #receipt-table tr:nth-child(even){
-    background-color: #C5DEDD;
+    background-color: #FFE4AD;
 }
 
 #receipt-table tr:nth-child(odd){
-    background-color: #DBE7E4;
+    background-color: #FFD685;
 }
 
-.btn-update{
+.btn-update {
+    background-color:#FFE4AD;
+    border:0;
+    float:right;
+    width: 100%;
+    height: 100%;
+    opacity: 75%;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: Candara, serif;
+    font-weight: bold
+}
 
+.btn-receipt {
+    background-color:#FFE4AD;
+    border:none;
+    float:right;
+    width: 100%;
+    height: 100%;
+    opacity: 75%;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: Candara, serif;
+    font-weight: bold
 }
 
 .btn-add {
-
+    background-color:#FFE4AD;
+    border:none;
+    border-radius: 12px;
+    float:right;
+    width: 230px;
+    height: 45px;
+    margin-right:280px;
+    margin-top: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: Candara, serif;
+    font-weight: bold
 }
 
 .btn-finalize {
-
+    background-color:#FFE4AD;
+    border:0;
+    float:left;
+    width: 50%;
+    height: 100%;
+    opacity: 75%;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: Candara, serif;
+    font-weight: bold
 }
-.btn-create {
-
+.btn-cancel {
+    background-color:#FFD685;
+    border:0;
+    float:right;
+    width: 50%;
+    height: 100%;
+    opacity: 75%;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: Candara, serif;
+    font-weight: bold
 }
+
+.btn-add:hover {
+    background-color: #FFB41F;
+    color: #be1e2d;
+    transition: 0.2s;
+}
+
+.btn-update:hover {
+    background-color: #FFB41F;
+    color: #be1e2d;
+    transition: 0.05s;
+    opacity:100%;
+}
+
+.btn-receipt:hover {
+    background-color: #FFB41F;
+    color: #be1e2d;
+    transition: 0.5s;
+    opacity:100%;
+}
+.btn-finalize:hover {
+    background-color: #FFB41F;
+    color: #be1e2d;
+    transition: 0.5s;
+    opacity:100%;
+}
+.btn-cancel:hover {
+    background-color: #FFB41F;
+    color: #be1e2d;
+    transition: 0.5s;
+    opacity:100%;
+}
+
 
 .switch {
     position: relative;

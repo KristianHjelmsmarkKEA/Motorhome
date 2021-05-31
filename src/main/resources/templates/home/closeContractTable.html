@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="header-box">
-    <a href="/" class="logo">Nordic Motorhome Rentals</a>
+    <a href="/"><img class="logo" alt="Nordi Motorhome Rental" src="https://i.imgur.com/pV8Doh3.png"/></a>
     <div class="header-menu">
         <a href="../manageCustomers">Kunder</a>
         <a href="../manageMotorhomes">Autocampere</a>
@@ -48,7 +48,7 @@
                 <button class="btn-finalize" >Færdiggør kontrakt</button>
             </a>
             <a th:href="@{'/cancelContract/'+${contracts.contractID}}">
-                <button class="btn-finalize" >Annuller kontrakt</button>
+                <button class="btn-cancel" >Annuller kontrakt</button>
             </a>
         </td>
     </tr>

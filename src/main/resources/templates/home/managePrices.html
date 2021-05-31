@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="header-box">
-    <a href="/" class="logo">Nordic Motorhome Rentals</a>
+    <a href="/"><img class="logo" alt="Nordi Motorhome Rental" src="https://i.imgur.com/pV8Doh3.png"/></a>
     <div class="header-menu">
         <a href="../manageCustomers">Kunder</a>
         <a href="../manageMotorhomes">Autocampere</a>
@@ -17,10 +17,10 @@
     </div>
 </div>
 
+<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for: Item Name or Category">
 <a href="/addItem">
-    <button class="btn-add" id="btn-add">Add new item to fees</button>
+    <button class="btn-add">Add new item to fees</button>
 </a>
-
 <table id="receipt-table">
     <thead>
     <tr>
@@ -55,5 +55,29 @@
     </tbody>
 </table>
 
+<!--search funktion, filtrer tabel ud fra user-input-->
+<!--Input er brugerens input, filter tjekker textContent, og fjerner row hvis i input ikke passer med søgning-->
+<!--td, td1 osv. Er de columns man kan søge på, hvor [i] er column nummerering-->
+<script>
+    function userSearch() {
+        var input, filter, table, tr, td, td1,  i;
+        input = document.getElementById("user-input");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("receipt-table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {   <!--tjekker hver td og om de skal kunne filtreres ud fra -->
+            td = tr[i].getElementsByTagName("td")[1];
+            td1 = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                if ( (td.textContent.toUpperCase().indexOf(filter) > -1) ||
+                    (td1.textContent.toUpperCase().indexOf(filter) > -1)) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>
