@@ -16,39 +16,35 @@ public class CustomerRepo {
     JdbcTemplate template;
 
 
-    public void addCountry(Customer customer){
-        String sql = "INSERT INTO country (country) VALUES (?)";
-        template.update(sql, customer.getCountry());
-    }
-
-    public void addZipcode(Customer customer) {
-        String sql = "INSERT INTO zipcodes (zipcode, city, foreign_countryid) VALUES (?, ?, (select countryid from country where countryid = (select max(countryid) from country)))";
-        template.update(sql, customer.getZipcode(), customer.getCity());
-    }
-
-    public void addAddress(Customer customer) {
-        String sql = " INSERT INTO address (address, foreign_zipcodeid) VALUES (?, (select zipcodeid from zipcodes where zipcodeid = (select max(zipcodeid) from zipcodes)))";
-        template.update(sql, customer.getAddress());
-    }
-
-    public void addCustomer(Customer customer) {
-        String sql = "INSERT INTO customers (first_name, last_name, phone_number, email, driver_license, driver_since_date, foreign_addressid) VALUES (?, ?, ?, ?, ?, ?, (select addressid from address where addressid = (select max(addressid) from address)))";
-        template.update(sql, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getDriverLicense(), customer.getDriverSinceDate());
-    }
-
+    /*
+    Opretter en ny customer, med alle tilhørende informationer i contry, zipcode og adresse tabellerne.
+     */
     public int addCustomerAddressZipcodeCountry(Customer customer){
-        addCountry(customer);
-        addZipcode(customer);
-        addAddress(customer);
-        addCustomer(customer);
+        String sql = "INSERT INTO country (country) VALUES (?)";
+        String sql1 = "INSERT INTO zipcodes (zipcode, city, foreign_countryid) VALUES (?, ?, (select countryid from country where countryid = (select max(countryid) from country)))";
+        String sql2 = " INSERT INTO address (address, foreign_zipcodeid) VALUES (?, (select zipcodeid from zipcodes where zipcodeid = (select max(zipcodeid) from zipcodes)))";
+        String sql3 = "INSERT INTO customers (first_name, last_name, phone_number, email, driver_license, driver_since_date, foreign_addressid) VALUES (?, ?, ?, ?, ?, ?, (select addressid from address where addressid = (select max(addressid) from address)))";
+
+        template.update(sql, customer.getCountry());
+        template.update(sql1, customer.getZipcode(), customer.getCity());
+        template.update(sql2, customer.getAddress());
+        template.update(sql3, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getDriverLicense(), customer.getDriverSinceDate());
+
         return returnNewCustomerID();
     }
 
+    /*
+    Mapper alle customers informationer fra databasen.
+     */
     public List<Customer> fetchAll() {
         String sql = "select * from customers, address, zipcodes, country WHERE zipcodes.foreign_countryid = country.countryid and address.foreign_zipcodeid = zipcodes.zipcodeid and customers.foreign_addressid = address.addressid  ";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return template.query(sql, rowMapper);
     }
+
+    /*
+    Finder det nyeste oprettet customerID fra databasen.
+     */
     public int returnNewCustomerID(){
         String sql = "select * from motorhome.customers where customerid = (select max(customerid) from motorhome.customers);";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
@@ -56,6 +52,9 @@ public class CustomerRepo {
         return c.getCustomerID();
     }
 
+    /*
+    Mapper en specifik kundes informationer ud fra customerID
+     */
     public Customer findCustomerID(int customerID){
         String sql = "select * from customers, address, zipcodes, country WHERE zipcodes.foreign_countryid = country.countryid and address.foreign_zipcodeid = zipcodes.zipcodeid and customers.foreign_addressid = address.addressid AND customerid = ?";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
@@ -63,6 +62,9 @@ public class CustomerRepo {
         return c;
     }
 
+    /*
+    Opdatere alle en kundes informationer i databasen, hvor instansen c indeholder infromationerne.
+     */
     public Customer updateCustomer(Customer c){
         String sql = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ? Where customerid = ?";
         String sql1 = "UPDATE address SET address = ? Where addressid = ?";

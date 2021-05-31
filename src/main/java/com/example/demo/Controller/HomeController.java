@@ -81,6 +81,10 @@ public class HomeController {
         return "home/manageContracts";
     }
 
+    /*
+    Burges til, at hente infromationer på en kontrakt, kunden og produkterne, så vi kan printe en specifik kontrakts kvittering,
+    som man kan hente ud fra en tabel.
+     */
     @GetMapping ("/receiptPage/{contractID}")
     public String receiptPage(@PathVariable("contractID") int contractID, Model model) {
         Contract contract = contractService.findContractByContractID(contractID);
@@ -173,10 +177,7 @@ Tilføjelse af ny vare i DB.
     public String addCustomer() { return "home/addCustomer"; }
     @PostMapping("/addCustomer")
     public String addCustomer(@ModelAttribute Customer customer) {
-        customerService.addCountry(customer);
-        customerService.addZipcode(customer);
-        customerService.addAddress(customer);
-        customerService.addCustomer(customer);
+        customerService.addCustomerAddressZipcodeCountry(customer);
         return "redirect:/manageCustomers";
     }
 }
