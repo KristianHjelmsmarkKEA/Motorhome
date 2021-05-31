@@ -51,7 +51,7 @@
         <br><label for="phoneNumber">Telefonnummer: </label>
         <input type="text" th:field="*{phoneNumber}" id="phoneNumber" placeholder="Telefonnummer"><br>
         <br><label for="email">Email: </label>
-        <input type="text" th:field="*{email}" id="email" placeholder="Email"><br>
+        <input type="email" th:field="*{email}" id="email" placeholder="Email"><br>
         <br><label for="driverLicense">Kørekortnummer: </label>
         <input type="text" th:field="*{driverLicense}" id="driverLicense" placeholder="driver License"><br>
         <br><label for="driverSinceDate">Kørekort dato: </label>
@@ -80,17 +80,17 @@
 
 
 <div class="right-card">
-    <input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for customer">
-    <table id="receipt-table">
+    <input type="text" style="margin-left:1%;" id="user-input" onkeyup="userSearch()" placeholder="Søg efter: Navn, Tlf nr eller Email">
+    <table style="width:90%;" id="receipt-table">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Phone Number</th>
+            <th>Kunde ID</th>
+            <th>Fornavn</th>
+            <th>Efternavn</th>
+            <th>Tlf. Nr.</th>
             <th>Email</th>
-            <th>Driver License</th>
-            <th>Choose</th>
+            <th>Kørekortnr.</th>
+            <th>Vælg Kunde</th>
         </tr>
         </thead>
         <tbody>

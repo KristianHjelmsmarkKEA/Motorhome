@@ -18,25 +18,25 @@
 </div>
 
 
-<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for: Customer ID, Name, Lastname, Phone number, Email">
+<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Søg efter: Kunde ID, Fornavn, Efternavn, Telefon nr. eller Email">
 <a href="/addCustomer">
     <button class="btn-add" id="btn-btn-create">Tilføj kunde</button>
 </a>
 <table id="receipt-table">
     <thead>
     <tr>
-        <th>Customer ID</th>
-        <th>Name</th>
-        <th>Lastname</th>
-        <th>Phone Number</th>
+        <th>Kunde ID</th>
+        <th>Fornavn</th>
+        <th>Efternavn</th>
+        <th>Tlf-Nummer</th>
         <th>Email</th>
-        <th>Driver License</th>
-        <th>Driver License Date</th>
-        <th>Address</th>
-        <th>Zipcode</th>
-        <th>City</th>
-        <th>Country</th>
-        <th>Update customer info</th>
+        <th>Kørekortnummer</th>
+        <th>Kørekort dato</th>
+        <th>Addresse</th>
+        <th>Postnr.</th>
+        <th>By</th>
+        <th>Land</th>
+        <th>Opdater Kunde</th>
     </tr>
     </thead>
     <tbody>
@@ -54,7 +54,7 @@
         <td th:text="${customers.country}" />
         <td>
             <a th:href="@{'/updateCustomer/'+${customers.customerID}}">
-                <button class="btn-update" id="btn-update">Opdater kunde-information</button>
+                <button class="btn-update" id="btn-update">Rediger Kunde</button>
             </a>
         </td>
     </tr>

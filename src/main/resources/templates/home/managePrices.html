@@ -17,18 +17,18 @@
     </div>
 </div>
 
-<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Search for: Item Name or Category">
+<input type="text" id="user-input" onkeyup="userSearch()" placeholder="Søg efter: Vare navn eller Kategori">
 <a href="/addItem">
-    <button class="btn-add">Add new item to fees</button>
+    <button class="btn-add">Tilføj ny vare</button>
 </a>
 <table id="receipt-table">
     <thead>
     <tr>
-        <th>Item-Fee ID</th>
-        <th>Item Name</th>
-        <th>Item Category</th>
-        <th>Price</th>
-        <th>Update Item-information</th>
+        <th>Vare ID</th>
+        <th>Vare navn</th>
+        <th>Kategori</th>
+        <th>Pris</th>
+        <th>Opdater Vare</th>
     </tr>
     </thead>
     <tbody>
@@ -45,9 +45,10 @@
         <td th:text="${prices.itemCategory}"/>
         <td th:text="${prices.itemPrice} + '€'" ></td>
         <td>
+            <span th:if="${prices.foreign_categoryID == 2}" th:text="'Kan ikke redigeres'"/>
             <span th:unless="${prices.foreign_categoryID == 2}">
                 <a th:href="@{'/updateItem/'+${prices.feeID}}">
-                <button class="btn-update" id="btn-update">Opdater vare information</button>
+                <button class="btn-update" id="btn-update">Rediger Vare</button>
                 </a>
             </span>
         </td>
