@@ -28,6 +28,8 @@ public class ContractController {
 
     @PostMapping("/chooseMotorhome")
     public String reservations(@ModelAttribute Contract contract, Model model) {
+        if (contract.getStartDate().isAfter(contract.getEndDate()))
+            return "redirect:/";
         List<Motorhome> availableMotorhomes = motorhomeService.fetchIntervalMotorhomes(contract.getStartDate(), contract.getEndDate());
         model.addAttribute("contractDate", contract);
         model.addAttribute("availableMotorhomes", motorhomeService.removeDuplicateBrands(availableMotorhomes));

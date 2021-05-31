@@ -158,6 +158,7 @@ public class ContractDetailsRepo {
     Udregner den totale pris for hele udlejningen, bruges når vi færdiggører en kontrakt med afsluttende informationer,
     og hvis der er tilføjet flere produkter eller gebyrer.
      */
+
     public double calculateTotalPriceFinalized(List<ContractDetails> fuelAndRepairDetails, double estimatedPrice) {
         double totalPrice = estimatedPrice;
         for (ContractDetails contractDetails : fuelAndRepairDetails) {
