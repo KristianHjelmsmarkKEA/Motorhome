@@ -8,7 +8,8 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
+    margin-bottom: 50px;
     text-align:center;
-    min-height:2000px;
+    min-height:auto;
     font-size:24px;
 }
