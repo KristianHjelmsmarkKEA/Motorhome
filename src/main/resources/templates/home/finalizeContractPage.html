@@ -37,7 +37,7 @@
                         </div>
                         <div th:if="${item.foreign_categoryID == 2}">
                             <div th:if="${contractDetails.foreign_feeID == item.feeID}">
-                                <span th:text="'Autocamper pris  pr. dag: '+${contractDetails.calculatedPrice} + '€'"/>
+                                <span th:text="'Autocamper pris  pr. dag: '+${contractDetails.calculatedPrice} + '€ ('+${item.itemName}+')'"/>
                             </div>
                         </div>
                     </div>
