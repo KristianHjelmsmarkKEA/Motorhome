@@ -26,13 +26,14 @@ public class ContractController {
 
     final int AVG_MAX_KM_PR_DAY = 400;
 
-    /* Author Gustav
-    *
+    /* Author Gustav & Ludvig
+    * Denne metode giver en liste af tilgængelige autocampers.
+    * Metoden henter et contract objektet der kun indeholder en start dato og slut dato som
+    * brugeren har indtastet. Der retuneres en List af tilgængelige Motorhome objekter der ikke er i brug af kontrakter
+    * via. fetchIntervalMotorhome(startDate, endDate) fra MotorhomeRepo.
+    * De blever tilføjet til Springs Model som kan bruges i html koden og filtrer alle objekter med samme brand and models fra.
     */
 
-    /*Author Gustav
-
-     */
     @PostMapping("/chooseMotorhome")
     public String reservations(@ModelAttribute Contract contract, Model model) {
         if (contract.getStartDate().isAfter(contract.getEndDate()))
@@ -43,8 +44,12 @@ public class ContractController {
         return "home/chooseMotorhome";
     }
 
-    /*Author Gustav
-
+    /* Author Gustav & Ludvig
+     * Denne metode bruges til at lave lister af mulige ekstra ting brugeren vil have med på orderen.
+     * extraSelection henter den brandAndModel fra URL'en som brugeren klikker på i gennem @PathVariable.
+     * Der bliver der oprettet en liste af alle de Motorhome objekter der har det valgte brand.
+     * Metoden fetcher også fra 3 forskellige pris kategorier, 1(accessories), 5(transfercost) & 2(seasons)
+     * der tilføjes til Springs Framework.
      */
     @GetMapping("extraSelection/{brandAndModel}")
     public String extraSelection(@PathVariable("brandAndModel") String brandAndModel,@ModelAttribute ContractDetails contractDetails, Contract contractDates, Model model) {
@@ -63,8 +68,13 @@ public class ContractController {
         return "home/extraSelection";
     }
 
-    /*Author Gustav
-
+    /* Author Gustav
+     * Denne metode bruges til at vise alle de nuvalgte attributter brugeren har fortaget sig samt udregning af en nuværende pris for Motorhomet
+     * createContract bruger @RequestParam(amount) og (foreign_feeID) til at extracte form parametrene String amount og String foreign_feeID.
+     * Der bruges metoden addListToContractDetails(List<ContractDetails>) til at tilføje alle de kontrakt detaljer brugeren har intastet til databasen.
+     * Der udregnes også hvor mange dage der er mellem start og slut datoen via javas ChronoUnit interface.
+     * Her bliver der også oprettet et kontrakt objekt, men uden et kunde_id.
+     * Til sidste bliver det hele tilføjet til Spris Model og kan vises på næste html side hvor kunden skal vælges/oprettes.
      */
     @PostMapping("/createContract")
     public String createContract(@RequestParam("amount") String amount, @RequestParam("foreign_feeID") String foreign_feeID,
@@ -99,8 +109,11 @@ public class ContractController {
         return "home/createContract";
     }
 
-    /*Author Gustav
-
+    /* Author Gustav
+     * Denne metode bruges til at vælge eller oprette en ny kunde alt efter brugerens valg og et if statement.
+     * Hvis der er oprettet en ny kunde bliver informationen tilføjet til databasen.
+     * Der efter sættes customerID til contract objektet. Her bliver kontrakten også gemt i databasen, via metoden addContract(Contract).
+     * Spring Modellen tilføjer alt for at udprinte html filen af en kvittering.
      */
     @PostMapping("/newCustomerToContract")
     public String newCustomerToContractPost(@ModelAttribute Customer customer,  @ModelAttribute("initialContract") Contract initialContract, Model model) {
@@ -133,12 +146,11 @@ public class ContractController {
     }
 
     /*Author Gustav
-
+     * Metoden her viser en liste af alle kontrakter der ikke er færdiggjort eller annulleret på en html side.
      */
     @GetMapping("/closeContractTable")
     public String closeContractTable(Model model) {
-        List<Contract> ongoingContractsList = contractService.fetchOngoingContracts();
-        model.addAttribute("ongoingContracts", ongoingContractsList);
+        model.addAttribute("ongoingContracts", contractService.fetchOngoingContracts());
 
         return "home/closeContractTable";
     }
@@ -212,50 +224,57 @@ public class ContractController {
         return "home/contractReceipt";
     }
 
-    /*Author Gustav
-
+    /*Author Gustav & Frederik
+     * Metoden minder meget om finalizeContract.
+     * Der oprettes en instans af contractCancellation, metodekaldet findOngoingContractID() bruger sql og rowMapper til,
+     * Her bliver der i stedet for hentet en liste af cancelFees ved hjælp af fetchItemsFromCategoryNum(int) - 4(cancellation).
      */
     @GetMapping("/cancelContract/{contractID}")
     public String cancelContract(@PathVariable("contractID") int contractID, @ModelAttribute Contract contract, Model model, @ModelAttribute ContractDetails contractDetails) {
-        Contract contractFinalization = contractService.findContractByContractID(contractID);
-        Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractFinalization.getForeign_MotorhomeID());
-        List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID());
+        Contract contractCancellation = contractService.findContractByContractID(contractID);
+        Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractCancellation.getForeign_MotorhomeID());
+        List<ContractDetails> currentDetails = contractDetailsService.fetchAllFromOrderID(contractCancellation.getForeign_OrderID());
         List<Price> cancelFees = priceService.fetchItemsFromCategoryNum(4);
         model.addAttribute("cancelFees", cancelFees);
         model.addAttribute("details", currentDetails);
         model.addAttribute("prices", priceService.fetchAll());
-        model.addAttribute("contracts", contractFinalization);
+        model.addAttribute("contracts", contractCancellation);
         model.addAttribute("selectedMotorhome", selectedMotorhome);
 
         return "home/cancelContractPage";
     }
 
     /*Author Gustav
-
+     * Denne metode udregner en total pris for den valgte cancelFee og retunerer html filen der udprinter en kvittering.
+     * Der bruges metoden calculateTotalPriceCancelled(double itemPrice, double totalPrice).
+     * Den nye cancellation bruges til at oprette en ContractDetail object der indeholder cancellation detaljer til kontrakten.
+     * Tilsidst bliver cancelDetails tilføjete til databasen og Contrakten bliver opdateret til databasen med den nye totale pris.
+     * Metoden saveContractInformation(contractCancellation, false) har boolean værdien false for at tilføje som en cancelled kontrakt i stedet for fianalized.
+     * Alt bliver tilføjet til Spring Frameworket via Model så det kan printes som en kvittering på næste html side.
      */
     @PostMapping("/cancelContractPage")
     public String cancelContractPage(@ModelAttribute Contract contract, Model model, Price selectedCancelFee,
                                      @ModelAttribute("foreign_MotorhomeID") Motorhome motorhome) {
-        Contract contractFinalization = contractService.findContractByContractID(contract.getContractID());
+        Contract contractCancellation = contractService.findContractByContractID(contract.getContractID());
         Price cancelFee = priceService.findFeeID(selectedCancelFee.getFeeID());
-        double cancelTotalPrice = contractDetailsService.calculateTotalPriceCancelled(cancelFee.getItemPrice(), contractFinalization.getTotalPrice());
-        ContractDetails cancelDetails = new ContractDetails(1, cancelTotalPrice, cancelFee.getFeeID(), contractFinalization.getForeign_OrderID());
+        double cancelTotalPrice = contractDetailsService.calculateTotalPriceCancelled(cancelFee.getItemPrice(), contractCancellation.getTotalPrice());
+        ContractDetails cancelDetails = new ContractDetails(1, cancelTotalPrice, cancelFee.getFeeID(), contractCancellation.getForeign_OrderID());
         contractDetailsService.addContractDetails(cancelDetails);
-        contractFinalization.setTotalPrice(cancelTotalPrice);
-        contractService.saveContractInformation(contractFinalization, false);
+        contractCancellation.setTotalPrice(cancelTotalPrice);
+        contractService.saveContractInformation(contractCancellation, false);
 
-        Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractFinalization.getForeign_MotorhomeID());
-        Customer chosenCustomer = customerService.findCustomerID(contractFinalization.getForeign_CustomerID());
-        long daysBetween = ChronoUnit.DAYS.between(contractFinalization.getStartDate(), contractFinalization.getEndDate());
+        Motorhome selectedMotorhome = motorhomeService.findMotorhomeID(contractCancellation.getForeign_MotorhomeID());
+        Customer chosenCustomer = customerService.findCustomerID(contractCancellation.getForeign_CustomerID());
+        long daysBetween = ChronoUnit.DAYS.between(contractCancellation.getStartDate(), contractCancellation.getEndDate());
 
-        ContractDetails seasonDetail = contractDetailsService.fetchObjectCategoryFromOrderID(2, contractFinalization.getForeign_OrderID());
+        ContractDetails seasonDetail = contractDetailsService.fetchObjectCategoryFromOrderID(2, contractCancellation.getForeign_OrderID());
 
         model.addAttribute("seasonDetail", seasonDetail);
         model.addAttribute("prices", priceService.removeCategoryPrice(priceService.fetchAll(),2));
         model.addAttribute("selectedMotorhome", selectedMotorhome);
         model.addAttribute("chosenCustomer", chosenCustomer);
-        model.addAttribute("mainContract", contractFinalization);
-        model.addAttribute("details", contractDetailsService.fetchAllFromOrderID(contractFinalization.getForeign_OrderID()));
+        model.addAttribute("mainContract", contractCancellation);
+        model.addAttribute("details", contractDetailsService.fetchAllFromOrderID(contractCancellation.getForeign_OrderID()));
         model.addAttribute("daysBetween", (int) daysBetween);
         model.addAttribute("motorhomeTotalPrice", ((int) daysBetween * seasonDetail.getCalculatedPrice()));
 
