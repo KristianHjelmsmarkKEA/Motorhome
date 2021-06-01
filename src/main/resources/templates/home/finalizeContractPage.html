@@ -21,14 +21,14 @@
     <form action="/finalizeContractPage" method="post">
 
         <h2>Nuværende kontrakt informationer</h2>
-        <label for="startDate"><b>Start date:</b><span th:text="${contracts.startDate}+' - '"/></label>
+        <label for="startDate"><b>Start dato:</b><span th:text="${contracts.startDate}+' - '"/></label>
         <input name="startDate" id="startDate" type="hidden" th:value="${contracts.startDate}">
-        <label for="endDate"><b>End Date:</b><span th:text="${contracts.endDate}"/></label>
+        <label for="endDate"><b>Slut dato:</b><span th:text="${contracts.endDate}"/></label>
         <input name="endDate" id="endDate" type="hidden" th:value="${contracts.endDate}"><br>
-        <label><b>Start Odometer:</b><span th:text="' '+${contracts.startOdometer} + ' km.'"/></label>
-        <span th:text="'Motorhome: '+${selectedMotorhome.brandAndModel}"/><br>
-        <span th:text="'Contracts current total price: '+${contracts.totalPrice}+'€'"></span>
-        <h1>Nuværende kontrakt vare information: </h1>
+        <label><b>Start Odometer:</b><span th:text="' '+${contracts.startOdometer} + ' km.'"/></label><br>
+        <span th:text="'Autocamper: '+${selectedMotorhome.brandAndModel}"/><br>
+        <span th:text="'Kontraktens nuværende pris: '+${contracts.totalPrice}+'€'"></span>
+        <h1>Nuværende kontrakt vare informationer </h1>
             <div th:each="contractDetails : ${details}">
                 <div th:each="item : ${prices}">
                     <div th:unless="${contractDetails.amount == 0}">
@@ -42,7 +42,7 @@
         <h1>Tilføj reparations gebyr</h1>
         <ul th:each="price, i : ${repair}">
             <span th:text="'Navn: '"/><b th:text="${price.itemName}"/><br/>
-            <span th:text="'Price: '"/><b th:text="${price.itemPrice}"/><br/>
+            <span th:text="'Pris: '"/><b th:text="${price.itemPrice}"/><br/>
             <input type="number" name="amount" min="0" value="0" required/>
             <input type="hidden" name="foreign_feeID" th:value="${price.feeID}"/>
         </ul>
@@ -50,7 +50,7 @@
         <h1>Vælg Fuel extras</h1>
         <ul th:each="price, i : ${fuel}">
             <span th:text="'Navn: '"/><b th:text="${price.itemName}"/><br/>
-            <span th:text="'Price: '"/><b th:text="${price.itemPrice}"/><br/>
+            <span th:text="'Pris: '"/><b th:text="${price.itemPrice}"/><br/>
             <div th:if="${price.feeID == 1}">
                 <input type="number" name="amount" value="0"  min="0" max="1"/>
                 <input type="hidden" name="foreign_feeID" th:value="${price.feeID}"/>
@@ -62,7 +62,7 @@
         </ul>
         <label for="startOdometer1"><b>Start Odometer:</b></label>
         <input type="number" id="startOdometer1" name="startOdometer" th:value="${contracts.startOdometer}"> <br>
-        <label for="endOdometer"><b>end Odometer:</b></label>
+        <label for="endOdometer"><b>Slut Odometer:</b></label>
         <input type="number" id="endOdometer" name="endOdometer" th:value="${contracts.endOdometer}">
         <input type="hidden" name="contractID" th:value="${contracts.contractID}">
         <input type="hidden" name="totalPrice" th:value="${contracts.totalPrice}">

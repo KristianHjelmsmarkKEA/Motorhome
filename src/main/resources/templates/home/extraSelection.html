@@ -36,7 +36,7 @@
     </select>
 
     <ul th:each="price, i : ${accessories}">
-        <span th:text="${price.feeID}"/><br/>
+        <br/>
         <span th:text="'Navn: '"/><b th:text="${price.itemName}"/><br/>
         <span th:text="'Price: '"/><b th:text="${price.itemPrice}+'€'"/><br/>
         <input type="number" name="amount" min="0" max="10" value="0" required/>
@@ -45,7 +45,7 @@
 
     <h1>Indtast kilometer til pick-up og drop-off points </h1>
     <ul th:each="price, i : ${transferCost}">
-        <span th:text="${price.feeID}"/><br/>
+        <br/>
         <span th:text="''"/><b th:text="${price.itemName}"/><br/>
         <span th:text="'Price: '"/><b th:text="${price.itemPrice}+'€'"/><br/>
         <input type="number" name="amount" min="0" max="1000" value="0" required>

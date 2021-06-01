@@ -20,9 +20,9 @@
         <input name="endDate" id="endDate" type="hidden" th:value="${contracts.endDate}"><br>
         <label for="startOdometer"><b>Start Odometer:</b><span th:text="' '+${contracts.startOdometer} + ' km.'"/></label>
         <input name="startOdometer" id="startOdometer" type="hidden" th:value="${contracts.startOdometer}"><br>
-        <span th:text="'Motorhome: '+${selectedMotorhome.brandAndModel}"/><br>
-        <span th:text="'Contracts current total price: '+${contracts.totalPrice}+'€'"></span>
-        <h1>Current contract item fees: </h1>
+        <span th:text="'Autocamper: '+${selectedMotorhome.brandAndModel}"/><br>
+        <span th:text="'Kontraktens nuværende pris: '+${contracts.totalPrice}+'€'"></span>
+        <h1>Nuværende kontrakt vare informationer </h1>
         <div th:each="contractDetails : ${details}">
             <div th:each="item : ${prices}">
                 <div th:unless="${contractDetails.amount == 0}">

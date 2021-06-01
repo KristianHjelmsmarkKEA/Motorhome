@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Update Customer Information</title>
     <link rel="stylesheet" type="text/css" href="../header.css">
-    <link rel="stylesheet" type="text/css" href="../tableLayout.css">
+    <link rel="stylesheet" type="text/css" href="../updateAdd.css">
     <link rel="stylesheet" type="text/css" href="../card.css">
 </head>
 <body>
@@ -30,15 +30,15 @@
         <br><br> <label>Land: </label>
         <input type="text" name="country" th:value="${customers.country}" placeholder="${customers.country}">
 
-    <input type="hidden" name="customerID" th:value="${customers.customerID}">
-    <input type="hidden" name="addressID" th:value="${customers.addressID}">
-    <input type="hidden" name="zipcodeID" th:value="${customers.zipcodeID}">
-    <input type="hidden" name="countryID" th:value="${customers.countryID}">
+        <input type="hidden" name="customerID" th:value="${customers.customerID}">
+        <input type="hidden" name="addressID" th:value="${customers.addressID}">
+        <input type="hidden" name="zipcodeID" th:value="${customers.zipcodeID}">
+        <input type="hidden" name="countryID" th:value="${customers.countryID}">
 
-    <br><br>
-    <input type="submit" value="Gem ændringer">
-</form>
-
+        <br><br>
+        <input class="btn" id="btn" type="submit" value="Opdater kunde information">
+    </form>
 </div>
+
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Add item</title>
     <link rel="stylesheet" type="text/css" href="header.css">
-    <link rel="stylesheet" type="text/css" href="tableLayout.css">
+    <link rel="stylesheet" type="text/css" href="../updateAdd.css">
     <link rel="stylesheet" type="text/css" href="../card.css">
 </head>
 <body>
@@ -21,9 +21,9 @@
 <h1>Tilføj ny vare</h1>
     <form action="/addItem" method="post">
         <label>Indtast vare navn:</label>
-        <input type="text" name="itemName" placeholder="Item Name" required>
+        <input type="text" name="itemName" placeholder="Vare navn" required>
         <br><br><label>Indtast vare pris (€):</label>
-        <input type="number" name="itemPrice" placeholder="Item Price" required>
+        <input type="number" name="itemPrice" placeholder="Vare pris" required>
         <br><br><label for="selection-box">Vælg vare kategori:</label>
             <select name="foreign_categoryID" id="selection-box">
                 <option value="1">Accessories</option>
@@ -33,7 +33,7 @@
                 <option value="6">Fuel</option>
                 <option value="7">Others</option>
             </select><br><br>
-        <input class="btn-add" id="btn-add" type="submit" value="Tilføj ny vare">
+        <input class="btn" id="btn" type="submit" value="Tilføj ny vare">
     </form>
 </div>
 </body>

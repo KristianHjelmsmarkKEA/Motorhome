@@ -129,6 +129,7 @@ public class HomeController {
         motorhomeService.updateMotorhome(motorhome);
         return "redirect:/manageMotorhomes";
     }
+
     /*Author
     Tilføjelse af ny autocamper i DB.
     .addMotorhome() opdatere DB med indtastet information fra hjemmeside index/addMotorhome.
@@ -141,7 +142,9 @@ public class HomeController {
         return "redirect:/manageMotorhomes";
     }
 
-    //Tabel-oversigt over alle kunder og deres informationer
+    /*
+    Tabel-oversigt over alle kunder og deres informationer
+     */
     @GetMapping ("/manageCustomers")
     public String manageCustomers(Model model) {
         model.addAttribute("customers", customerService.fetchAll());
@@ -170,9 +173,9 @@ public class HomeController {
     }
 
     /*Author
-Tilføjelse af ny vare i DB.
-.addPrice opdatere DB med indtastet information fra hjemmeside index/addItem.
-*/
+    Tilføjelse af ny vare i DB.
+    .addPrice opdatere DB med indtastet information fra hjemmeside index/addItem.
+    */
     @GetMapping("/addCustomer")
     public String addCustomer() { return "home/addCustomer"; }
     @PostMapping("/addCustomer")
