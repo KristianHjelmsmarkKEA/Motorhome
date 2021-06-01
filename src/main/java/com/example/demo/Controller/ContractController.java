@@ -26,6 +26,10 @@ public class ContractController {
 
     final int AVG_MAX_KM_PR_DAY = 400;
 
+    /* Author Gustav
+    *
+    */
+
     @PostMapping("/chooseMotorhome")
     public String reservations(@ModelAttribute Contract contract, Model model) {
         if (contract.getStartDate().isAfter(contract.getEndDate()))

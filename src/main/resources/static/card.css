@@ -1,15 +1,13 @@
 .center-card {
     box-sizing: border-box;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-    padding: 16px;
     background-color: #FFC759;
     width: 65%;
     position:relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    margin-bottom: auto;
-    text-align:center;
+    margin: 50px auto auto;
+    padding: 16px 16px 16px 100px;
     min-height:500px;
     font-size:24px;
+    text-align: left;
+
 }

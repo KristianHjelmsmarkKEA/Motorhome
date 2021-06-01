@@ -28,7 +28,7 @@
         <label><b>Start Odometer:</b><span th:text="' '+${contracts.startOdometer} + ' km.'"/></label><br>
         <span th:text="'Autocamper: '+${selectedMotorhome.brandAndModel}"/><br>
         <span th:text="'Kontraktens nuværende pris: '+${contracts.totalPrice}+'€'"></span>
-        <h1>Nuværende kontrakt vare informationer </h1>
+        <h2>Nuværende kontrakt vare informationer </h2>
             <div th:each="contractDetails : ${details}">
                 <div th:each="item : ${prices}">
                     <div th:unless="${contractDetails.amount == 0}">
@@ -44,17 +44,17 @@
                 </div>
             </div>
 
-        <h1>Tilføj reparations gebyr</h1>
+        <h2>Tilføj reparations gebyr</h2>
         <ul th:each="price, i : ${repair}">
-            <span th:text="'Navn: '"/><b th:text="${price.itemName}"/><br/>
+            <b th:text="${price.itemName}"/><br/>
             <span th:text="'Pris: '"/><b th:text="${price.itemPrice}"/><br/>
             <input type="number" name="amount" min="0" value="0" required/>
             <input type="hidden" name="foreign_feeID" th:value="${price.feeID}"/>
         </ul>
 
-        <h1>Vælg Fuel extras</h1>
+        <h2>Vælg brændstof</h2>
         <ul th:each="price, i : ${fuel}">
-            <span th:text="'Navn: '"/><b th:text="${price.itemName}"/><br/>
+            <b th:text="${price.itemName}"/><br/>
             <span th:text="'Pris: '"/><b th:text="${price.itemPrice}"/><br/>
             <div th:if="${price.feeID == 1}">
                 <input type="number" name="amount" value="0"  min="0" max="1"/>
