@@ -75,7 +75,7 @@
                     <tr th:if="${contractDetails.foreign_feeID == item.feeID}">
                         <td th:text="${contractDetails.amount}"/>
                         <td th:text="'Cancellation: '+${item.itemName}"/>
-                        <td th:text="'total price * '+${item.itemPrice}"/>
+                        <td th:text="'Ny Total pris ('+${item.itemPrice}+')'"/>
                         <td th:text="${contractDetails.calculatedPrice} + '€'"/>
                     </tr>
                     </div>

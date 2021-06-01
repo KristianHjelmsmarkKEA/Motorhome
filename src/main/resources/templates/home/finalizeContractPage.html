@@ -32,12 +32,17 @@
             <div th:each="contractDetails : ${details}">
                 <div th:each="item : ${prices}">
                     <div th:unless="${contractDetails.amount == 0}">
-                        <div th:if="${contractDetails.foreign_feeID == item.feeID}">
+                        <div th:if="${contractDetails.foreign_feeID == item.feeID}" th:unless="${item.foreign_categoryID == 2}">
                             <span th:text="${contractDetails.amount} + 'x ' + ${item.itemName} +  ': ' + ${contractDetails.calculatedPrice} + '€'"/>
+                        </div>
+                        <div th:if="${item.foreign_categoryID == 2}">
+                            <div th:if="${contractDetails.foreign_feeID == item.feeID}">
+                                <span th:text="'Autocamper pris  pr. dag: '+${contractDetails.calculatedPrice} + '€'"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <h1>Tilføj reparations gebyr</h1>
         <ul th:each="price, i : ${repair}">
