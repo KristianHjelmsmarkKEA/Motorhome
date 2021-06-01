@@ -21,9 +21,9 @@
 <h1>Tilføj ny vare</h1>
     <form action="/addItem" method="post">
         <label>Indtast vare navn:</label>
-        <input type="text" name="itemName" placeholder="Item Name">
+        <input type="text" name="itemName" placeholder="Item Name" required>
         <br><br><label>Indtast vare pris (€):</label>
-        <input type="text" name="itemPrice" placeholder="Item Price">
+        <input type="number" name="itemPrice" placeholder="Item Price" required>
         <br><br><label for="selection-box">Vælg vare kategori:</label>
             <select name="foreign_categoryID" id="selection-box">
                 <option value="1">Accessories</option>
