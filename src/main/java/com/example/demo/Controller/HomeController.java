@@ -136,7 +136,7 @@ public class HomeController {
         return "redirect:/manageMotorhomes";
     }
 
-    /*Author
+    /*Author Kristian
     Tilføjelse af ny autocamper i DB.
     .addMotorhome() opdatere DB med indtastet information fra hjemmeside index/addMotorhome.
     */
