@@ -190,6 +190,7 @@ public class ContractController {
     Den endelige pris bliver fundet med finalizedTotalPrice variablen og setTotalPrice(finalizedTotalPrice) opdatere DB med ny endelig pris.
     saveContractInformation() metodekaldet opdatere DB boolean værdi fra 0 til 1, så kontrakten registreres som færdig
     og med ny endelig pris. */
+
     @PostMapping("/finalizeContractPage")
     public String finalizeContractPage(@ModelAttribute Contract contract, Model model, @RequestParam("amount") String amount,
                                        @RequestParam("foreign_feeID") String foreign_feeID) {

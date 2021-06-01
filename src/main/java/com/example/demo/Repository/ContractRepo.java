@@ -75,7 +75,8 @@ public class ContractRepo {
         } else {
             cancelled = true;
         }
-        String sql = "UPDATE contracts SET start_odometer = ?, end_odometer = ?, total_price = ?, finalized_contract = ?, cancelled_contract = ? WHERE contractid = ?";
+        String sql = "UPDATE contracts SET start_odometer = ?, end_odometer = ?, total_price = ?, " +
+                "finalized_contract = ?, cancelled_contract = ? WHERE contractid = ?";
         template.update(sql, c.getStartOdometer(), c.getEndOdometer(), c.getTotalPrice(), finalized, cancelled, c.getContractID());
     }
 

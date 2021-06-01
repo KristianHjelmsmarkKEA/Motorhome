@@ -25,7 +25,9 @@ public class ContractService {
         return contractRepo.fetchOngoingContracts();
     }
 
-    public Contract findContractByContractID(int contractID) { return contractRepo.findContractByContractID(contractID); }
+    public Contract findContractByContractID(int contractID) {
+        return contractRepo.findContractByContractID(contractID);
+    }
 
     public void saveContractInformation(Contract c, boolean trueFinalFalseCancel) { contractRepo.saveContractInformation(c, trueFinalFalseCancel); }
 
