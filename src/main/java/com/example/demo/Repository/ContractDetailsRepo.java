@@ -21,7 +21,7 @@ public class ContractDetailsRepo {
     PriceService priceService;
 
 
-    /*
+    /*Author Frederik
     Henter alle informationer i contract_details, og mapper det med RowMapper.
      */
     public List<ContractDetails> fetchAll() {
@@ -30,7 +30,7 @@ public class ContractDetailsRepo {
         return template.query(sql, rowMapper);
     }
 
-    /*
+    /*Author Gustav
     Henter al information om en specifik contract_details ud fra et orderID.
     Man får derved alle tilhørende/tilvalgte produkter på en kontrakt
      */
@@ -39,7 +39,7 @@ public class ContractDetailsRepo {
         RowMapper<ContractDetails> rowMapper = new BeanPropertyRowMapper<>(ContractDetails.class);
         return template.query(sql, rowMapper, orderID);
     }
-    /*
+    /*Author Gustav
     Henter produkter i en katagori ud fra orderID og categoryID
     Bruges i fetchObjectCategoryFromOrderID();
      */
@@ -51,7 +51,7 @@ public class ContractDetailsRepo {
         return template.query(sql, rowMapper, orderID, category);
     }
 
-    /*
+    /*Author Ludvig og Frederik
     Finder det nyeste oprettet orderID
      */
     public Integer returnNewestOrderID() {
@@ -60,7 +60,7 @@ public class ContractDetailsRepo {
     }
 
 
-    /*
+    /*Author Ludvig og Frederik
     Genererer et nyt orderID i databasen.
      */
     public void generateOrderID(){
@@ -68,7 +68,7 @@ public class ContractDetailsRepo {
         template.update(sql);
     }
 
-    /*
+    /*Author Gustav
     Tilføjer en kontrakts produkt-informationer til database.
      */
     public void addContractDetails(ContractDetails cd){
@@ -76,7 +76,7 @@ public class ContractDetailsRepo {
         template.update(sql, cd.getAmount(), cd.getCalculatedPrice(), cd.getForeign_feeID(), cd.getForeign_orderID());
     }
 
-    /*
+    /*Author Gustav og Kristian
     Henter et specifikt katagori-produkt, bruges til at finde hvilken season der er valgt til kontrakten.
     */
     public ContractDetails fetchObjectCategoryFromOrderID(int category, int orderID) {
@@ -87,7 +87,7 @@ public class ContractDetailsRepo {
         return seasonDetail;
     }
 
-    /*
+    /*Author Gustav
     Tilføjer tilføjet produkter på en kontrakt, til den samlede liste, brugte når en kontrakt oprettes
     og når man skal tilføje endelige gebyrer ved færdiggørelse af en kontrakt.
      */
@@ -97,7 +97,7 @@ public class ContractDetailsRepo {
         }
     }
 
-    /*
+    /*Author Gustav
     Opretter en ny contractDetails, som indeholder produkter på en kontrakt, med antal, feeId, og pris.
      */
     public ArrayList<ContractDetails> createContractDetails(String amount, String feeID, int orderID) {
@@ -112,7 +112,7 @@ public class ContractDetailsRepo {
     }
 
 
-    /*
+    /*Author Gustav
     konvertere en String til en IntArrayList bruges til at oprette en ny contractDetails collection.
     Årsagen til det er Strings er, at vi får parametrene amount og feeID fra @RequestParam.
      */
@@ -125,7 +125,7 @@ public class ContractDetailsRepo {
         return listInt;
     }
 
-    /*
+    /*Author Gustav
     Finder prisen for hvert produkt, udfra hvor mange (amount) og hver feeID's pris per amount.
      */
     public ArrayList<Double> calculatedPriceOfFees(ArrayList<Integer> amount, ArrayList<Integer> feeID) {
@@ -142,7 +142,7 @@ public class ContractDetailsRepo {
         return calculatedPrice;
     }
 
-    /*
+    /*Author Gustav
     Bruges til at udregne den esitmeret totalPrise ved kontrakt oprettelse, udfra tilføjet produkter, autocamperens
     pris og hvilken season den udlejes i.
      */
@@ -154,11 +154,10 @@ public class ContractDetailsRepo {
         return totalPrice;
     }
 
-    /*
+    /*Author Kristian
     Udregner den totale pris for hele udlejningen, bruges når vi færdiggører en kontrakt med afsluttende informationer,
     og hvis der er tilføjet flere produkter eller gebyrer.
      */
-
     public double calculateTotalPriceFinalized(List<ContractDetails> fuelAndRepairDetails, double estimatedPrice) {
         double totalPrice = estimatedPrice;
         for (ContractDetails contractDetails : fuelAndRepairDetails) {
@@ -167,7 +166,7 @@ public class ContractDetailsRepo {
         return totalPrice;
     }
 
-    /*
+    /*Author Gustav
     Udregner den totale pris for kontrakten, hvis det er kontrakten bliver annulleret.
      */
     public double calculateTotalPriceCancelled(double priceModifier, double currentContractPrice) {

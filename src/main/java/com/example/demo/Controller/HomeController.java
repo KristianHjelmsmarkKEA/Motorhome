@@ -33,14 +33,16 @@ public class HomeController {
         return "home/index";
     }
 
-    //Tabel-oversigt over alle priser, med feeID, navn, kategori og pris
+    /*Author Gustav
+    Tabel-oversigt over alle priser, med feeID, navn, kategori og pris
+     */
     @GetMapping("/managePrices")
     public String managePrices(Model model) {
         model.addAttribute("prices", priceService.fetchAll());
         return "home/managePrices";
     }
 
-    /*Author
+    /*Author Kristian
     @PathVariable henter variablen "feeID" ud fra den valgte vare i tabellen,
     så vi får fat i den specifikke vares id, .findFeeID() henter alle item_fees information ud fra feeid,
     og mapper den med RowMapper<Price>, og tilføjer den til en collection.
@@ -52,7 +54,7 @@ public class HomeController {
         return "home/updateItem";
     }
 
-    /*Author
+    /*Author Kristian
     Opdaterings page af vare-informationer.
     .updateFeeInformation henter FeeID'et for objektet, og sørger for, at det er den rette
     vare, som bliver opdateret. */
@@ -62,7 +64,7 @@ public class HomeController {
         return "redirect:/managePrices";
     }
 
-    /*Author
+    /*Author Kristian
     Tilføjelse af ny vare i DB.
     .addPrice opdatere DB med indtastet information fra hjemmeside index/addItem.
     */
@@ -74,14 +76,16 @@ public class HomeController {
         return "redirect:/managePrices";
     }
 
-    //Tabel-oversigt over alle kontrakter
+    /*Author Kristian
+    Tabel-oversigt over alle kontrakter
+     */
     @GetMapping ("/manageContracts")
     public String manageContracts(Model model) {
         model.addAttribute("contracts", contractService.fetchAll());
         return "home/manageContracts";
     }
 
-    /*
+    /*Author Gustav
     Burges til, at hente infromationer på en kontrakt, kunden og produkterne, så vi kan printe en specifik kontrakts kvittering,
     som man kan hente ud fra en tabel.
      */
@@ -102,14 +106,16 @@ public class HomeController {
         return "home/contractReceipt";
     }
 
-    //Tabel-oversigt over alle autocamper
+    /*Author Frederik
+    Tabel-oversigt over alle autocamper
+     */
     @GetMapping ("/manageMotorhomes")
     public String manageMotorhomes(Model model) {
         model.addAttribute("motorhomes", motorhomeService.fetchAll());
         return "home/manageMotorhomes";
     }
 
-    /*Author
+    /*Author Kristian
     @PathVariable henter variablen "motorhomeID" ud fra den valgte autocamper i tabellen,
     så vi får fat i den specifikke autocampers id, .findMotorhome() henter alle autocamperens
     information ud fra motorhomeID, og mapper den med RowMapper<Motorhome>, og tilføjer den til en collection.
@@ -120,7 +126,7 @@ public class HomeController {
         return "home/updateMotorhome";
     }
 
-    /*Author
+    /*Author Kristian
     Opdaterings page af autocamper-informationer.
     .updateMotorhomeInformation() henter MotorhomeID'et for objektet, og sørger for, at det er den rette
     autocampers information, som bliver opdateret. */
@@ -142,7 +148,7 @@ public class HomeController {
         return "redirect:/manageMotorhomes";
     }
 
-    /*
+    /*Author Gustav
     Tabel-oversigt over alle kunder og deres informationer
      */
     @GetMapping ("/manageCustomers")
@@ -151,7 +157,7 @@ public class HomeController {
         return "home/manageCustomers";
     }
 
-    /*Author
+    /*Author Kristian
     @PathVariable henter variablen "customerID" ud fra den valgte autocamper i tabellen,
     så vi får fat i den specifikke kundes id, .findCustomerID() henter alle kundens
     information ud fra customerID, og mapper den med RowMapper<Customer>, og tilføjer den til en collection.
@@ -162,7 +168,7 @@ public class HomeController {
         return "home/updateCustomer";
     }
 
-    /*Author
+    /*Author Kristian
     Opdaterings page af kunde-informationer.
     .updateCustomerInformation() henter CustomerID'et for objektet, og sørger for, at det er den rette
     kundes information, som bliver opdateret. */
@@ -172,7 +178,7 @@ public class HomeController {
         return "redirect:/";
     }
 
-    /*Author
+    /*Author Kristian
     Tilføjelse af ny vare i DB.
     .addPrice opdatere DB med indtastet information fra hjemmeside index/addItem.
     */

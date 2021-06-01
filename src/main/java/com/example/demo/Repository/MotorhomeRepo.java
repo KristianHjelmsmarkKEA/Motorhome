@@ -19,7 +19,7 @@ public class MotorhomeRepo {
     @Autowired
     JdbcTemplate template;
 
-    /*
+    /*Author Ludvig
     Mapper alle autocampere i vores motorhome.motorhomes tabel
      */
     public List<Motorhome> fetchAll() {
@@ -28,7 +28,7 @@ public class MotorhomeRepo {
         return template.query(sql, rowMapper);
     }
 
-    /*
+    /*Author Gustav
     Mapper alle autocampere, som er i service, dvs. at de kan udlejes og ikke er til reparation eller lign.
      */
     public List<Motorhome> fetchAllInService() {
@@ -37,13 +37,15 @@ public class MotorhomeRepo {
         return template.query(sql, rowMapper);
     }
 
-    //Tilføjer en ny autocamper til databasen.
+    /*Author Gustav
+    Tilføjer en ny autocamper til databasen.
+     */
     public void addMotorhome(Motorhome motorhome){
         String sql = "INSERT INTO motorhomes (brand_and_model, capacity, odometer, number_plate, rental_price, in_service) VALUES (?, ?, ?, ?, ?, 1)";
         template.update(sql, motorhome.getBrandAndModel(), motorhome.getCapacity(), motorhome.getOdometer(), motorhome.getNumberPlate(), motorhome.getRentalPrice());
     }
 
-    /*
+    /*Author Kristian
     Finder en specifik autocamper via primaryKey motorhomeID
      */
     public Motorhome findMotorhomeID(int motorhomeID){
@@ -53,7 +55,7 @@ public class MotorhomeRepo {
         return m;
     }
 
-    /*
+    /*Author Frederik
     Opdatere en specifik autocamper med nyt odometer, lejepris og om den er i service
      */
     public void updateMotorhome(Motorhome m) {
@@ -61,7 +63,7 @@ public class MotorhomeRepo {
         template.update(sql, m.getOdometer(), m.getRentalPrice(), m.isInService(), m.getMotorhomeID());
     }
 
-    /*
+    /*Author Gustav
     Finder alle autocampere, som ikke er available i den indtastet dato-periode
     metoden bliver brugt i fetchIntervalMotorhomes()
      */
@@ -85,7 +87,7 @@ public class MotorhomeRepo {
         }
     }
 
-    /*
+    /*Author Gustav
     Fetcher alle autocampere, som er i service, dvs. ikke til reparation og lignende.
     Derudover, har den metodekald til unavilableMotorhomes(), så vi kun får avilable autocampere tilbage.
      */
@@ -116,7 +118,7 @@ public class MotorhomeRepo {
         return allMotorhomesInService;
     }
 
-    /*
+    /*Author Gustav
     Fjerner alle autocampere mærker/modeller, så der kun vises unikke autocampere, dette sker
     når man skal vælge hvilken autocamper man vil have. Efterfølgende, kan man vælge hvilken autocamper,
     med samme brand/model man vil have, ud fra deres nummerplade.
@@ -132,7 +134,7 @@ public class MotorhomeRepo {
         return removedDuplicates;
     }
 
-    /*
+    /*Author Gustav
     Finder alle de forskellige autocampers mærker og modeller i en sorteret liste.
      */
     public List<Motorhome> fetchMotorhomesBrandAndModel(String brandAndModel, LocalDate startDate, LocalDate endDate) {

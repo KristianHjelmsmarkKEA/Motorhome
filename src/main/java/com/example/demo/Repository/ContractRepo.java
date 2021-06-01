@@ -15,7 +15,7 @@ public class ContractRepo {
     @Autowired
     JdbcTemplate template;
 
-    /*
+    /*Author Ludvig
     Mapper alle kontrakters informationer og tilføjer dem til en collection.
      */
     public List<Contract> fetchAll() {
@@ -24,7 +24,7 @@ public class ContractRepo {
         return template.query(sql, rowMapper);
     }
 
-    /*
+    /*Author Gustav
     Tilføjer en hel ny kontrakt til databasen med alle information.
      */
     public int addContract(Contract contract){
@@ -35,7 +35,7 @@ public class ContractRepo {
         return returnNewContractID();
     }
 
-    /*
+    /*Author Gustav
     Mapper det nyeste oprettet contractID.
      */
     public int returnNewContractID(){
@@ -45,7 +45,7 @@ public class ContractRepo {
         return c.getContractID();
     }
 
-    /*Author
+    /*Author Kristian
     Mapper alle igangværende kontrakter, bruges når man skal vælge hvilken kontrakt, som man gerne vil færdiggøre eller annullere.
      */
     public List<Contract> fetchOngoingContracts() {
@@ -54,7 +54,7 @@ public class ContractRepo {
         return template.query(sql, rowMapper);
     }
 
-    /*Author
+    /*Author Kristian
     Har contractID med som parameter, så man kan søge efter den specifikke contract ud fra contractID,
     derefter mappes c, med en collection af den specifikke kontrakts coullums indhold
      */
@@ -65,7 +65,7 @@ public class ContractRepo {
         return c;
     }
 
-    /*Author
+    /*Author Gustav
     Har en Contract c med som parameter, trueFinalFalseCancel er en boolean, der bruges til at sætte
     kontraktens finalized og cancelled's værdi til true/false i DB. */
     public void saveContractInformation(Contract c, boolean trueFinalFalseCancel) {

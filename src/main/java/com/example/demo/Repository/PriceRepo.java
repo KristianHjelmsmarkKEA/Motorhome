@@ -16,7 +16,7 @@ public class PriceRepo {
     @Autowired
     JdbcTemplate template;
 
-    /*
+    /*Author Frederik
     Mapper alle infromationer i vores produkt-katagorier og produkters informationer.
      */
     public List <Price> fetchAll() {
@@ -25,7 +25,7 @@ public class PriceRepo {
         return template.query(sql, rowMapper);
     }
 
-    /*
+    /*Author Gustav
     Mapper alle produkter i en specifik produkt-katagori
     categoryNumber: 1=Accessories 2=Season 3=Repair 4=Cancellation 5=Transfercost 6=Fuel 7= Others.
      */
@@ -35,7 +35,7 @@ public class PriceRepo {
         return template.query(sql, rowMapper);
     }
 
-    /*
+    /*Author Gustav
     Tilføjer et nyt produkt til vores database.
      */
     public void addPrice(Price p){
@@ -43,7 +43,7 @@ public class PriceRepo {
         template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID());
     }
 
-    /*
+    /*Author Kristian
     Mappper et specifikt produkts informationer, heri: navn, pris og foreign_category.
      */
     public Price findFeeID(int feeID){
@@ -53,7 +53,7 @@ public class PriceRepo {
         return p;
     }
 
-    /*
+    /*Author Gustav
     Opdatere et produkts informationer i databasen, hvor instansen p indeholder informationerne.
      */
     public void updateFeeInformation(int feeID, Price p){
@@ -61,7 +61,7 @@ public class PriceRepo {
         template.update(sql, p.getItemName(), p.getItemPrice(), p.getForeign_categoryID(), feeID);
     }
 
-    /*
+    /*Author Gustav
     Fjerne er en specifik katagori fra en liste, bruges til at fjerne season katagorien.
      */
     public List<Price> removeCategoryPrice(List<Price> listToRemove, int category) {

@@ -16,7 +16,7 @@ public class CustomerRepo {
     JdbcTemplate template;
 
 
-    /*
+    /*Author Ludvig
     Opretter en ny customer, med alle tilhørende informationer i contry, zipcode og adresse tabellerne.
      */
     public int addCustomerAddressZipcodeCountry(Customer customer){
@@ -33,7 +33,7 @@ public class CustomerRepo {
         return returnNewCustomerID();
     }
 
-    /*
+    /*Author Ludvig
     Mapper alle customers informationer fra databasen.
      */
     public List<Customer> fetchAll() {
@@ -42,7 +42,7 @@ public class CustomerRepo {
         return template.query(sql, rowMapper);
     }
 
-    /*
+    /*Author Gustav
     Finder det nyeste oprettet customerID fra databasen.
      */
     public int returnNewCustomerID(){
@@ -52,7 +52,7 @@ public class CustomerRepo {
         return c.getCustomerID();
     }
 
-    /*
+    /*Author Kristian
     Mapper en specifik kundes informationer ud fra customerID
      */
     public Customer findCustomerID(int customerID){
@@ -62,7 +62,7 @@ public class CustomerRepo {
         return c;
     }
 
-    /*
+    /*Author Frederik
     Opdatere alle en kundes informationer i databasen, hvor instansen c indeholder infromationerne.
      */
     public Customer updateCustomer(Customer c){

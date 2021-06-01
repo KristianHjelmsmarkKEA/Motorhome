@@ -30,6 +30,9 @@ public class ContractController {
     *
     */
 
+    /*Author Gustav
+
+     */
     @PostMapping("/chooseMotorhome")
     public String reservations(@ModelAttribute Contract contract, Model model) {
         if (contract.getStartDate().isAfter(contract.getEndDate()))
@@ -40,6 +43,9 @@ public class ContractController {
         return "home/chooseMotorhome";
     }
 
+    /*Author Gustav
+
+     */
     @GetMapping("extraSelection/{brandAndModel}")
     public String extraSelection(@PathVariable("brandAndModel") String brandAndModel,@ModelAttribute ContractDetails contractDetails, Contract contractDates, Model model) {
         List<Motorhome> allSortedMotorhomes = motorhomeService.fetchMotorhomesBrandAndModel(brandAndModel, contractDates.getStartDate(), contractDates.getEndDate());
@@ -57,6 +63,9 @@ public class ContractController {
         return "home/extraSelection";
     }
 
+    /*Author Gustav
+
+     */
     @PostMapping("/createContract")
     public String createContract(@RequestParam("amount") String amount, @RequestParam("foreign_feeID") String foreign_feeID,
                                 @ModelAttribute("motorhomeID") Motorhome motorhome, Contract contractDates, Price season, Model model) {
@@ -90,6 +99,9 @@ public class ContractController {
         return "home/createContract";
     }
 
+    /*Author Gustav
+
+     */
     @PostMapping("/newCustomerToContract")
     public String newCustomerToContractPost(@ModelAttribute Customer customer,  @ModelAttribute("initialContract") Contract initialContract, Model model) {
         Customer chosenCustomer;
@@ -120,6 +132,9 @@ public class ContractController {
         return "home/contractReceipt";
     }
 
+    /*Author Gustav
+
+     */
     @GetMapping("/closeContractTable")
     public String closeContractTable(Model model) {
         List<Contract> ongoingContractsList = contractService.fetchOngoingContracts();
@@ -197,6 +212,9 @@ public class ContractController {
         return "home/contractReceipt";
     }
 
+    /*Author Gustav
+
+     */
     @GetMapping("/cancelContract/{contractID}")
     public String cancelContract(@PathVariable("contractID") int contractID, @ModelAttribute Contract contract, Model model, @ModelAttribute ContractDetails contractDetails) {
         Contract contractFinalization = contractService.findContractByContractID(contractID);
@@ -212,6 +230,9 @@ public class ContractController {
         return "home/cancelContractPage";
     }
 
+    /*Author Gustav
+
+     */
     @PostMapping("/cancelContractPage")
     public String cancelContractPage(@ModelAttribute Contract contract, Model model, Price selectedCancelFee,
                                      @ModelAttribute("foreign_MotorhomeID") Motorhome motorhome) {
