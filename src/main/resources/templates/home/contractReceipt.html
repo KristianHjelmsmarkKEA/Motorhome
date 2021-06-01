@@ -18,9 +18,9 @@
 </div>
 
 <div class="receipt-card">
-    <h1 style="float: left;">Nordic Motorhome Rentals</h1>
+    <img style="float:left; width:500px; height:86px;" src="https://i.imgur.com/eP44bMo.png">
     <b style="float:right;" th:text="'Dato: '+${#dates.format(#dates.createNow(), 'dd MMM yyyy')}"></b><br>
-    <b style="float:right;" th:text="'Kontrakt #'+${mainContract.contractID}"></b><br>
+    <b style="float:right;" th:text="'Kontrakt #'+${mainContract.contractID}"></b>
     <div id="new-line">
     <b>Start date: </b><span th:text="${mainContract.startDate}"/><br>
     <b>End Date: </b><span th:text="${mainContract.endDate}"/><br>
@@ -56,24 +56,32 @@
         </tr>
         </thead>
         <tbody>
-        <div th:each="contractDetails : ${details}">
-            <div th:each="item : ${prices}">
-                <div th:unless="${contractDetails.amount == 0}">
-                <tr th:if="${contractDetails.foreign_feeID == item.feeID}">
-                    <td th:text="${contractDetails.amount}"/>
-                    <td th:text="${item.itemName}"/>
-                    <td th:text="${item.itemPrice} + '€'"/>
-                    <td th:text="${contractDetails.calculatedPrice} + '€'"/>
-                </tr>
-            </div>
-            </div>
-        </div>
         <tr>
             <td th:text="'Dage: '+ ${daysBetween}"/>
             <td th:text="'Autocamper: '+${selectedMotorhome.brandAndModel} + ' #' + ${selectedMotorhome.numberPlate}"/>
             <td th:text="${seasonDetail.calculatedPrice}+'€'"/>
             <td th:text="${motorhomeTotalPrice}+'€'"/>
         </tr>
+        <div th:each="contractDetails : ${details}">
+            <div th:each="item : ${prices}">
+                <div th:unless="${contractDetails.amount == 0}">
+                <tr th:if="${contractDetails.foreign_feeID == item.feeID}" th:unless="${item.foreign_categoryID == 4}">
+                    <td th:text="${contractDetails.amount}"/>
+                    <td th:text="${item.itemName}"/>
+                    <td th:text="${item.itemPrice} + '€'"/>
+                    <td th:text="${contractDetails.calculatedPrice} + '€'"/>
+                </tr>
+                    <div th:if="${item.foreign_categoryID == 4}">
+                    <tr th:if="${contractDetails.foreign_feeID == item.feeID}">
+                        <td th:text="${contractDetails.amount}"/>
+                        <td th:text="'Cancellation: '+${item.itemName}"/>
+                        <td th:text="'total price * '+${item.itemPrice}"/>
+                        <td th:text="${contractDetails.calculatedPrice} + '€'"/>
+                    </tr>
+                    </div>
+            </div>
+            </div>
+        </div>
         <tr>
             <th></th>
             <th></th>
@@ -82,7 +90,6 @@
         </tr>
         </tbody>
     </table>
-    <img style="float:right; width:500px; height:86px; margin-right:100px;" src="https://i.imgur.com/eP44bMo.png">
 </div>
 
 </body>
