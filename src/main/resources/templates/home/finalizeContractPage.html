@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Finalize Contract</title>
     <link rel="stylesheet" type="text/css" href="../header.css">
-    <link rel="stylesheet" type="text/css" href="../tableLayout.css">
+    <link rel="stylesheet" type="text/css" href="../updateAdd.css">
     <link rel="stylesheet" type="text/css" href="../card.css">
 </head>
 <body>
@@ -65,13 +65,13 @@
                 <input type="hidden" name="foreign_feeID" th:value="${price.feeID}"/>
             </div>
         </ul>
-        <label for="startOdometer1"><b>Start Odometer:</b></label>
-        <input type="number" id="startOdometer1" name="startOdometer" th:value="${contracts.startOdometer}"> <br>
-        <label for="endOdometer"><b>Slut Odometer:</b></label>
-        <input type="number" id="endOdometer" name="endOdometer" th:value="${contracts.endOdometer}">
+        <label for="startOdometer1"><b>Start Odometer:</b></label><br>
+        <input type="number" id="startOdometer1" name="startOdometer" th:min="${contracts.startOdometer}" th:value="${contracts.startOdometer}"> <br><br>
+        <label for="endOdometer"><b>Slut Odometer:</b></label><br>
+        <input type="number" id="endOdometer" name="endOdometer" th:min="${contracts.startOdometer}" th:value="${contracts.endOdometer}"><br><br>
         <input type="hidden" name="contractID" th:value="${contracts.contractID}">
         <input type="hidden" name="totalPrice" th:value="${contracts.totalPrice}">
-        <h3>Færdiggør kontrakt: <input type="submit" value="submit"></h3>
+        <br><input class="btn" id="btn" type="submit" value="Færdiggør Kontrakt">
     </form>
 </div>
 
