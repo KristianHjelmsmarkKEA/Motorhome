@@ -24,7 +24,7 @@ public class ContractRepo {
         return template.query(sql, rowMapper);
     }
 
-    /*Author Gustav
+    /*Author Gustav gfd
     Tilføjer en hel ny kontrakt til databasen med alle information.
      */
     public int addContract(Contract contract){

@@ -95,12 +95,11 @@ public class MotorhomeRepo {
 
         List<Motorhome> allMotorhomesInService = fetchAllInService();
         List<Motorhome> unAvailableMotorhomes = new ArrayList<>();
+        List<Integer> unavailableMH = unavailableMotorhomes(startDate, endDate);
 
         if (unavailableMotorhomes(startDate, endDate) == null) {
             return allMotorhomesInService;
         }
-
-        List<Integer> unavailableMH = unavailableMotorhomes(startDate, endDate);
 
         for (Motorhome motorhome : allMotorhomesInService) {
             for (int i = 0; i < unavailableMH.size(); i++) {
@@ -114,7 +113,6 @@ public class MotorhomeRepo {
         for (int i = 0; i < unAvailableMotorhomes.size(); i++) { //Removes all unAvailableMotorhome Objects from return value.
             allMotorhomesInService.remove(unAvailableMotorhomes.get(i));
         }
-
         return allMotorhomesInService;
     }
 
